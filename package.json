@@ -1,17 +1,25 @@
 {
-  "private": true,
-  "scripts": {
-    "build": "turbo run build",
-    "dev": "turbo run dev",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
-  },
-  "devDependencies": {
-    "eslint": "^8.48.0",
-    "prettier": "^3.0.3",
-    "tsconfig": "workspace:*",
-    "turbo": "latest"
-  },
-  "packageManager": "pnpm@8.6.10",
-  "name": "RSM.JavaScript"
+    "name": "rsm-javscript",
+    "private": true,
+    "license": "MIT",
+    "scripts": {
+        "build": "turbo run build",
+        "dev": "turbo run dev",
+        "docs": "turbo run docs",
+        "test": "turbo run test",
+        "watch:test": "turbo run watch:test",
+        "lint": "turbo run lint",
+        "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    },
+    "devDependencies": {
+        "eslint": "^8.50.0",
+        "prettier": "^3.0.3",
+        "tsconfig": "workspace:*",
+        "turbo": "latest"
+    },
+    "packageManager": "pnpm@8.6.12",
+    "volta": {
+        "node": "18.18.0",
+        "pnpm": "8.6.12"
+    }
 }

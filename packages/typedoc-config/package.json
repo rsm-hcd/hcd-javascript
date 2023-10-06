@@ -1,0 +1,8 @@
+{
+    "name": "typedoc-config",
+    "license": "MIT",
+    "private": true,
+    "devDependencies": {
+        "typedoc-plugin-markdown": "^3.16.0"
+    }
+  }

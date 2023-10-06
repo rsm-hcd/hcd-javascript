@@ -1,0 +1,9 @@
+{
+    "$schema": "https://typedoc.org/schema.json",
+    "includeVersion": true,
+    "excludeExternals": true,
+    "plugin": [
+        "typedoc-plugin-markdown"
+    ],
+    "readme": "none",
+}

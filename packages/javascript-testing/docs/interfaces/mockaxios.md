@@ -1,178 +1,192 @@
-[andculturecode-javascript-testing](../README.md) › [MockAxios](mockaxios.md)
+[RSM Javascript Testing](../README.md) / MockAxios
 
 # Interface: MockAxios
 
-## Hierarchy
-
-* **MockAxios**
-
-## Index
+## Table of contents
 
 ### Properties
 
-* [delete](mockaxios.md#delete)
-* [deleteSuccess](mockaxios.md#deletesuccess)
-* [get](mockaxios.md#get)
-* [getSuccess](mockaxios.md#getsuccess)
-* [listSuccess](mockaxios.md#listsuccess)
-* [post](mockaxios.md#post)
-* [postSuccess](mockaxios.md#postsuccess)
-* [put](mockaxios.md#put)
-* [putSuccess](mockaxios.md#putsuccess)
+- [delete](MockAxios.md#delete)
+- [deleteSuccess](MockAxios.md#deletesuccess)
+- [get](MockAxios.md#get)
+- [getSuccess](MockAxios.md#getsuccess)
+- [listSuccess](MockAxios.md#listsuccess)
+- [post](MockAxios.md#post)
+- [postSuccess](MockAxios.md#postsuccess)
+- [put](MockAxios.md#put)
+- [putSuccess](MockAxios.md#putsuccess)
 
 ## Properties
 
-###  delete
+### delete
 
-• **delete**: *[AxiosJestMock](../README.md#axiosjestmock)*
+• **delete**: `AxiosJestMock`
 
-*Defined in [src/mocks/mock-axios.ts:17](https://github.com/AndcultureCode/AndcultureCode.JavaScript.Testing/blob/3b27039/src/mocks/mock-axios.ts#L17)*
+#### Defined in
+
+packages/javascript-testing/src/mocks/mock-axios.ts:17
 
 ___
 
-###  deleteSuccess
+### deleteSuccess
 
-• **deleteSuccess**: *function*
+• **deleteSuccess**: (`record?`: `any`, `delay?`: `number`) => `void`
 
-*Defined in [src/mocks/mock-axios.ts:24](https://github.com/AndcultureCode/AndcultureCode.JavaScript.Testing/blob/3b27039/src/mocks/mock-axios.ts#L24)*
+#### Type declaration
+
+▸ (`record?`, `delay?`): `void`
 
 Simple way to mock a successful axios delete request
 
-**`param`** value to return when resolved
+##### Parameters
 
-**`param`** milliseconds to delay before resolving the promise
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `record?` | `any` | value to return when resolved |
+| `delay?` | `number` | milliseconds to delay before resolving the promise |
 
-#### Type declaration:
+##### Returns
 
-▸ (`record?`: any, `delay?`: undefined | number): *void*
+`void`
 
-**Parameters:**
+#### Defined in
 
-Name | Type |
------- | ------ |
-`record?` | any |
-`delay?` | undefined &#124; number |
-
-___
-
-###  get
-
-• **get**: *[AxiosJestMock](../README.md#axiosjestmock)*
-
-*Defined in [src/mocks/mock-axios.ts:26](https://github.com/AndcultureCode/AndcultureCode.JavaScript.Testing/blob/3b27039/src/mocks/mock-axios.ts#L26)*
+packages/javascript-testing/src/mocks/mock-axios.ts:24
 
 ___
 
-###  getSuccess
+### get
 
-• **getSuccess**: *function*
+• **get**: `AxiosJestMock`
 
-*Defined in [src/mocks/mock-axios.ts:33](https://github.com/AndcultureCode/AndcultureCode.JavaScript.Testing/blob/3b27039/src/mocks/mock-axios.ts#L33)*
+#### Defined in
+
+packages/javascript-testing/src/mocks/mock-axios.ts:26
+
+___
+
+### getSuccess
+
+• **getSuccess**: (`record`: `any`, `delay?`: `number`) => `void`
+
+#### Type declaration
+
+▸ (`record`, `delay?`): `void`
 
 Simple way to mock a successful axios get/find request
 
-**`param`** value to return when resolved
+##### Parameters
 
-**`param`** milliseconds to delay before resolving the promise
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `record` | `any` | value to return when resolved |
+| `delay?` | `number` | milliseconds to delay before resolving the promise |
 
-#### Type declaration:
+##### Returns
 
-▸ (`record`: any, `delay?`: undefined | number): *void*
+`void`
 
-**Parameters:**
+#### Defined in
 
-Name | Type |
------- | ------ |
-`record` | any |
-`delay?` | undefined &#124; number |
+packages/javascript-testing/src/mocks/mock-axios.ts:33
 
 ___
 
-###  listSuccess
+### listSuccess
 
-• **listSuccess**: *function*
+• **listSuccess**: (`records`: `any`[], `delay?`: `number`) => `void`
 
-*Defined in [src/mocks/mock-axios.ts:40](https://github.com/AndcultureCode/AndcultureCode.JavaScript.Testing/blob/3b27039/src/mocks/mock-axios.ts#L40)*
+#### Type declaration
+
+▸ (`records`, `delay?`): `void`
 
 Simple way to mock a successful axios get/list request
 
-**`param`** value to return when resolved
+##### Parameters
 
-**`param`** milliseconds to delay before resolving the promise
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `records` | `any`[] | - |
+| `delay?` | `number` | milliseconds to delay before resolving the promise |
 
-#### Type declaration:
+##### Returns
 
-▸ (`records`: any[], `delay?`: undefined | number): *void*
+`void`
 
-**Parameters:**
+#### Defined in
 
-Name | Type |
------- | ------ |
-`records` | any[] |
-`delay?` | undefined &#124; number |
-
-___
-
-###  post
-
-• **post**: *[AxiosJestMock](../README.md#axiosjestmock)*
-
-*Defined in [src/mocks/mock-axios.ts:42](https://github.com/AndcultureCode/AndcultureCode.JavaScript.Testing/blob/3b27039/src/mocks/mock-axios.ts#L42)*
+packages/javascript-testing/src/mocks/mock-axios.ts:40
 
 ___
 
-###  postSuccess
+### post
 
-• **postSuccess**: *function*
+• **post**: `AxiosJestMock`
 
-*Defined in [src/mocks/mock-axios.ts:49](https://github.com/AndcultureCode/AndcultureCode.JavaScript.Testing/blob/3b27039/src/mocks/mock-axios.ts#L49)*
+#### Defined in
+
+packages/javascript-testing/src/mocks/mock-axios.ts:42
+
+___
+
+### postSuccess
+
+• **postSuccess**: (`record`: `any`, `delay?`: `number`) => `void`
+
+#### Type declaration
+
+▸ (`record`, `delay?`): `void`
 
 Simple way to mock a successful axios post request
 
-**`param`** value to return when resolved
+##### Parameters
 
-**`param`** milliseconds to delay before resolving the promise
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `record` | `any` | value to return when resolved |
+| `delay?` | `number` | milliseconds to delay before resolving the promise |
 
-#### Type declaration:
+##### Returns
 
-▸ (`record`: any, `delay?`: undefined | number): *void*
+`void`
 
-**Parameters:**
+#### Defined in
 
-Name | Type |
------- | ------ |
-`record` | any |
-`delay?` | undefined &#124; number |
-
-___
-
-###  put
-
-• **put**: *[AxiosJestMock](../README.md#axiosjestmock)*
-
-*Defined in [src/mocks/mock-axios.ts:51](https://github.com/AndcultureCode/AndcultureCode.JavaScript.Testing/blob/3b27039/src/mocks/mock-axios.ts#L51)*
+packages/javascript-testing/src/mocks/mock-axios.ts:49
 
 ___
 
-###  putSuccess
+### put
 
-• **putSuccess**: *function*
+• **put**: `AxiosJestMock`
 
-*Defined in [src/mocks/mock-axios.ts:58](https://github.com/AndcultureCode/AndcultureCode.JavaScript.Testing/blob/3b27039/src/mocks/mock-axios.ts#L58)*
+#### Defined in
+
+packages/javascript-testing/src/mocks/mock-axios.ts:51
+
+___
+
+### putSuccess
+
+• **putSuccess**: (`record`: `any`, `delay?`: `number`) => `void`
+
+#### Type declaration
+
+▸ (`record`, `delay?`): `void`
 
 Simple way to mock a successful axios put request
 
-**`param`** value to return when resolved
+##### Parameters
 
-**`param`** milliseconds to delay before resolving the promise
+| Name | Type | Description |
+| :------ | :------ | :------ |
+| `record` | `any` | value to return when resolved |
+| `delay?` | `number` | milliseconds to delay before resolving the promise |
 
-#### Type declaration:
+##### Returns
 
-▸ (`record`: any, `delay?`: undefined | number): *void*
+`void`
 
-**Parameters:**
+#### Defined in
 
-Name | Type |
------- | ------ |
-`record` | any |
-`delay?` | undefined &#124; number |
+packages/javascript-testing/src/mocks/mock-axios.ts:58

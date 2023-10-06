@@ -1,34 +1,34 @@
-[andculturecode-javascript-testing](../README.md) › [StubResource](stubresource.md)
+[RSM Javascript Testing](../README.md) / StubResource
 
 # Interface: StubResource
 
-## Hierarchy
-
-* **StubResource**
-
 ## Implemented by
 
-* [StubResourceRecord](../classes/stubresourcerecord.md)
+- [`StubResourceRecord`](../classes/StubResourceRecord.md)
 
-## Index
+## Table of contents
 
 ### Properties
 
-* [id](stubresource.md#id)
-* [name](stubresource.md#optional-name)
+- [id](StubResource.md#id)
+- [name](StubResource.md#name)
 
 ## Properties
 
-###  id
+### id
 
-• **id**: *number*
+• **id**: `number`
 
-*Defined in [src/stubs/stub-resource.ts:6](https://github.com/AndcultureCode/AndcultureCode.JavaScript.Testing/blob/3b27039/src/stubs/stub-resource.ts#L6)*
+#### Defined in
+
+packages/javascript-testing/src/stubs/stub-resource.ts:6
 
 ___
 
-### `Optional` name
+### name
 
-• **name**? : *undefined | string*
+• `Optional` **name**: `string`
 
-*Defined in [src/stubs/stub-resource.ts:7](https://github.com/AndcultureCode/AndcultureCode.JavaScript.Testing/blob/3b27039/src/stubs/stub-resource.ts#L7)*
+#### Defined in
+
+packages/javascript-testing/src/stubs/stub-resource.ts:7
