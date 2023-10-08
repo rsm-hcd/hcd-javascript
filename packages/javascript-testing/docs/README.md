@@ -1,39 +1,71 @@
-RSM Javascript Testing
+HCD Javascript Testing
 
-# RSM Javascript Testing
+# HCD Javascript Testing
 
 ## Table of contents
 
 ### Classes
 
-- [StubResourceRecord](classes/StubResourceRecord.md)
+- [StubResourceRecord](undefined)
 
 ### Interfaces
 
-- [MockAxios](interfaces/MockAxios.md)
-- [StubResource](interfaces/StubResource.md)
+- [MockAxios](undefined)
+- [StubResource](undefined)
 
 ### Variables
 
-- [AxiosResponseFactory](README.md#axiosresponsefactory)
-- [FactoryType](README.md#factorytype)
-- [MockAxios](README.md#mockaxios)
-- [StubResourceRecordFactory](README.md#stubresourcerecordfactory)
-- [TestUtils](README.md#testutils)
+- [AxiosResponseFactory](undefined)
+- [FactoryType](undefined)
+- [MockAxios](undefined)
+- [StubResourceRecordFactory](undefined)
+- [TestUtils](undefined)
 
 ### Functions
 
-- [testLoop](README.md#testloop)
+- [testLoop](undefined)
+
+## Classes
+
+### StubResourceRecord
+
+• **StubResourceRecord**: Class StubResourceRecord
+
+#### Defined in
+
+[packages/javascript-testing/src/stubs/stub-resource-record.ts:4](https://github.com/myty/hcd-javascript/blob/733fa0d/packages/javascript-testing/src/stubs/stub-resource-record.ts#L4)
+
+## Interfaces
+
+### MockAxios
+
+• **MockAxios**: Interface MockAxios
+
+#### Defined in
+
+[packages/javascript-testing/src/mocks/mock-axios.ts:16](https://github.com/myty/hcd-javascript/blob/733fa0d/packages/javascript-testing/src/mocks/mock-axios.ts#L16)
+
+[packages/javascript-testing/src/mocks/mock-axios.ts:135](https://github.com/myty/hcd-javascript/blob/733fa0d/packages/javascript-testing/src/mocks/mock-axios.ts#L135)
+
+___
+
+### StubResource
+
+• **StubResource**: Interface StubResource
+
+#### Defined in
+
+[packages/javascript-testing/src/stubs/stub-resource.ts:5](https://github.com/myty/hcd-javascript/blob/733fa0d/packages/javascript-testing/src/stubs/stub-resource.ts#L5)
 
 ## Variables
 
 ### AxiosResponseFactory
 
-• `Const` **AxiosResponseFactory**: `IFactory`<`AxiosResponse`<`any`, `any`\>\>
+• `Const` **AxiosResponseFactory**: IFactory<AxiosResponse<any, any\>\>
 
 #### Defined in
 
-packages/javascript-testing/src/factories/axios-response-factory.ts:9
+[packages/javascript-testing/src/factories/axios-response-factory.ts:9](https://github.com/myty/hcd-javascript/blob/733fa0d/packages/javascript-testing/src/factories/axios-response-factory.ts#L9)
 
 ___
 
@@ -45,34 +77,34 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `AxiosResponse` | `string` |
-| `StubResourceRecord` | `string` |
+| `AxiosResponse` | string |
+| `StubResourceRecord` | string |
 
 #### Defined in
 
-packages/javascript-testing/src/factories/factory-type.ts:1
+[packages/javascript-testing/src/factories/factory-type.ts:1](https://github.com/myty/hcd-javascript/blob/733fa0d/packages/javascript-testing/src/factories/factory-type.ts#L1)
 
 ___
 
 ### MockAxios
 
-• **MockAxios**: [`MockAxios`](README.md#mockaxios)
+• **MockAxios**: MockAxios
 
 #### Defined in
 
-packages/javascript-testing/src/mocks/mock-axios.ts:16
+[packages/javascript-testing/src/mocks/mock-axios.ts:16](https://github.com/myty/hcd-javascript/blob/733fa0d/packages/javascript-testing/src/mocks/mock-axios.ts#L16)
 
-packages/javascript-testing/src/mocks/mock-axios.ts:135
+[packages/javascript-testing/src/mocks/mock-axios.ts:135](https://github.com/myty/hcd-javascript/blob/733fa0d/packages/javascript-testing/src/mocks/mock-axios.ts#L135)
 
 ___
 
 ### StubResourceRecordFactory
 
-• `Const` **StubResourceRecordFactory**: `IFactory`<[`StubResourceRecord`](classes/StubResourceRecord.md)\>
+• `Const` **StubResourceRecordFactory**: IFactory<StubResourceRecord\>
 
 #### Defined in
 
-packages/javascript-testing/src/factories/stub-resource-record-factory.ts:9
+[packages/javascript-testing/src/factories/stub-resource-record-factory.ts:9](https://github.com/myty/hcd-javascript/blob/733fa0d/packages/javascript-testing/src/factories/stub-resource-record-factory.ts#L9)
 
 ___
 
@@ -84,26 +116,26 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `faker` | `Faker` |
-| `randomCase` | (`value`: `string`) => `string` |
-| `randomFilename` | () => `string` |
-| `randomGuid` | () => `string` |
-| `randomKey` | (`obj`: `object`) => `string` |
-| `randomObject` | (`keyCount?`: `number`) => `Record`<`string`, `string`\> |
-| `randomPath` | () => `string` |
-| `randomValue` | <TValue\>(`obj`: `Record`<`string`, `TValue`\> \| `TValue`[]) => `TValue` |
-| `randomWord` | () => `string` |
-| `randomWords` | () => `string`[] |
+| `faker` | Faker |
+| `randomCase` | Method randomCase |
+| `randomFilename` | Method randomFilename |
+| `randomGuid` | Method randomGuid |
+| `randomKey` | Method randomKey |
+| `randomObject` | Method randomObject |
+| `randomPath` | Method randomPath |
+| `randomValue` | Method randomValue |
+| `randomWord` | Method randomWord |
+| `randomWords` | Method randomWords |
 
 #### Defined in
 
-packages/javascript-testing/src/utilities/test-utils.ts:3
+[packages/javascript-testing/src/utilities/test-utils.ts:3](https://github.com/myty/hcd-javascript/blob/733fa0d/packages/javascript-testing/src/utilities/test-utils.ts#L3)
 
 ## Functions
 
 ### testLoop
 
-▸ **testLoop**(`name`, `fn`, `times?`): `void`
+▸ **testLoop**(`name`, `fn`, `times?`): void
 
 Utility function for running a test body a certain number of times. Useful for ensuring specific
 behavior on implementations that return randomized data and edge cases will not immediately be
@@ -113,14 +145,14 @@ exposed.
 
 | Name | Type | Default value | Description |
 | :------ | :------ | :------ | :------ |
-| `name` | `string` | `undefined` | Name of the test |
-| `fn` | `Function` | `undefined` | Function body to run (can be asynchronous) |
-| `times?` | `number` | `100` | Number of times to run the test function. |
+| `name` | string | `undefined` | Name of the test |
+| `fn` | Function | `undefined` | Function body to run (can be asynchronous) |
+| `times?` | number | `100` | Number of times to run the test function. |
 
 #### Returns
 
-`void`
+void
 
 #### Defined in
 
-packages/javascript-testing/src/utilities/shared-specs.ts:14
+[packages/javascript-testing/src/utilities/shared-specs.ts:14](https://github.com/myty/hcd-javascript/blob/733fa0d/packages/javascript-testing/src/utilities/shared-specs.ts#L14)

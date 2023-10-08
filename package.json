@@ -7,7 +7,7 @@
         "dev": "turbo run dev",
         "docs": "turbo run docs",
         "test": "turbo run test",
-        "watch:test": "turbo run watch:test",
+        "test:watch": "turbo run watch:test",
         "lint": "turbo run lint",
         "format": "prettier --write \"**/*.{ts,tsx,md}\""
     },
