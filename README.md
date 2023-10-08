@@ -1,4 +1,4 @@
-# RSM Javascript Packages
+# RSM HCD Javascript Packages
 
 This is a monorepo consisting of numerous core JavaScript packages utilized by engineers within the Human-Centered Design group at RSM.
 
