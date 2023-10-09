@@ -1,5 +1,6 @@
 {
     "name": "@rsm-hcd/javascript-testing",
+    "version": "1.0.0",
     "description": "Commonly used actors for automated testing javascript applications",
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
@@ -53,10 +54,10 @@
         "url": "git+https://github.com/rsm-hcd/hcd-javascript.git"
     },
     "scripts": {
-        "build": "tsup ./src/index.ts --format=cjs,esm --dts-resolve --minify --clean --sourcemap --treeshake --shims",
+        "build": "tsup ./src/index.ts --format=cjs,esm --dts --minify --clean --sourcemap --treeshake --shims",
         "clean": "rimraf dist && rimraf coverage",
         "coverage": "jest ./src --coverage",
-        "dev": "tsc --watch",
+        "dev": "pnpm run build -- --watch",
         "docs": "typedoc",
         "format": "prettier --write \"src/**/*.ts\" --trailing-comma es5",
         "postbuild": "pnpm run docs",
