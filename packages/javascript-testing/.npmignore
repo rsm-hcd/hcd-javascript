@@ -13,3 +13,7 @@ lib_test
 
 src/
 .vscode/
+jest.config.js
+tsconfig.json
+typedoc.json
+.all-contributorsrc
