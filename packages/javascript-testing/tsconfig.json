@@ -1,26 +1,21 @@
 {
+    "extends": "@rsm-hcd/tsconfig/base.json",
     "compilerOptions": {
         "allowJs": true,
         "allowSyntheticDefaultImports": true,
         "baseUrl": "./src",
-        "declaration": true,
         "emitDecoratorMetadata": true,
-        "esModuleInterop": true,
         "experimentalDecorators": true,
-        "forceConsistentCasingInFileNames": false,
         "inlineSourceMap": true,
         "inlineSources": true,
         "lib": ["dom", "dom.iterable", "esnext"],
         "jsx": "react",
         "module": "commonjs",
-        "moduleResolution": "node",
         "noUnusedParameters": true,
-        "outDir": "./dist",
         "removeComments": false,
         "resolveJsonModule": true,
-        "skipLibCheck": true,
-        "strict": true,
-        "target": "es5"
+        "target": "es5",
+        "noEmit": true
     },
     "include": ["src"]
 }

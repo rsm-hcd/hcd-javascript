@@ -1,5 +1,5 @@
 {
-    "name": "typedoc-config",
+    "name": "@rsm-hcd/typedoc-config",
     "license": "MIT",
     "private": true,
     "devDependencies": {

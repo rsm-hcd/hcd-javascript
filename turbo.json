@@ -5,9 +5,12 @@
     "build": {
       "dependsOn": ["^build"]
     },
+    "dev": {
+        "dependsOn": ["^dev"]
+    },
     "lint": {},
     "docs": {},
-    "watch:test": {},
-    "test": {}
+    "test": {},
+    "test:watch": {}
   }
 }

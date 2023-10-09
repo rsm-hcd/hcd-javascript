@@ -1,6 +1,5 @@
 {
-  "name": "tsconfig",
-  "version": "0.0.0",
+  "name": "@rsm-hcd/tsconfig",
   "private": true,
   "license": "MIT",
   "publishConfig": {

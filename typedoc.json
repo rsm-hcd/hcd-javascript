@@ -1,7 +1,8 @@
 {
     "$schema": "https://typedoc.org/schema.json",
     "extends": ["@rsm-hcd/typedoc-config/typedoc.base.json"],
-    "entryPoints": ["src/index.ts"],
-    "name": "Javascript Testing",
+    "entryPoints": ["packages/javascript-*"],
+    "name": "HCD Javascript",
+    "entryPointStrategy": "packages",
     "includeVersion": true
-}
+  }

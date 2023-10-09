@@ -1,10 +1,10 @@
-# RSM Javascript Packages
+# RSM HCD Javascript Packages
 
 This is a monorepo consisting of numerous core JavaScript packages utilized by engineers within the Human-Centered Design group at RSM.
 
 ## Packages
 
-- `javascript-testing`: Testing utilities for JavaScript (published to npm)
+- [`javascript-testing`](./packages/javascript-testing/README.md): Testing utilities for JavaScript (published to npm)
 - `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `tsconfig`: `tsconfig.json`s used throughout the monorepo
 - `typedoc-config`: Shared `typedoc` configurations

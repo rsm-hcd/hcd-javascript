@@ -13,6 +13,6 @@ interface StubResource {
 // #region Export
 // -----------------------------------------------------------------------------------------
 
-export { StubResource };
+export type { StubResource };
 
 // #endregion Export

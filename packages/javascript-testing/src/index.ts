@@ -21,7 +21,7 @@ export { MockAxios } from "./mocks/mock-axios";
 // #region Stubs
 // -----------------------------------------------------------------------------------------
 
-export { StubResource } from "./stubs/stub-resource";
+export type { StubResource } from "./stubs/stub-resource";
 export { StubResourceRecord } from "./stubs/stub-resource-record";
 
 // #endregion Stubs

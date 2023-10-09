@@ -2,24 +2,32 @@
     "name": "rsm-hcd-javscript",
     "private": true,
     "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/rsm-hcd/hcd-javscript.git"
+    },
     "scripts": {
         "build": "turbo run build",
         "dev": "turbo run dev",
-        "docs": "turbo run docs",
+        "docs": "typedoc",
         "test": "turbo run test",
-        "watch:test": "turbo run watch:test",
+        "test:watch": "turbo run test:watch",
         "lint": "turbo run lint",
-        "format": "prettier --write \"**/*.{ts,tsx,md}\""
+        "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+        "publish-packages": "turbo run build lint test && changeset version && changeset publish"
     },
     "devDependencies": {
-        "eslint": "^8.50.0",
+        "@changesets/cli": "^2.26.2",
+        "@rsm-hcd/tsconfig": "workspace:*",
+        "@rsm-hcd/typedoc-config": "workspace:*",
+        "eslint": "^8.51.0",
         "prettier": "^3.0.3",
-        "tsconfig": "workspace:*",
-        "turbo": "latest"
+        "turbo": "latest",
+        "typedoc": "^0.25.2"
     },
-    "packageManager": "pnpm@8.6.12",
+    "packageManager": "pnpm@8.8.0",
     "volta": {
         "node": "18.18.0",
-        "pnpm": "8.6.12"
+        "pnpm": "8.8.0"
     }
 }
