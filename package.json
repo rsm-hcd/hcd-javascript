@@ -2,6 +2,10 @@
     "name": "rsm-hcd-javscript",
     "private": true,
     "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/rsm-hcd/hcd-javscript.git"
+    },
     "scripts": {
         "build": "turbo run build",
         "dev": "turbo run dev",

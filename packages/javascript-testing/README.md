@@ -1,4 +1,4 @@
-# AndcultureCode.JavaScript.Testing
+# HCD JavaScript Testing
 
 ![build status](https://github.com/AndcultureCode/AndcultureCode.JavaScript.Testing/actions/workflows/build.yaml/badge.svg)
 [![codecov](https://codecov.io/gh/AndcultureCode/AndcultureCode.JavaScript.Testing/branch/main/graph/badge.svg)](https://codecov.io/gh/AndcultureCode/AndcultureCode.JavaScript.Testing)<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
@@ -33,7 +33,7 @@ import {
 
 [Full API documentation](docs/README.md)
 
-# Contributing
+## Contributing
 
 Information on contributing to this repo is in the [Contributing Guide](CONTRIBUTING.md)
 

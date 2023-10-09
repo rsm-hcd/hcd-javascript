@@ -1,5 +1,5 @@
 {
-    "name": "@rsm/javascript-testing",
+    "name": "@rsm-hcd/javascript-testing",
     "description": "Commonly used actors for automated testing javascript applications",
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
@@ -29,6 +29,7 @@
         "ts-jest": "^29.1.1",
         "tsup": "^7.2.0",
         "typedoc": "^0.25.1",
+        "tsconfig": "workspace:*",
         "typedoc-config": "workspace:*",
         "typescript": "^5.2.2"
     },
@@ -49,12 +50,13 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/AndcultureCode/hcd-testing.git"
+        "url": "git+https://github.com/rsm-hcd/hcd-javascript.git"
     },
     "scripts": {
-        "build": "tsup ./src/index.ts --format=iife,cjs,esm --dts-resolve --minify --clean --sourcemap --treeshake --shims",
+        "build": "tsup ./src/index.ts --format=cjs,esm --dts-resolve --minify --clean --sourcemap --treeshake --shims",
         "clean": "rimraf dist && rimraf coverage",
         "coverage": "jest ./src --coverage",
+        "dev": "tsc --watch",
         "docs": "typedoc",
         "format": "prettier --write \"src/**/*.ts\" --trailing-comma es5",
         "postbuild": "pnpm run docs",
