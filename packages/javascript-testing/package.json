@@ -1,6 +1,6 @@
 {
     "name": "@rsm-hcd/javascript-testing",
-    "version": "0.2.1",
+    "version": "1.0.0",
     "description": "Commonly used actors for automated testing javascript applications",
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
