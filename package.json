@@ -11,7 +11,7 @@
         "dev": "turbo run dev",
         "docs": "typedoc",
         "test": "turbo run test",
-        "test:watch": "turbo run watch:test",
+        "test:watch": "turbo run test:watch",
         "lint": "turbo run lint",
         "format": "prettier --write \"**/*.{ts,tsx,md}\""
     },

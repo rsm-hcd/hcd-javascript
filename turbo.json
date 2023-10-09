@@ -10,7 +10,7 @@
     },
     "lint": {},
     "docs": {},
-    "watch:test": {},
-    "test": {}
+    "test": {},
+    "test:watch": {}
   }
 }
