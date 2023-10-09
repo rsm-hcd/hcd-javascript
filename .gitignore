@@ -34,3 +34,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# HCD JavaScript specific
+docs/

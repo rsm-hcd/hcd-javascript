@@ -9,7 +9,7 @@
     "scripts": {
         "build": "turbo run build",
         "dev": "turbo run dev",
-        "docs": "turbo run docs",
+        "docs": "typedoc",
         "test": "turbo run test",
         "test:watch": "turbo run watch:test",
         "lint": "turbo run lint",
@@ -18,9 +18,11 @@
     "devDependencies": {
         "@changesets/cli": "^2.26.2",
         "@rsm-hcd/tsconfig": "workspace:*",
+        "@rsm-hcd/typedoc-config": "workspace:*",
         "eslint": "^8.51.0",
         "prettier": "^3.0.3",
-        "turbo": "latest"
+        "turbo": "latest",
+        "typedoc": "^0.25.2"
     },
     "packageManager": "pnpm@8.8.0",
     "volta": {
