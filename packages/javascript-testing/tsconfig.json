@@ -1,5 +1,5 @@
 {
-    "extends": "tsconfig/base.json",
+    "extends": "@rsm-hcd/tsconfig/base.json",
     "compilerOptions": {
         "allowJs": true,
         "allowSyntheticDefaultImports": true,

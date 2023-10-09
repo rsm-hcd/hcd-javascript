@@ -33,7 +33,7 @@ HCD Javascript Testing
 
 #### Defined in
 
-[packages/javascript-testing/src/stubs/stub-resource-record.ts:4](https://github.com/myty/hcd-javascript/blob/63f2189/packages/javascript-testing/src/stubs/stub-resource-record.ts#L4)
+[packages/javascript-testing/src/stubs/stub-resource-record.ts:4](https://github.com/myty/hcd-javascript/blob/dfe4d13/packages/javascript-testing/src/stubs/stub-resource-record.ts#L4)
 
 ## Interfaces
 
@@ -43,9 +43,9 @@ HCD Javascript Testing
 
 #### Defined in
 
-[packages/javascript-testing/src/mocks/mock-axios.ts:16](https://github.com/myty/hcd-javascript/blob/63f2189/packages/javascript-testing/src/mocks/mock-axios.ts#L16)
+[packages/javascript-testing/src/mocks/mock-axios.ts:16](https://github.com/myty/hcd-javascript/blob/dfe4d13/packages/javascript-testing/src/mocks/mock-axios.ts#L16)
 
-[packages/javascript-testing/src/mocks/mock-axios.ts:135](https://github.com/myty/hcd-javascript/blob/63f2189/packages/javascript-testing/src/mocks/mock-axios.ts#L135)
+[packages/javascript-testing/src/mocks/mock-axios.ts:135](https://github.com/myty/hcd-javascript/blob/dfe4d13/packages/javascript-testing/src/mocks/mock-axios.ts#L135)
 
 ___
 
@@ -55,7 +55,7 @@ ___
 
 #### Defined in
 
-[packages/javascript-testing/src/stubs/stub-resource.ts:5](https://github.com/myty/hcd-javascript/blob/63f2189/packages/javascript-testing/src/stubs/stub-resource.ts#L5)
+[packages/javascript-testing/src/stubs/stub-resource.ts:5](https://github.com/myty/hcd-javascript/blob/dfe4d13/packages/javascript-testing/src/stubs/stub-resource.ts#L5)
 
 ## Variables
 
@@ -65,7 +65,7 @@ ___
 
 #### Defined in
 
-[packages/javascript-testing/src/factories/axios-response-factory.ts:9](https://github.com/myty/hcd-javascript/blob/63f2189/packages/javascript-testing/src/factories/axios-response-factory.ts#L9)
+[packages/javascript-testing/src/factories/axios-response-factory.ts:9](https://github.com/myty/hcd-javascript/blob/dfe4d13/packages/javascript-testing/src/factories/axios-response-factory.ts#L9)
 
 ___
 
@@ -82,7 +82,7 @@ ___
 
 #### Defined in
 
-[packages/javascript-testing/src/factories/factory-type.ts:1](https://github.com/myty/hcd-javascript/blob/63f2189/packages/javascript-testing/src/factories/factory-type.ts#L1)
+[packages/javascript-testing/src/factories/factory-type.ts:1](https://github.com/myty/hcd-javascript/blob/dfe4d13/packages/javascript-testing/src/factories/factory-type.ts#L1)
 
 ___
 
@@ -92,9 +92,9 @@ ___
 
 #### Defined in
 
-[packages/javascript-testing/src/mocks/mock-axios.ts:16](https://github.com/myty/hcd-javascript/blob/63f2189/packages/javascript-testing/src/mocks/mock-axios.ts#L16)
+[packages/javascript-testing/src/mocks/mock-axios.ts:16](https://github.com/myty/hcd-javascript/blob/dfe4d13/packages/javascript-testing/src/mocks/mock-axios.ts#L16)
 
-[packages/javascript-testing/src/mocks/mock-axios.ts:135](https://github.com/myty/hcd-javascript/blob/63f2189/packages/javascript-testing/src/mocks/mock-axios.ts#L135)
+[packages/javascript-testing/src/mocks/mock-axios.ts:135](https://github.com/myty/hcd-javascript/blob/dfe4d13/packages/javascript-testing/src/mocks/mock-axios.ts#L135)
 
 ___
 
@@ -104,7 +104,7 @@ ___
 
 #### Defined in
 
-[packages/javascript-testing/src/factories/stub-resource-record-factory.ts:9](https://github.com/myty/hcd-javascript/blob/63f2189/packages/javascript-testing/src/factories/stub-resource-record-factory.ts#L9)
+[packages/javascript-testing/src/factories/stub-resource-record-factory.ts:9](https://github.com/myty/hcd-javascript/blob/dfe4d13/packages/javascript-testing/src/factories/stub-resource-record-factory.ts#L9)
 
 ___
 
@@ -129,7 +129,7 @@ ___
 
 #### Defined in
 
-[packages/javascript-testing/src/utilities/test-utils.ts:3](https://github.com/myty/hcd-javascript/blob/63f2189/packages/javascript-testing/src/utilities/test-utils.ts#L3)
+[packages/javascript-testing/src/utilities/test-utils.ts:3](https://github.com/myty/hcd-javascript/blob/dfe4d13/packages/javascript-testing/src/utilities/test-utils.ts#L3)
 
 ## Functions
 
@@ -155,4 +155,4 @@ void
 
 #### Defined in
 
-[packages/javascript-testing/src/utilities/shared-specs.ts:14](https://github.com/myty/hcd-javascript/blob/63f2189/packages/javascript-testing/src/utilities/shared-specs.ts#L14)
+[packages/javascript-testing/src/utilities/shared-specs.ts:14](https://github.com/myty/hcd-javascript/blob/dfe4d13/packages/javascript-testing/src/utilities/shared-specs.ts#L14)
