@@ -29,8 +29,8 @@
         "ts-jest": "^29.1.1",
         "tsup": "^7.2.0",
         "typedoc": "^0.25.1",
-        "tsconfig": "workspace:*",
-        "typedoc-config": "workspace:*",
+        "@rsm-hcd/tsconfig": "workspace:*",
+        "@rsm-hcd/typedoc-config": "workspace:*",
         "typescript": "^5.2.2"
     },
     "files": [
