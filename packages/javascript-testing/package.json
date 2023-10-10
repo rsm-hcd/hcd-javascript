@@ -1,6 +1,6 @@
 {
     "name": "@rsm-hcd/javascript-testing",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "Commonly used actors for automated testing javascript applications",
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
@@ -13,7 +13,7 @@
         }
     },
     "devDependencies": {
-        "@faker-js/faker": "^7.3.0",
+        "@faker-js/faker": "^8.1.0",
         "@rsm-hcd/tsconfig": "workspace:*",
         "@rsm-hcd/typedoc-config": "workspace:*",
         "@swc/core": "^1.3.92",

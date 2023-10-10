@@ -35,16 +35,20 @@ const TestUtils = {
     },
 
     /**
-     * Wrapper around `faker.datatype.uuid`
+     * Wrapper around `faker.string.uuid`
      */
     randomGuid(): string {
-        return faker.datatype.uuid();
+        return faker.string.uuid();
     },
 
     /**
      * Returns a random key from the given object. If the object has no keys, it returns `undefined`.
      */
-    randomKey(obj: object): string {
+    randomKey(obj: object): string | undefined {
+        if (Object.keys(obj).length === 0) {
+            return undefined;
+        }
+
         return faker.helpers.arrayElement(Object.keys(obj));
     },
 
@@ -53,7 +57,7 @@ const TestUtils = {
      */
     randomObject(keyCount?: number): Record<string, string> {
         const object: Record<string, string> = {};
-        keyCount = keyCount ?? faker.datatype.number({ min: 1, max: 10 });
+        keyCount = keyCount ?? faker.number.int({ min: 1, max: 10 });
 
         for (let i = 0; i < keyCount; i++) {
             const key = this.randomGuid();
@@ -74,25 +78,28 @@ const TestUtils = {
      */
     randomValue<TValue = any>(
         obj: Record<string, TValue> | Array<TValue>
-    ): TValue {
+    ): TValue | undefined {
         if (Array.isArray(obj)) {
+            if (obj.length === 0) {
+                return undefined;
+            }
+
             return faker.helpers.arrayElement(obj);
         }
 
-        return obj[this.randomKey(obj)];
+        const key = this.randomKey(obj);
+        if (key === undefined) {
+            return undefined;
+        }
+
+        return obj[key];
     },
 
     /**
-     * Wrapper of faker.random.word.
-     *
-     * Unfortunately there is an unresolved bug https://github.com/Marak/faker.js/issues/661
-     * and it will occasionally return multiple which can cause test flake
+     * Wrapper of faker.word.sample.
      */
     randomWord(): string {
-        return faker.random
-            .word()
-            .split(" ")[0]
-            .replace(/[^A-Za-z0-9]/gi, "");
+        return faker.word.words(1);
     },
 
     /**
@@ -100,7 +107,7 @@ const TestUtils = {
      */
     randomWords(): string[] {
         const words: string[] = [];
-        const count = faker.datatype.number({ min: 2, max: 10 });
+        const count = faker.number.int({ min: 2, max: 10 });
         for (let i = 0; i < count; i++) {
             words.push(this.randomWord());
         }

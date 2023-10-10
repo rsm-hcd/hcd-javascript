@@ -1,5 +1,11 @@
 # @rsm-hcd/javascript-testing
 
+## 1.1.0
+
+### Minor Changes
+
+-   Update TestUtils
+
 ## 1.0.0
 
 ### Major Changes

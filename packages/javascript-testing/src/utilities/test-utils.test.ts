@@ -49,11 +49,11 @@ describe("TestUtils", () => {
             "given an object with at least one key, it returns a random key",
             () => {
                 // Arrange
-                const keys = faker.random.words(5).split(" ");
+                const keys = faker.word.words(5).split(" ");
                 const obj: Record<string, string> = {};
                 keys.forEach((key: string) => {
                     // Assign the randomly generated keys to the object
-                    obj[key] = faker.datatype.uuid();
+                    obj[key] = faker.string.uuid();
                 });
 
                 // Act
@@ -132,11 +132,11 @@ describe("TestUtils", () => {
             "given an object with at least one key, it returns a random value",
             () => {
                 // Arrange
-                const keys = faker.random.words(5).split(" ");
+                const keys = faker.word.words(5).split(" ");
                 const obj: Record<string, number> = {};
                 keys.forEach((key: string) => {
                     // Assign the randomly generated keys to the object
-                    obj[key] = faker.datatype.number();
+                    obj[key] = faker.number.int();
                 });
 
                 // Act
@@ -162,7 +162,7 @@ describe("TestUtils", () => {
             "given an array with at least one value, it returns a random value",
             () => {
                 // Arrange
-                const obj = faker.random.words(5).split(" ");
+                const obj = faker.word.words(5).split(" ");
 
                 // Act
                 const result = TestUtils.randomValue(obj);
@@ -199,12 +199,12 @@ describe("TestUtils", () => {
             expect(result).not.toContain(" ");
         });
 
-        testLoop("it returns only alphanumeric characters", () => {
+        testLoop("it returns only a word or a hyphenated word", () => {
             // Arrange & Act
             const result = TestUtils.randomWord();
 
             // Assert
-            expect(result).not.toMatch(/[^a-zA-Z0-9]/);
+            expect(result).toMatch(/^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)?$/);
         });
     });
 
@@ -223,13 +223,13 @@ describe("TestUtils", () => {
             expect(result.length).toBeGreaterThanOrEqual(2);
         });
 
-        testLoop("it returns only alphanumeric characters", () => {
+        testLoop("it returns only a word or a hyphenated word", () => {
             // Arrange & Act
             const result = TestUtils.randomWords();
 
             // Assert
             result.forEach((word: string) =>
-                expect(word).not.toMatch(/[^a-zA-Z0-9]/)
+                expect(word).toMatch(/^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)?$/)
             );
         });
     });
