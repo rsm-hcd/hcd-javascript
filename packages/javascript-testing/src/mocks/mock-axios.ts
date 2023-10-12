@@ -133,14 +133,14 @@ const _resultObjectToJS = (resultObject: any | any[]): any | any[] => {
 // ---------------------------------------------------------
 
 const MockAxios: IMockAxios = {
-    delete: axios.delete as AxiosJestMock,
+    delete: axios?.delete as AxiosJestMock,
     deleteSuccess,
-    get: axios.get as AxiosJestMock,
+    get: axios?.get as AxiosJestMock,
     getSuccess,
     listSuccess,
-    post: axios.post as AxiosJestMock,
+    post: axios?.post as AxiosJestMock,
     postSuccess,
-    put: axios.put as AxiosJestMock,
+    put: axios?.put as AxiosJestMock,
     putSuccess,
 };
 

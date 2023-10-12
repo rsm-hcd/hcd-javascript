@@ -10,4 +10,4 @@ interface DoTryConfig {
     defaultErrorHandler?: CatchResultHandler<any>;
 }
 
-export { DoTryConfig };
+export type { DoTryConfig };

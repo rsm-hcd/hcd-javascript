@@ -3,4 +3,4 @@
  */
 type FinallyHandler = () => void;
 
-export { FinallyHandler };
+export type { FinallyHandler };

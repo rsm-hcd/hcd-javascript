@@ -1,11 +1,15 @@
 import { CollectionUtils } from "./collection-utils";
-import _ from "lodash";
 import {
-    Cancelable,
-    CurriedFunction1,
-    MemoizedFunction,
-    ThrottleSettings,
+    DebouncedFunc,
+    bindAll,
+    curry,
+    memoize,
+    merge,
+    range,
+    throttle,
+    times,
 } from "lodash";
+import { CurriedFunction1, MemoizedFunction, ThrottleSettings } from "lodash";
 import { TimerFunctionReturn } from "../types/timer-function-return";
 
 // -----------------------------------------------------------------------------------------
@@ -26,7 +30,7 @@ const CoreUtils = {
      * @return Returns object.
      */
     bindAll<T>(object: T, ...methodNames: Array<string | string[]>): T {
-        return _.bindAll(object, ...methodNames);
+        return bindAll(object, ...methodNames);
     },
 
     /**
@@ -38,7 +42,7 @@ const CoreUtils = {
      * @return Returns the new curried function.
      */
     curry<T1, R>(func: (t1: T1) => R, arity?: number): CurriedFunction1<T1, R> {
-        return _.curry(func, arity);
+        return curry(func, arity);
     },
 
     /**
@@ -94,7 +98,7 @@ const CoreUtils = {
         func: T,
         resolver?: (...args: any[]) => any
     ): T & MemoizedFunction {
-        return _.memoize(func, resolver);
+        return memoize(func, resolver);
     },
 
     /**
@@ -109,7 +113,7 @@ const CoreUtils = {
         object: TObject,
         source: TSource
     ): TObject & TSource {
-        return _.merge(object, source);
+        return merge(object, source);
     },
 
     /**
@@ -163,7 +167,7 @@ const CoreUtils = {
      * @return Returns a new range array.
      */
     range(start: number, end?: number, step?: number): number[] {
-        return _.range(start, end, step);
+        return range(start, end, step);
     },
 
     /**
@@ -219,8 +223,8 @@ const CoreUtils = {
         func: T,
         wait?: number,
         options?: ThrottleSettings
-    ): T & Cancelable {
-        return _.throttle(func, wait, options);
+    ): DebouncedFunc<T> {
+        return throttle(func, wait, options);
     },
 
     /**
@@ -257,7 +261,7 @@ const CoreUtils = {
      * @return Returns the array of results.
      */
     times<TResult>(n: number, iteratee: (num: number) => TResult): TResult[] {
-        return _.times(n, iteratee);
+        return times(n, iteratee);
     },
 };
 

@@ -1,4 +1,3 @@
-import faker from "faker";
 import { LocalizationUtils } from "./localization-utils";
 import { ServiceUtils } from "./service-utils";
 import { Factory } from "rosie";
@@ -7,10 +6,10 @@ import { FactoryType } from "../tests/factories/factory-type";
 import {
     FactoryType as AndcultureCodeFactoryType,
     StubResourceRecord,
-} from "andculturecode-javascript-testing";
+    TestUtils,
+} from "@rsm-hcd/javascript-testing";
 import { ResultRecord } from "../view-models/result-record";
 import axios from "axios";
-import "jest-extended";
 
 describe("ServiceUtils", () => {
     // -----------------------------------------------------------------------------------------
@@ -28,7 +27,8 @@ describe("ServiceUtils", () => {
             "when supplied cultureCode is $invalidCultureCode, configures baseUrl with default culture code",
             ({ invalidCultureCode }) => {
                 // Arrange
-                const expected = LocalizationUtils.defaultCultureCode().toLowerCase();
+                const expected =
+                    LocalizationUtils.defaultCultureCode().toLowerCase();
 
                 // Act
                 ServiceUtils.configure(invalidCultureCode);
@@ -40,7 +40,7 @@ describe("ServiceUtils", () => {
 
         test("when cultureCode set, configures baseUrl with provided value", () => {
             // Arrange
-            const expected = faker.random.locale();
+            const expected = TestUtils.faker.word.sample({ length: 5 });
 
             // Act
             ServiceUtils.configure(expected);
@@ -60,7 +60,7 @@ describe("ServiceUtils", () => {
 
             // Act
             ServiceUtils.configure(
-                faker.random.locale(),
+                TestUtils.faker.word.sample({ length: 5 }),
                 expectedErrorHandler,
                 expectedSuccessHandler
             );
@@ -90,7 +90,8 @@ describe("ServiceUtils", () => {
             "when cultureCode of $cultureCode, configures baseUrl with default culture code",
             ({ cultureCode }) => {
                 // Arrange
-                const expected = LocalizationUtils.defaultCultureCode().toLowerCase();
+                const expected =
+                    LocalizationUtils.defaultCultureCode().toLowerCase();
 
                 // Act
                 ServiceUtils.configureCultureCode(cultureCode);
@@ -102,7 +103,7 @@ describe("ServiceUtils", () => {
 
         test("when cultureCode set, configures baseUrl with provided value", () => {
             // Arrange
-            const expected = faker.random.locale();
+            const expected = TestUtils.faker.word.sample({ length: 5 });
 
             // Act
             ServiceUtils.configureCultureCode(expected);
@@ -476,7 +477,7 @@ describe("ServiceUtils", () => {
                 FactoryType.StubResourceRecord,
                 2
             );
-            const rowCount = faker.datatype.number({
+            const rowCount = TestUtils.faker.number.int({
                 min: resultObject.length + 1,
             }); // This is the important setup (should be different from resultObject.length)
             const axiosResponse = Factory.build<AxiosResponse>(

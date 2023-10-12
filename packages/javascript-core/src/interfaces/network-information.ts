@@ -50,6 +50,6 @@ interface NetworkInformation extends Partial<EventTarget> {
 // #region Export
 // -----------------------------------------------------------------------------------------
 
-export { NetworkInformation };
+export type { NetworkInformation };
 
 // #endregion Export

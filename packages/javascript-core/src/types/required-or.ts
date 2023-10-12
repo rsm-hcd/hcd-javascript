@@ -15,6 +15,6 @@ type RequiredOr<T, TOrType> = {
 // #region Exports
 // -----------------------------------------------------------------------------------------
 
-export { RequiredOr };
+export type { RequiredOr };
 
 // #endregion Exports

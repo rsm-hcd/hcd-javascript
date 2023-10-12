@@ -5,4 +5,4 @@ import { ResultRecord } from "../view-models/result-record";
  */
 type CatchResultHandler<T> = (result?: ResultRecord<T>, error?: any) => void;
 
-export { CatchResultHandler };
+export type { CatchResultHandler };

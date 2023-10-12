@@ -1,15 +1,14 @@
 import { ResultRecord } from "../../view-models/result-record";
-import { Factory } from "rosie";
 import { FactoryType } from "./factory-type";
+import { FactoryInitializer } from "@rsm-hcd/javascript-testing";
 
 // -------------------------------------------------------------------------------------------------
 // #region Factory
 // -------------------------------------------------------------------------------------------------
 
-const ResultRecordFactory = Factory.define<ResultRecord<any>>(
-    FactoryType.ResultRecord,
-    ResultRecord
-);
+const resultRecordFactoryInitializer: FactoryInitializer = ({ define }) => {
+    define<ResultRecord<any>>(FactoryType.ResultRecord, ResultRecord);
+};
 
 // #endregion Factory
 
@@ -17,6 +16,6 @@ const ResultRecordFactory = Factory.define<ResultRecord<any>>(
 // #region Exports
 // -------------------------------------------------------------------------------------------------
 
-export { ResultRecordFactory };
+export { resultRecordFactoryInitializer };
 
 // #endregion Exports

@@ -15,6 +15,6 @@ type RequiredOrUndefined<T> = RequiredOr<T, undefined>;
 // #region Exports
 // -----------------------------------------------------------------------------------------
 
-export { RequiredOrUndefined };
+export type { RequiredOrUndefined };
 
 // #endregion Exports

@@ -15,6 +15,6 @@ interface LocalizationInitOptions
 // #region Export
 // -----------------------------------------------------------------------------------------
 
-export { LocalizationInitOptions };
+export type { LocalizationInitOptions };
 
 // #endregion Export

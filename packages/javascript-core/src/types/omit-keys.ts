@@ -13,6 +13,6 @@ type OmitKeys<TSource, TExclusion> = Omit<TSource, keyof TExclusion>;
 // #region Exports
 // -----------------------------------------------------------------------------------------
 
-export { OmitKeys };
+export type { OmitKeys };
 
 // #endregion Exports

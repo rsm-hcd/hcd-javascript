@@ -16,6 +16,6 @@ interface PagedResult<T> {
 // #region Export
 // -----------------------------------------------------------------------------------------
 
-export { PagedResult };
+export type { PagedResult };
 
 // #endregion Export

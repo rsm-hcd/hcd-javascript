@@ -6,16 +6,9 @@
     "publishConfig": {
         "directory": "dist"
     },
-    "main": "./index.js",
-    "module": "./index.mjs",
-    "types": "./index.d.ts",
-    "exports": {
-        ".": {
-            "require": "./index.js",
-            "import": "./index.mjs",
-            "types": "./index.d.ts"
-        }
-    },
+    "main": "./dist/index.js",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
     "devDependencies": {
         "@faker-js/faker": "^8.1.0",
         "@rsm-hcd/scripts": "workspace:*",
@@ -38,7 +31,11 @@
         "tsup": "^7.2.0",
         "typescript": "^5.2.2"
     },
+    "files": [
+        "dist/**"
+    ],
     "keywords": [
+        "TypeScript",
         "JavaScript",
         "Node"
     ],
@@ -52,10 +49,11 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/rsm-hcd/hcd-javascript.git"
+        "url": "git+https://github.com/rsm-hcd/hcd-javascript.git",
+        "directory": "packages/javascript-testing"
     },
     "scripts": {
-        "build": "tsup ./src/index.ts --format=cjs,esm --dts --minify --clean --sourcemap --treeshake --shims",
+        "build": "tsup ./src/index.ts --format cjs,esm --dts",
         "clean": "rimraf dist && rimraf coverage",
         "coverage": "jest ./src --coverage",
         "dev": "pnpm run build --watch",
@@ -63,8 +61,7 @@
         "prebuild": "pnpm run clean && echo Using TypeScript && tsc --version",
         "prepare-packagejson": "ts-node ./node_modules/@rsm-hcd/scripts/prepare-package.ts package.json ./dist/package.json @rsm-hcd/tsconfig,@rsm-hcd/scripts,@rsm-hcd/typedoc-config",
         "copy-readme": "ts-node ./node_modules/@rsm-hcd/scripts/copy-readme.ts",
-        "postbuild": "pnpm run prepare-packagejson && pnpm run copy-readme",
-        "prepublishOnly": "pnpm run build",
+        "prepublishOnly": "npm run build && pnpm run prepare-packagejson && pnpm run copy-readme",
         "test": "jest ./src",
         "test:watch": "jest ./src --watch"
     }
