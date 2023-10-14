@@ -1,5 +1,15 @@
 # @rsm-hcd/javascript-testing
 
+## 1.2.0
+
+### Minor Changes
+
+-   0e8c00b: Additional monorepo configuration and modernization
+
+### Patch Changes
+
+-   5f843b7: pnpm publishable
+
 ## 1.1.0
 
 ### Minor Changes

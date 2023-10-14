@@ -1,16 +1,16 @@
 {
     "name": "@rsm-hcd/javascript-testing",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "description": "Commonly used actors for automated testing javascript applications",
     "homepage": "https://github.com/rsm-hcd/hcd-javascript/tree/main/packages/javascript-testing",
     "main": "dist/index.js",
     "module": "dist/index.mjs",
     "types": "dist/index.d.ts",
-    "exports":{
+    "exports": {
         ".": {
-          "require": "./dist/index.js",
-          "import": "./dist/index.mjs",
-          "types": "./dist/index.d.ts"
+            "require": "./dist/index.js",
+            "import": "./dist/index.mjs",
+            "types": "./dist/index.d.ts"
         }
     },
     "devDependencies": {
