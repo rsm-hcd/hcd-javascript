@@ -64,7 +64,6 @@
         "dev": "pnpm run build:dev --watch",
         "format": "prettier --write \"src/**/*.ts\" --trailing-comma es5",
         "prepublishOnly": "npm run build:prod",
-        "test": "jest ./src",
-        "test:watch": "jest ./src --watch"
+        "test": "jest ./src"
     }
 }

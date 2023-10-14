@@ -11,8 +11,8 @@
         "build:prod": "turbo run build:prod",
         "dev": "turbo run dev",
         "docs": "typedoc",
-        "test": "turbo run test",
-        "test:watch": "turbo run test:watch",
+        "test": "turbo run test --filter=@rsm-hcd/javascript-testing",
+        "test:watch": "turbo run test --filter=@rsm-hcd/javascript-testing -- --watch",
         "lint": "turbo run lint",
         "format": "prettier --write \"**/*.{ts,tsx,md}\"",
         "publish-packages": "turbo run build lint test && changeset version && changeset publish"
