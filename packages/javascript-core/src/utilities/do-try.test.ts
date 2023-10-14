@@ -241,20 +241,23 @@ describe("do-try.ts", () => {
             expect(finallyHandler).toHaveBeenCalled();
         });
 
-        // it("When no errors occur, then finally handler is still called and return value is not undefined", () => {
-        //     // Arrange
-        //     const finallyHandler = jest.fn();
-        //     const workload = () => StubResourceRecordFactory.build();
+        it("When no errors occur, then finally handler is still called and return value is not undefined", () => {
+            // Arrange
+            const finallyHandler = jest.fn();
+            const workload = () =>
+                Factory.build<StubResourceRecord>(
+                    FactoryType.StubResourceRecord
+                );
 
-        //     // Act
-        //     const result = DoSync.try(workload)
-        //         .finally(finallyHandler)
-        //         .execute();
+            // Act
+            const result = DoSync.try(workload)
+                .finally(finallyHandler)
+                .execute();
 
-        //     // Assert
-        //     expect(result).toBeInstanceOf(StubResourceRecord);
-        //     expect(finallyHandler).toHaveBeenCalled();
-        // });
+            // Assert
+            expect(result).toBeInstanceOf(StubResourceRecord);
+            expect(finallyHandler).toHaveBeenCalled();
+        });
     });
 
     describe("DoSync.configure", () => {
