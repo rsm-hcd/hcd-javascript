@@ -7,7 +7,6 @@ This is a monorepo consisting of numerous core JavaScript packages utilized by e
 - [`javascript-testing`](./packages/javascript-testing/README.md): Testing utilities for JavaScript (published to npm)
 - `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `tsconfig`: `tsconfig.json`s used throughout the monorepo
-- `typedoc-config`: Shared `typedoc` configurations
 
 ## Getting Started
 
@@ -20,4 +19,3 @@ This is a monorepo consisting of numerous core JavaScript packages utilized by e
   - `pnpm run build`: Build all packages
   - `pnpm run lint`: Lint all packages
   - `pnpm run test`: Test all packages
-  - `pnpm run docs`: Generate docs for all packages
