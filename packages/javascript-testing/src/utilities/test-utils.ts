@@ -99,7 +99,7 @@ const TestUtils = {
      * Wrapper of faker.word.sample.
      */
     randomWord(): string {
-        return faker.word.words(1);
+        return faker.lorem.words(1);
     },
 
     /**
