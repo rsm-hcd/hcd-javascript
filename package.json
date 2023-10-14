@@ -8,6 +8,7 @@
     },
     "scripts": {
         "build": "turbo run build",
+        "build:prod": "turbo run build:prod",
         "dev": "turbo run dev",
         "docs": "typedoc",
         "test": "turbo run test",
