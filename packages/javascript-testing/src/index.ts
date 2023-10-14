@@ -12,8 +12,7 @@ export * from "./factories/factory-initializer";
 // #region Mocks
 // -----------------------------------------------------------------------------------------
 
-export * from "./mocks/axios";
-export { MockAxios } from "./mocks/mock-axios";
+export * from "./mocks/mock-axios";
 
 // #endregion Mocks
 

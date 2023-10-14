@@ -8,7 +8,6 @@ describe("EnvironmentUtils", () => {
     beforeEach(() => {
         jest.resetModules(); // this is important - it clears the cache
         process.env = { ...originalEnv };
-        delete process.env;
     });
 
     afterEach(() => {

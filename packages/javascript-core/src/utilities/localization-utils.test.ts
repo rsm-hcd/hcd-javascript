@@ -256,7 +256,7 @@ describe("LocalizationUtils", () => {
             test(`given querystring '${LocalizationUtils.routeParam}' set, returns route value as priority`, () => {
                 // Arrange
                 const expected = randomCultureCode();
-                const unexpected = faker.address.countryCode();
+                const unexpected = faker.location.countryCode();
                 window.location = {
                     pathname: `/${expected}`,
                     search: `${LocalizationUtils.routeParam}=${unexpected}`,
@@ -437,7 +437,7 @@ describe("LocalizationUtils", () => {
         test("when cultures with resources, successfully configures translations", () => {
             // Arrange
             const expectedKey = "testkey";
-            const expectedValue = faker.random.words();
+            const expectedValue = faker.lorem.words();
 
             const culture: Partial<Culture<any>> = { resources: {} };
             culture.resources[expectedKey] = expectedValue;
@@ -504,7 +504,7 @@ describe("LocalizationUtils", () => {
             ${LocalizationUtils.translate}
         `("when key missing translation, returns key", ({ fn }) => {
             // Arrange
-            const expected = faker.random.word();
+            const expected = faker.lorem.word();
 
             // Act & Assert
             expect(fn(expected)).toBe(expected);
@@ -517,7 +517,7 @@ describe("LocalizationUtils", () => {
         `("when key found, returns translated value", ({ fn }) => {
             // Arrange
             const key = "testkey";
-            const expected = faker.random.words();
+            const expected = faker.lorem.words();
 
             const culture: Partial<Culture<any>> = { resources: {} };
             culture.resources[key] = expected;
@@ -542,8 +542,8 @@ describe("LocalizationUtils", () => {
             ({ fn }) => {
                 // Arrange
                 const key = "testkey";
-                const valueTemplate = `${faker.random.words()} -- {{variable}}`;
-                const variable = faker.random.word();
+                const valueTemplate = `${faker.lorem.words()} -- {{variable}}`;
+                const variable = faker.lorem.word();
                 const expected = valueTemplate.replace(
                     "{{variable}}",
                     variable

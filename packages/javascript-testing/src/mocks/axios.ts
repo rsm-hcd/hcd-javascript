@@ -1,4 +1,6 @@
-export default {
+import { AxiosStatic } from "axios";
+
+export const axiosMock = {
     defaults: {
         headers: {
             post: {},
@@ -14,4 +16,4 @@ export default {
     },
     post: jest.fn(() => Promise.resolve({ data: {} })),
     put: jest.fn(() => Promise.resolve({ data: {} })),
-};
+} as unknown as AxiosStatic;

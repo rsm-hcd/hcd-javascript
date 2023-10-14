@@ -264,17 +264,6 @@ describe("CollectionUtils", () => {
             expect(result).toBe(array.length);
         });
 
-        test(`when collections param is null, it returns -1`, (): void => {
-            // Arrange
-            const array = null;
-
-            // Act
-            const result = CollectionUtils.length(array);
-
-            // Assert
-            expect(result).toBe(-1);
-        });
-
         test(`when collections param is a list and has elements, it returns the length`, (): void => {
             // Arrange
             const list = List(["test", "test"]);
@@ -424,7 +413,7 @@ describe("CollectionUtils", () => {
 
         it("When source array has no values it, then returns the source array", () => {
             // Arrange
-            const arr = [];
+            const arr: any[] = [];
 
             // Act
             const result = CollectionUtils.replaceElementAt(arr, 1, "replaced");

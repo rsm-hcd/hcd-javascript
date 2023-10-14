@@ -1,5 +1,5 @@
-import { MockAxios as IMockAxios } from "./mock-axios";
 import axios from "axios";
+import { axiosMock } from "./axios";
 import { Record } from "immutable";
 
 // ---------------------------------------------------------
@@ -14,6 +14,8 @@ import { Record } from "immutable";
 type AxiosJestMock = jest.Mock<Promise<{ data: {} }>, []>;
 
 interface MockAxios {
+    default: typeof axiosMock;
+
     delete: AxiosJestMock;
 
     /**
@@ -132,15 +134,16 @@ const _resultObjectToJS = (resultObject: any | any[]): any | any[] => {
 // #region Exports
 // ---------------------------------------------------------
 
-const MockAxios: IMockAxios = {
-    delete: axios?.delete as AxiosJestMock,
+const MockAxios: MockAxios = {
+    default: axiosMock,
+    delete: axios.delete as AxiosJestMock,
     deleteSuccess,
-    get: axios?.get as AxiosJestMock,
+    get: axios.get as AxiosJestMock,
     getSuccess,
     listSuccess,
-    post: axios?.post as AxiosJestMock,
+    post: axios.post as AxiosJestMock,
     postSuccess,
-    put: axios?.put as AxiosJestMock,
+    put: axios.put as AxiosJestMock,
     putSuccess,
 };
 
