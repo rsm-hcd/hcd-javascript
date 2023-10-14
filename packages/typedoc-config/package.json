@@ -1,9 +1,0 @@
-{
-    "name": "@rsm-hcd/typedoc-config",
-    "version": "0.1.0",
-    "license": "MIT",
-    "private": true,
-    "devDependencies": {
-        "typedoc-plugin-markdown": "^3.16.0"
-    }
-  }
