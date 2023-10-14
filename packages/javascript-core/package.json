@@ -4,12 +4,9 @@
     "description": "Common patterns, functions, etc... used when building any JavaScript or TypeScript application",
     "homepage": "https://github.com/rsm-hcd/hcd-javascript/tree/main/packages/javascript-core",
     "license": "MIT",
-    "publishConfig": {
-        "directory": "dist"
-    },
-    "main": "./dist/index.js",
-    "module": "./dist/index.mjs",
-    "types": "./dist/index.d.ts",
+    "main": "dist/index.js",
+    "module": "dist/index.mjs",
+    "types": "dist/index.d.ts",
     "exports":{
         ".": {
           "require": "./dist/index.js",
@@ -82,11 +79,7 @@
         "coverage": "jest ./src --coverage",
         "dev": "pnpm run build:dev --watch",
         "format": "prettier --write \"src/**/*.ts\" --trailing-comma es5",
-        "prepare-packagejson": "ts-node ./node_modules/@rsm-hcd/scripts/prepare-package.ts package.json ./dist/package.json @rsm-hcd/tsconfig,@rsm-hcd/scripts,@rsm-hcd/typedoc-config",
-        "copy-readme": "ts-node ./node_modules/@rsm-hcd/scripts/copy-readme.ts",
-        "postpublish": "cross-env-shell \"git add -A && git commit -m \"$npm_package_version\" && git push origin main\"",
-        "prebuild": "npm run clean && npm run format && echo Using TypeScript && tsc --version",
-        "prepublishOnly": "npm run build:prod && pnpm run prepare-packagejson && pnpm run copy-readme",
+        "prepublishOnly": "npm run build:prod",
         "test": "jest ./src",
         "test-cypress": "cypress run",
         "watch": "tsc --pretty --watch",
