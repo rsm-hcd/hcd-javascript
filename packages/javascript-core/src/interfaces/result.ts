@@ -15,6 +15,6 @@ interface Result<T> {
 // #region Export
 // -----------------------------------------------------------------------------------------
 
-export { Result };
+export type { Result };
 
 // #endregion Export

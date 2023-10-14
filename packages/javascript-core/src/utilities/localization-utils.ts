@@ -5,7 +5,7 @@ import { CultureParams } from "./../interfaces/culture-params";
 import { RouteUtils } from "./route-utils";
 import { StringUtils } from "./string-utils";
 import { Rfc4646LanguageCodes } from "./../constants/rfc4646-language-codes";
-import i18n from "i18next";
+import i18n, { TFunctionDetailedResult } from "i18next";
 import LanguageDetector, {
     DetectorOptions,
 } from "i18next-browser-languagedetector";
@@ -69,8 +69,8 @@ const cultureCodeFromRoute = () => window.location.pathname.split("/")[1];
  * @param culture subclass culture's partial properties to override 'base'. Typically where providing culture resources
  */
 const cultureFactory = <TResources>(
-    base: Culture<any>,
-    culture: Partial<Culture<TResources>>
+    base: Culture<any> | null,
+    culture: Partial<Culture<TResources>> | null
 ): Culture<TResources> => Object.assign({}, base, culture);
 
 const culturesToResources = <TResources>(cultures: Culture<TResources>[]) => {
@@ -153,7 +153,10 @@ const initialize = <TResources>(
  * @param key culture resource key
  * @param options object key/values for interpolation of dynamic values
  */
-const translate = (key: string, options?: any): string => i18n.t(key, options);
+const translate = (
+    key: string,
+    options?: any
+): string | TFunctionDetailedResult<string> => i18n.t(key, options);
 
 /**
  * Retrieve translation for given key in the currently configured language

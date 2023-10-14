@@ -3,4 +3,4 @@
  */
 type SyncWorkload<T> = () => T;
 
-export { SyncWorkload };
+export type { SyncWorkload };

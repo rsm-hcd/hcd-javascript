@@ -1,5 +1,5 @@
+import { faker } from "@faker-js/faker";
 import { ScrollUtils } from "./scroll-utils";
-import faker from "faker";
 
 describe("ScrollUtils", () => {
     // -----------------------------------------------------------------------------------------
@@ -14,9 +14,7 @@ describe("ScrollUtils", () => {
             jest.spyOn(document, "getElementById").mockImplementation(
                 () => element
             );
-            const elementId = faker.datatype
-                .number({ min: 1, max: 999 })
-                .toString();
+            const elementId = faker.number.int({ min: 1, max: 999 }).toString();
 
             // Act
             ScrollUtils.scrollToElementById(elementId);
@@ -27,9 +25,7 @@ describe("ScrollUtils", () => {
 
         test("when element is not found, it attempts to retrieve the element up to 50 times", () => {
             // Arrange
-            const elementId = faker.datatype
-                .number({ min: 1, max: 999 })
-                .toString();
+            const elementId = faker.number.int({ min: 1, max: 999 }).toString();
             const getElementByIdMock = jest.spyOn(document, "getElementById");
 
             // Act
@@ -43,9 +39,7 @@ describe("ScrollUtils", () => {
 
         test("when element is not found, it logs a console warning for development environment", () => {
             // Arrange
-            const elementId = faker.datatype
-                .number({ min: 1, max: 999 })
-                .toString();
+            const elementId = faker.number.int({ min: 1, max: 999 }).toString();
             process.env.NODE_ENV = "development";
             const consoleWarnMock = jest.spyOn(console, "warn");
 
@@ -61,9 +55,7 @@ describe("ScrollUtils", () => {
         test("when scrollOption has initial delay, it calls setTimeout with supplied delay", () => {
             // Arrange
             const options = { initialDelay: 200 };
-            const elementId = faker.datatype
-                .number({ min: 1, max: 999 })
-                .toString();
+            const elementId = faker.number.int({ min: 1, max: 999 }).toString();
             const setTimeoutMock = jest.spyOn(window, "setTimeout");
 
             // Act

@@ -1,5 +1,5 @@
-import QueryString, { StringifyOptions } from "query-string";
 import { QueryStringArrayFormat } from "../enumerations/query-string-array-format";
+import QueryString, { StringifyOptions } from "query-string";
 
 // -----------------------------------------------------------------------------------------
 // #region Constants
@@ -88,8 +88,8 @@ const getUrlFromPath = (path: string, pathParams?: any, queryParams?: any) => {
  * Determines if supplied url is an absolute url
  * @param url
  */
-const isAbsoluteUrl = (url: string): boolean =>
-    new RegExp("^(?:[a-z]+:)?//", "i").test(url);
+const isAbsoluteUrl = (url?: string | null): boolean =>
+    url ? new RegExp("^(?:[a-z]+:)?//", "i").test(url) : false;
 
 /**
  * Parse a query string and return an object of type T
@@ -104,11 +104,11 @@ const queryStringToObject = <T>(
     parseNumbers: boolean = true,
     parseBooleans: boolean = true
 ): T =>
-    (QueryString.parse(queryString, {
+    QueryString.parse(queryString, {
         arrayFormat,
         parseNumbers,
         parseBooleans,
-    }) as any) as T;
+    }) as any as T;
 
 /**
  * Replace routing components in supplied path with keys and values

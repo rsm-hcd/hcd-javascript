@@ -3,4 +3,4 @@
  */
 type AsyncWorkload<T> = () => Promise<T>;
 
-export { AsyncWorkload };
+export type { AsyncWorkload };

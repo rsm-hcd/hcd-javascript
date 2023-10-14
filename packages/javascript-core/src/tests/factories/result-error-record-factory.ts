@@ -1,17 +1,18 @@
 import { ResultErrorRecord } from "../../view-models/result-error-record";
-import { Factory } from "rosie";
 import { FactoryType } from "./factory-type";
+import { FactoryInitializer } from "@rsm-hcd/javascript-testing";
 
 // -------------------------------------------------------------------------------------------------
 // #region Factory
 // -------------------------------------------------------------------------------------------------
 
-const ResultErrorRecordFactory = Factory.define<ResultErrorRecord>(
-    FactoryType.ResultErrorRecord,
-    ResultErrorRecord
-)
-    .sequence("key", (i: number) => `TEST_ERROR_KEY_${i}`)
-    .sequence("message", (i: number) => `Test error message ${i}`);
+const resultErrorRecordFactoryInitializer: FactoryInitializer = ({
+    define,
+}) => {
+    define<ResultErrorRecord>(FactoryType.ResultErrorRecord, ResultErrorRecord)
+        .sequence("key", (i: number) => `TEST_ERROR_KEY_${i}`)
+        .sequence("message", (i: number) => `Test error message ${i}`);
+};
 
 // #endregion Factory
 
@@ -19,6 +20,6 @@ const ResultErrorRecordFactory = Factory.define<ResultErrorRecord>(
 // #region Exports
 // -------------------------------------------------------------------------------------------------
 
-export { ResultErrorRecordFactory };
+export { resultErrorRecordFactoryInitializer };
 
 // #endregion Exports

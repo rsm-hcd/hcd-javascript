@@ -38,21 +38,21 @@ export { UnitOfTime } from "./enumerations/unit-of-time";
 // #region Interfaces
 // -----------------------------------------------------------------------------------------
 
-export { Auditable } from "./interfaces/auditable";
-export { Culture } from "./interfaces/culture";
-export { CultureParams } from "./interfaces/culture-params";
-export { Entity } from "./interfaces/entity";
-export { KeyValuePair } from "./interfaces/key-value-pair";
-export { LocalizationInitOptions } from "./interfaces/localization-init-options";
-export { NetworkConnection } from "./interfaces/network-connection";
-export { PagedQuery } from "./interfaces/paged-query";
-export { PagedResult } from "./interfaces/paged-result";
-export { Result } from "./interfaces/result";
-export { ResultError } from "./interfaces/result-error";
-export { Role } from "./interfaces/role";
-export { ScrollOptions } from "./interfaces/scroll-options";
-export { ServiceResponse } from "./interfaces/service-response";
-export { User } from "./interfaces/user";
+export type { Auditable } from "./interfaces/auditable";
+export type { Culture } from "./interfaces/culture";
+export type { CultureParams } from "./interfaces/culture-params";
+export type { Entity } from "./interfaces/entity";
+export type { KeyValuePair } from "./interfaces/key-value-pair";
+export type { LocalizationInitOptions } from "./interfaces/localization-init-options";
+export type { NetworkConnection } from "./interfaces/network-connection";
+export type { PagedQuery } from "./interfaces/paged-query";
+export type { PagedResult } from "./interfaces/paged-result";
+export type { Result } from "./interfaces/result";
+export type { ResultError } from "./interfaces/result-error";
+export type { Role } from "./interfaces/role";
+export type { ScrollOptions } from "./interfaces/scroll-options";
+export type { ServiceResponse } from "./interfaces/service-response";
+export type { User } from "./interfaces/user";
 
 // #endregion Interfaces
 
@@ -60,16 +60,16 @@ export { User } from "./interfaces/user";
 // #region Types
 // -----------------------------------------------------------------------------------------
 
-export { AsyncWorkload } from "./types/async-workload";
-export { CancellablePromise } from "./types/cancellable-promise";
-export { CatchResultHandler } from "./types/catch-result-handler";
-export { Constructor } from "./types/constructor";
-export { FinallyHandler } from "./types/finally-handler";
-export { OmitKeys } from "./types/omit-keys";
-export { SyncWorkload } from "./types/sync-workload";
-export { RequiredOr } from "./types/required-or";
-export { RequiredOrUndefined } from "./types/required-or-undefined";
-export { TimerFunctionReturn } from "./types/timer-function-return";
+export type { AsyncWorkload } from "./types/async-workload";
+export type { CancellablePromise } from "./types/cancellable-promise";
+export type { CatchResultHandler } from "./types/catch-result-handler";
+export type { Constructor } from "./types/constructor";
+export type { FinallyHandler } from "./types/finally-handler";
+export type { OmitKeys } from "./types/omit-keys";
+export type { SyncWorkload } from "./types/sync-workload";
+export type { RequiredOr } from "./types/required-or";
+export type { RequiredOrUndefined } from "./types/required-or-undefined";
+export type { TimerFunctionReturn } from "./types/timer-function-return";
 
 // #endregion Types
 

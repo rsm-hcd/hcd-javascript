@@ -1,9 +1,10 @@
 import i18n from "i18next";
 import { LocalizationUtils } from "./localization-utils";
 import { Rfc4646LanguageCodes } from "../constants/rfc4646-language-codes";
-import faker from "faker";
 import { BaseEnglishUnitedStates } from "../cultures/base-english-united-states";
 import { Culture } from "../interfaces/culture";
+import { faker } from "@faker-js/faker";
+import { TestUtils } from "@rsm-hcd/javascript-testing";
 
 describe("LocalizationUtils", () => {
     // -----------------------------------------------------------------------------------------
@@ -11,8 +12,17 @@ describe("LocalizationUtils", () => {
     // -----------------------------------------------------------------------------------------
 
     const randomCultureCode = () => {
-        const separator = faker.random.arrayElement(["-", "_"]);
-        return `${faker.address.countryCode()}${separator}${faker.address.countryCode()}`;
+        const separator = TestUtils.randomValue(["-", "_"]);
+        return `${faker.location.countryCode(
+            "alpha-2"
+        )}${separator}${faker.location.countryCode("alpha-2")}`;
+    };
+
+    const deleteWindowLocation = () => {
+        // Must delete pre-existing location before mocked assignment works
+        if (window.location != null) {
+            delete (window as any).location;
+        }
     };
 
     // #endregion Setup
@@ -51,7 +61,7 @@ describe("LocalizationUtils", () => {
 
     describe("cultureCodeFromQueryString", () => {
         beforeEach(() => {
-            delete window.location; // Must delete pre-existing location before mocked assignment works
+            deleteWindowLocation();
         });
 
         test(`given query string does not contain ${LocalizationUtils.routeParam}, returns undefined`, () => {
@@ -88,7 +98,7 @@ describe("LocalizationUtils", () => {
 
     describe("cultureCodeFromRoute", () => {
         beforeEach(() => {
-            delete window.location; // Must delete pre-existing location before mocked assignment works
+            deleteWindowLocation();
         });
 
         test(`given pathname does not have at least one '/', returns undefined`, () => {
@@ -214,7 +224,7 @@ describe("LocalizationUtils", () => {
 
     describe("detectCultureCode", () => {
         beforeEach(() => {
-            delete window.location; // Must delete pre-existing location before mocked assignment works
+            deleteWindowLocation();
         });
 
         describe("given route param is set", () => {
@@ -246,7 +256,7 @@ describe("LocalizationUtils", () => {
             test(`given querystring '${LocalizationUtils.routeParam}' set, returns route value as priority`, () => {
                 // Arrange
                 const expected = randomCultureCode();
-                const unexpected = faker.address.countryCode();
+                const unexpected = faker.location.countryCode();
                 window.location = {
                     pathname: `/${expected}`,
                     search: `${LocalizationUtils.routeParam}=${unexpected}`,
@@ -366,7 +376,7 @@ describe("LocalizationUtils", () => {
     // -----------------------------------------------------------------------------------------
 
     describe("initialize", () => {
-        let moduleStub;
+        let moduleStub: any;
 
         beforeEach(() => {
             moduleStub = { type: "backend" };
@@ -381,7 +391,7 @@ describe("LocalizationUtils", () => {
             expect.assertions(1);
             try {
                 LocalizationUtils.initialize({}, cultures);
-            } catch (e) {
+            } catch (e: any) {
                 expect(e.message).toBe(
                     LocalizationUtils.errorCultureIsRequired
                 );
@@ -400,7 +410,7 @@ describe("LocalizationUtils", () => {
             expect.assertions(1);
             try {
                 LocalizationUtils.initialize(module, cultures);
-            } catch (e) {
+            } catch (e: any) {
                 expect(e.message).toContain("module");
             }
         });
@@ -427,7 +437,7 @@ describe("LocalizationUtils", () => {
         test("when cultures with resources, successfully configures translations", () => {
             // Arrange
             const expectedKey = "testkey";
-            const expectedValue = faker.random.words();
+            const expectedValue = faker.lorem.words();
 
             const culture: Partial<Culture<any>> = { resources: {} };
             culture.resources[expectedKey] = expectedValue;
@@ -482,7 +492,7 @@ describe("LocalizationUtils", () => {
     // -----------------------------------------------------------------------------------------
 
     describe("translate, t", () => {
-        let moduleStub;
+        let moduleStub: any;
 
         beforeEach(() => {
             moduleStub = { type: "backend" };
@@ -494,7 +504,7 @@ describe("LocalizationUtils", () => {
             ${LocalizationUtils.translate}
         `("when key missing translation, returns key", ({ fn }) => {
             // Arrange
-            const expected = faker.random.word();
+            const expected = faker.lorem.word();
 
             // Act & Assert
             expect(fn(expected)).toBe(expected);
@@ -507,7 +517,7 @@ describe("LocalizationUtils", () => {
         `("when key found, returns translated value", ({ fn }) => {
             // Arrange
             const key = "testkey";
-            const expected = faker.random.words();
+            const expected = faker.lorem.words();
 
             const culture: Partial<Culture<any>> = { resources: {} };
             culture.resources[key] = expected;
@@ -532,8 +542,8 @@ describe("LocalizationUtils", () => {
             ({ fn }) => {
                 // Arrange
                 const key = "testkey";
-                const valueTemplate = `${faker.random.words()} -- {{variable}}`;
-                const variable = faker.random.word();
+                const valueTemplate = `${faker.lorem.words()} -- {{variable}}`;
+                const variable = faker.lorem.word();
                 const expected = valueTemplate.replace(
                     "{{variable}}",
                     variable
@@ -542,9 +552,11 @@ describe("LocalizationUtils", () => {
                 const culture: Partial<Culture<any>> = { resources: {} };
                 culture.resources[key] = valueTemplate;
 
-                const EnglishUnitedStates = LocalizationUtils.cultureFactory<
-                    any
-                >(BaseEnglishUnitedStates, culture);
+                const EnglishUnitedStates =
+                    LocalizationUtils.cultureFactory<any>(
+                        BaseEnglishUnitedStates,
+                        culture
+                    );
 
                 LocalizationUtils.initialize(moduleStub, [EnglishUnitedStates]);
 

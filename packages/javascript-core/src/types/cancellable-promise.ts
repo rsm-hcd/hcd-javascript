@@ -3,4 +3,4 @@ type CancellablePromise<T = any> = {
     promise: Promise<T>;
 };
 
-export { CancellablePromise };
+export type { CancellablePromise };

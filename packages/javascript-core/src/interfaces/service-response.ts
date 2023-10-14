@@ -27,4 +27,4 @@ interface ServiceResponse<T> {
     status: number;
 }
 
-export { ServiceResponse };
+export type { ServiceResponse };

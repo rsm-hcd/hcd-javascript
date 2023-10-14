@@ -1,26 +1,17 @@
 {
-    "compilerOptions": {
-        "allowJs": true,
-        "allowSyntheticDefaultImports": true,
-        "declaration": true,
-        "emitDecoratorMetadata": true,
-        "esModuleInterop": true,
-        "experimentalDecorators": true,
-        "forceConsistentCasingInFileNames": false,
-        "inlineSourceMap": true,
-        "inlineSources": true,
-        "lib": ["dom", "dom.iterable", "esnext"],
-        "jsx": "react",
-        "module": "commonjs",
-        "moduleResolution": "node",
-        "noUnusedParameters": true,
-        "outDir": "./dist",
-        "resolveJsonModule": true,
-        "removeComments": false,
-        "skipLibCheck": true,
-        "strict": true,
-        "target": "es5"
-    },
-    "exclude": ["node_modules", "src/setupTests.ts"],
-    "include": ["src"]
+  "extends": "@rsm-hcd/tsconfig/base.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "baseUrl": "./src",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": ["dom", "dom.iterable", "ES2015"],
+    "module": "commonjs",
+    "noUnusedParameters": true,
+    "removeComments": false,
+    "resolveJsonModule": true,
+    "target": "es5",
+    "outDir": "dist"
+  },
+  "include": ["src"]
 }

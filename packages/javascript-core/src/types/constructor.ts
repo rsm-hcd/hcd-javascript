@@ -3,4 +3,4 @@
  */
 type Constructor<T = {}> = new (...values: any[]) => T;
 
-export { Constructor };
+export type { Constructor };

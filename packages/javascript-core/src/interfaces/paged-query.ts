@@ -21,6 +21,6 @@ interface PagedQuery {
 // #region Exports
 // -----------------------------------------------------------------------------------------
 
-export { PagedQuery };
+export type { PagedQuery };
 
 // #endregion Exports

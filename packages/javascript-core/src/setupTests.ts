@@ -1,7 +1,19 @@
-import "jest-extended";
+import "jest-extended/all";
+import { Factory } from "rosie";
+import {
+    FactoryInitializerOptions,
+    initializeFactories as initializeTestingFactories,
+} from "@rsm-hcd/javascript-testing";
+import { initializeFactories } from "tests/factories";
 
-require("jest-extended");
-require("tests/factories");
+beforeAll(() => {
+    const options: FactoryInitializerOptions = {
+        define: (name, constructor) => Factory.define(name, constructor),
+    };
+
+    initializeTestingFactories(options);
+    initializeFactories(options);
+});
 
 // Run before each individual test across the entire test suite
 beforeEach(() => {

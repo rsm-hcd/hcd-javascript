@@ -3,4 +3,4 @@ interface KeyValuePair<TKey, TValue> {
     value: TValue;
 }
 
-export { KeyValuePair };
+export type { KeyValuePair };

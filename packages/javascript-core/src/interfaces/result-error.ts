@@ -16,6 +16,6 @@ interface ResultError {
 // #region Export
 // -----------------------------------------------------------------------------------------
 
-export { ResultError };
+export type { ResultError };
 
 // #endregion Export

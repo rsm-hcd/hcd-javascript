@@ -17,6 +17,6 @@ interface NetworkConnection extends NetworkInformation {
 // #region Export
 // -----------------------------------------------------------------------------------------
 
-export { NetworkConnection };
+export type { NetworkConnection };
 
 // #endregion Export
