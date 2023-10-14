@@ -13,8 +13,8 @@ lib_test
 # npmignore
 
 src/
-.vscode/
+.all-contributorsrc
+.gitignore
 jest.config.js
 tsconfig.json
 typedoc.json
-.all-contributorsrc
