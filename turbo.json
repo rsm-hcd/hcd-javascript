@@ -33,9 +33,8 @@
         "docs": {},
         "test": {
             "dependsOn": [
-                "^build:dev"
+                "^build:prod"
             ]
-        },
-        "test:watch": {}
+        }
     }
 }
