@@ -14,12 +14,15 @@
         "test:watch": "turbo run test -- --watch",
         "lint": "turbo run lint",
         "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-        "publish-packages": "turbo run build:prod lint test && changeset version && changeset publish"
+        "publish-packages": "turbo run build:prod lint test && changeset version && changeset publish",
+        "prepare": "pnpm husky install"
     },
     "devDependencies": {
         "@changesets/cli": "^2.26.2",
         "@rsm-hcd/tsconfig": "workspace:*",
         "eslint": "^8.51.0",
+        "husky": "^8.0.3",
+        "lint-staged": "^15.0.0",
         "prettier": "^3.0.3",
         "turbo": "latest"
     },
@@ -27,5 +30,8 @@
     "volta": {
         "node": "18.18.0",
         "pnpm": "8.8.0"
+    },
+    "lint-staged": {
+        "*.{ts,tsx,md}": "prettier --write"
     }
 }
