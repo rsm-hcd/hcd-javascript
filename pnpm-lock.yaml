@@ -103,8 +103,8 @@ importers:
         specifier: 4.17.21
         version: 4.17.21
       prettier:
-        specifier: 1.19.1
-        version: 1.19.1
+        specifier: 3.0.3
+        version: 3.0.3
       rimraf:
         specifier: 2.6.2
         version: 2.6.2
@@ -8834,12 +8834,6 @@ packages:
       prettier: 3.0.3
       sort-package-json: 2.6.0
       synckit: 0.8.5
-    dev: true
-
-  /prettier@1.19.1:
-    resolution: {integrity: sha512-s7PoyDv/II1ObgQunCbB9PdLmUcBZcnWOcxDh7O0N/UwDEsHyqkW+Qh28jW+mVuCdx7gLB0BotYI1Y6uI9iyew==}
-    engines: {node: '>=4'}
-    hasBin: true
     dev: true
 
   /prettier@2.8.8:
