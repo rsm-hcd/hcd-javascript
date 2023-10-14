@@ -1,17 +1,21 @@
-import { Factory } from "rosie";
 import { StubResourceRecord } from "../stubs/stub-resource-record";
 import { FactoryType } from "./factory-type";
+import { FactoryInitializer } from "./factory-initializer";
 
 // -----------------------------------------------------------------------------------------
 // #region Factory
 // -----------------------------------------------------------------------------------------
 
-const StubResourceRecordFactory = Factory.define<StubResourceRecord>(
-    FactoryType.StubResourceRecord,
-    StubResourceRecord
-)
-    .sequence("id", (i: number) => i)
-    .sequence("name", (i: number) => `Name ${i}`);
+const stubResourceRecordFactoryInitializer: FactoryInitializer = ({
+    define,
+}) => {
+    define<StubResourceRecord>(
+        FactoryType.StubResourceRecord,
+        StubResourceRecord
+    )
+        .sequence("id", (i: number) => i)
+        .sequence("name", (i: number) => `Name ${i}`);
+};
 
 // #endregion Factory
 
@@ -19,6 +23,6 @@ const StubResourceRecordFactory = Factory.define<StubResourceRecord>(
 // #region Export
 // -----------------------------------------------------------------------------------------
 
-export { StubResourceRecordFactory };
+export { stubResourceRecordFactoryInitializer };
 
 // #endregion Export

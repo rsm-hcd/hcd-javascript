@@ -8,12 +8,13 @@ yarn-error.log*
 .nyc_output
 lib
 lib_test
+.turbo/
 
 # npmignore
 
 src/
-.vscode/
+.all-contributorsrc
+.gitignore
 jest.config.js
 tsconfig.json
 typedoc.json
-.all-contributorsrc

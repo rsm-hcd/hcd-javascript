@@ -7,14 +7,15 @@
         "url": "git+https://github.com/rsm-hcd/hcd-javscript.git"
     },
     "scripts": {
-        "build": "turbo run build",
-        "dev": "turbo run dev",
+        "build": "turbo run build --filter=@rsm-hcd/javascript-testing",
+        "build:prod": "turbo run build:prod --filter=@rsm-hcd/javascript-testing",
+        "dev": "turbo run dev --filter=@rsm-hcd/javascript-testing",
         "docs": "typedoc",
-        "test": "turbo run test",
-        "test:watch": "turbo run test:watch",
+        "test": "turbo run test --filter=@rsm-hcd/javascript-testing",
+        "test:watch": "turbo run test --filter=@rsm-hcd/javascript-testing -- --watch",
         "lint": "turbo run lint",
         "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-        "publish-packages": "turbo run build lint test && changeset version && changeset publish"
+        "publish-packages": "turbo run build:prod lint test --filter=@rsm-hcd/javascript-testing && changeset version && changeset publish"
     },
     "devDependencies": {
         "@changesets/cli": "^2.26.2",
