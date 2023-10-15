@@ -1,5 +1,5 @@
+import type { ScrollOptions } from "../interfaces/scroll-options";
 import { EnvironmentUtils } from "./environment-utils";
-import { ScrollOptions } from "../interfaces/scroll-options";
 import { StringUtils } from "./string-utils";
 
 // -----------------------------------------------------------------------------------------
@@ -33,11 +33,11 @@ const _scrollToElementById = (
         retryCount += 1;
 
         if (retryCount > 50) {
-            EnvironmentUtils.runIfDevelopment(() =>
+            EnvironmentUtils.runIfDevelopment(() => {
                 console.warn(
                     `Could not find element with ID ${id} in the page.`
-                )
-            );
+                );
+            });
 
             // couldn't find element in 50 loops, give up.
             return;

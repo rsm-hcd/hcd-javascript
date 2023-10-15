@@ -1,9 +1,9 @@
-import { ResultRecord } from "./result-record";
-import { ErrorType } from "../enumerations/error-type";
-import { ResultErrorRecord } from "./result-error-record";
-import { ResultError } from "../interfaces/result-error";
 import { Factory } from "rosie";
+import { ErrorType } from "../enumerations/error-type";
+import type { ResultError } from "../interfaces/result-error";
 import { FactoryType } from "../tests/factories/factory-type";
+import { ResultRecord } from "./result-record";
+import { ResultErrorRecord } from "./result-error-record";
 
 describe("ResultRecord", () => {
     // -----------------------------------------------------------------------------------------
@@ -14,7 +14,7 @@ describe("ResultRecord", () => {
         describe("errors", () => {
             test("when instantiated, given errors is array of non-record objects, errors should be wrapped in records", () => {
                 // arrange
-                var errors: ResultError[] = [
+                const errors: ResultError[] = [
                     { key: "error1", message: "message1" },
                     { key: "error2", message: "message2" },
                 ];
@@ -75,7 +75,7 @@ describe("ResultRecord", () => {
                     type: ErrorType.Error,
                 }),
             ];
-            const sut = new ResultRecord({ errors: errors });
+            const sut = new ResultRecord({ errors });
 
             // Act
             const result = sut.addError("testkey3", "testmessage3");
@@ -137,7 +137,7 @@ describe("ResultRecord", () => {
                     type: ErrorType.Error,
                 }),
             ];
-            const sut = new ResultRecord({ errors: errors });
+            const sut = new ResultRecord({ errors });
 
             // Act
             const result = sut.addValidationError("testkey3", "testmessage3");
@@ -197,7 +197,7 @@ describe("ResultRecord", () => {
             ];
 
             // Act & Assert
-            expect(new ResultRecord({ errors: errors }).errorCount()).toBe(
+            expect(new ResultRecord({ errors }).errorCount()).toBe(
                 errors.length
             );
         });
@@ -243,7 +243,7 @@ describe("ResultRecord", () => {
             // Act & Assert
             expect(
                 Factory.build<ResultRecord<any>>(FactoryType.ResultRecord, {
-                    errors: errors,
+                    errors,
                 }).doesNotHaveErrors()
             ).toBeFalse();
         });

@@ -1,4 +1,4 @@
-import { ResultErrorRecord } from "../view-models/result-error-record";
+import type { ResultErrorRecord } from "../view-models/result-error-record";
 
 // -----------------------------------------------------------------------------------------
 // #region Interfaces
@@ -7,7 +7,7 @@ import { ResultErrorRecord } from "../view-models/result-error-record";
 interface PagedResult<T> {
     errors?: ResultErrorRecord[];
     resultObject?: T[];
-    rowCount: number;
+    rowCount?: number;
 }
 
 // #endregion Interfaces

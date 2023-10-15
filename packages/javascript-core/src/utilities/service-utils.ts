@@ -1,12 +1,13 @@
-import { LocalizationUtils } from "./localization-utils";
-import { StringUtils } from "./string-utils";
-import axios, { AxiosResponse } from "axios";
-import { ServiceResponse } from "../interfaces/service-response";
-import { Result } from "../interfaces/result";
+import type { AxiosResponse } from "axios";
+import axios from "axios";
+import type { ServiceResponse } from "../interfaces/service-response";
+import type { Result } from "../interfaces/result";
 import { ResultRecord } from "../view-models/result-record";
-import { PagedResult } from "../interfaces/paged-result";
+import type { PagedResult } from "../interfaces/paged-result";
 import { HttpHeader } from "../enumerations/http-header";
 import { ContentType } from "../enumerations/content-type";
+import { StringUtils } from "./string-utils";
+import { LocalizationUtils } from "./localization-utils";
 import { CollectionUtils } from "./collection-utils";
 
 // -----------------------------------------------------------------------------------------
@@ -31,7 +32,7 @@ const _defaultApiUrl = "/api/v1";
 const _configure = (
     cultureCode?: string,
     onApiResponseError?: (error: any) => Promise<unknown>,
-    onApiResponseSuccess?: (response: AxiosResponse) => AxiosResponse<any>
+    onApiResponseSuccess?: (response: AxiosResponse) => AxiosResponse
 ) => {
     _configureCultureCode(cultureCode);
     _configureHeaders();
@@ -77,7 +78,7 @@ const _configureHeaders = () => {
  */
 const _configureInterceptors = (
     onApiResponseError?: (error: any) => Promise<unknown>,
-    onApiResponseSuccess?: (response: AxiosResponse) => AxiosResponse<any>
+    onApiResponseSuccess?: (response: AxiosResponse) => AxiosResponse
 ) => {
     if (onApiResponseError == null && onApiResponseSuccess == null) {
         return;
@@ -90,48 +91,65 @@ const _configureInterceptors = (
  * Translates axios specific data response to a more generic ServiceResponse
  * type for consumption throughout the system
  */
-const _mapAxiosResponse = <TRecord>(
-    recordType: { new (props: Partial<TRecord>): TRecord },
+function mapAxiosResponse<TRecord>(
+    RecordType: new (props: Partial<TRecord>) => TRecord,
     axiosResponse: AxiosResponse<Result<TRecord>>
-): ServiceResponse<TRecord> => {
+): ServiceResponse<TRecord>;
+function mapAxiosResponse<TRecord>(
+    RecordType: new (props: Partial<TRecord>) => TRecord,
+    axiosResponse?: null
+): null;
+function mapAxiosResponse<TRecord>(
+    RecordType: new (props: Partial<TRecord>) => TRecord,
+    axiosResponse?: AxiosResponse<Result<TRecord>> | null
+): ServiceResponse<TRecord> | null {
     if (axiosResponse == null) {
-        return null!;
+        return null;
     }
 
     // Ensure result data is wrapped within a record
     let resultObject;
     if (axiosResponse.data?.resultObject != null) {
-        resultObject = new recordType(axiosResponse.data.resultObject);
+        resultObject = new RecordType(axiosResponse.data.resultObject);
         axiosResponse.data.resultObject = resultObject;
     }
 
     return {
         result: new ResultRecord<TRecord>(axiosResponse.data),
-        resultObject: resultObject,
+        resultObject,
         resultObjects: [],
         rowCount: 1,
         status: axiosResponse.status,
     };
-};
+}
 
 /**
  * Translates axios specific data responses to a more generic ServiceResponse
  * type for consumption throughout the system
  */
-const _mapPagedAxiosResponse = <TRecord>(
-    recordType: { new (props: Partial<TRecord>): TRecord },
+function mapPagedAxiosResponse<TRecord>(
+    RecordType: new (props: Partial<TRecord>) => TRecord,
     axiosResponse: AxiosResponse<PagedResult<TRecord>>
-): ServiceResponse<TRecord> => {
+): ServiceResponse<TRecord>;
+function mapPagedAxiosResponse<TRecord>(
+    RecordType: new (props: Partial<TRecord>) => TRecord,
+    axiosResponse?: null
+): null;
+function mapPagedAxiosResponse<TRecord>(
+    RecordType: new (props: Partial<TRecord>) => TRecord,
+    axiosResponse?: AxiosResponse<PagedResult<TRecord>> | null
+): ServiceResponse<TRecord> | null {
     if (axiosResponse == null) {
-        return null!;
+        return null;
     }
     const { data } = axiosResponse;
 
     // Ensure result data is wrapped within records
-    let resultObjects: Array<TRecord> = [];
+    let resultObjects: TRecord[] = [];
     let rowCount = 0;
-    if (CollectionUtils.hasValues(data?.resultObject)) {
-        resultObjects = data.resultObject!.map((r: any) => new recordType(r));
+    const { resultObject } = data ?? {};
+    if (CollectionUtils.hasValues(resultObject)) {
+        resultObjects = resultObject.map((r) => new RecordType(r));
 
         // For now, record rowCount as the number of resultObjects we got back. We'll check the
         // response for a rowCount of the total query set if the value was returned.
@@ -144,11 +162,11 @@ const _mapPagedAxiosResponse = <TRecord>(
 
     return {
         results: new ResultRecord<TRecord[]>(data),
-        resultObjects: resultObjects,
-        rowCount: rowCount,
+        resultObjects,
+        rowCount,
         status: axiosResponse.status,
     };
-};
+}
 
 // #endregion Functions
 
@@ -159,8 +177,8 @@ const _mapPagedAxiosResponse = <TRecord>(
 export const ServiceUtils = {
     configure: _configure,
     configureCultureCode: _configureCultureCode,
-    mapAxiosResponse: _mapAxiosResponse,
-    mapPagedAxiosResponse: _mapPagedAxiosResponse,
+    mapAxiosResponse,
+    mapPagedAxiosResponse,
 };
 
 // #endregion Exports

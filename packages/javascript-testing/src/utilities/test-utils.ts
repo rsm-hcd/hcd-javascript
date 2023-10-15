@@ -76,8 +76,8 @@ const TestUtils = {
     /**
      * Returns a random value from the given object. If the object has no keys, it returns `undefined`.
      */
-    randomValue<TValue = any>(
-        obj: Record<string, TValue> | Array<TValue>
+    randomValue<TValue>(
+        obj: Record<string, TValue> | TValue[]
     ): TValue | undefined {
         if (Array.isArray(obj)) {
             if (obj.length === 0) {

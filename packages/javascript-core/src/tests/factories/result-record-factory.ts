@@ -1,6 +1,6 @@
+import type { FactoryInitializer } from "@rsm-hcd/javascript-testing";
 import { ResultRecord } from "../../view-models/result-record";
 import { FactoryType } from "./factory-type";
-import { FactoryInitializer } from "@rsm-hcd/javascript-testing";
 
 // -------------------------------------------------------------------------------------------------
 // #region Factory

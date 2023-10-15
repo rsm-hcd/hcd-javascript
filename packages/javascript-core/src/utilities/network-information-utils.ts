@@ -1,6 +1,6 @@
-import { NetworkConnection } from "../interfaces/network-connection";
-import { NetworkInformation } from "../interfaces/network-information";
-import { Navigator } from "../types/navigator";
+import type { NetworkConnection } from "../interfaces/network-connection";
+import type { NetworkInformation } from "../interfaces/network-information";
+import type { Navigator } from "../types/navigator";
 
 // -----------------------------------------------------------------------------------------
 // #region Functions

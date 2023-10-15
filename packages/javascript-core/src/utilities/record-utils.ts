@@ -1,9 +1,9 @@
 import { Record } from "immutable";
 import { AuditableDefaultValues } from "../constants/auditable-default-values";
-import { Auditable } from "../interfaces/auditable";
-import { Constructor } from "../types/constructor";
-import { OmitKeys } from "../types/omit-keys";
-import { RequiredOrUndefined } from "../types/required-or-undefined";
+import type { Auditable } from "../interfaces/auditable";
+import type { Constructor } from "../types/constructor";
+import type { OmitKeys } from "../types/omit-keys";
+import type { RequiredOrUndefined } from "../types/required-or-undefined";
 
 // -----------------------------------------------------------------------------------------
 // #region Public Functions

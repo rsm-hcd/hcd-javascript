@@ -1,7 +1,6 @@
-import { MockAxios } from "@rsm-hcd/javascript-testing";
-
 // TODO-BUG (https://github.com/rsm-hcd/hcd-javascript/issues/17)
 // // Hook into jest mocking, but re-export from testing
+// import { MockAxios } from "@rsm-hcd/javascript-testing";
 // export default MockAxios.default;
 
 export default {

@@ -1,4 +1,4 @@
-import { Auditable } from "./auditable";
+import type { Auditable } from "./auditable";
 
 export interface User extends Auditable {
     email?: string;

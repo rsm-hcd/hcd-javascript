@@ -20,8 +20,5 @@ pnpm install --save-dev @rsm-hcd/javascript-testing
 From there you can import the variety of modules.
 
 ```typescript
-import {
-    AxiosResponseFactory,
-    MockAxios,
-} from "@rsm-hcd/javascript-testing";
+import { AxiosResponseFactory, MockAxios } from "@rsm-hcd/javascript-testing";
 ```

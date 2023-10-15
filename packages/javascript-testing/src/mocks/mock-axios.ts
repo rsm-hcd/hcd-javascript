@@ -1,6 +1,6 @@
 import axios from "axios";
-import { axiosMock } from "./axios";
 import { Record } from "immutable";
+import { axiosMock } from "./axios";
 
 // ---------------------------------------------------------
 // #region Interfaces & Types
@@ -66,20 +66,25 @@ interface MockAxios {
 // #region Public Functions
 // ---------------------------------------------------------
 
-const deleteSuccess = (record?: any, delay?: number) =>
+const deleteSuccess = (record?: any, delay?: number) => {
     _mockSuccess(MockAxios.delete, record, delay);
+};
 
-const getSuccess = (record: any, delay?: number) =>
+const getSuccess = (record: any, delay?: number) => {
     _mockSuccess(MockAxios.get, record, delay);
+};
 
-const listSuccess = (records: any[], delay?: number) =>
+const listSuccess = (records: any[], delay?: number) => {
     _mockSuccess(MockAxios.get, records, delay);
+};
 
-const postSuccess = (record: any, delay?: number) =>
+const postSuccess = (record: any, delay?: number) => {
     _mockSuccess(MockAxios.post, record, delay);
+};
 
-const putSuccess = (record: any, delay?: number) =>
+const putSuccess = (record: any, delay?: number) => {
     _mockSuccess(MockAxios.put, record, delay);
+};
 
 // #endregion Public Functions
 
@@ -107,7 +112,9 @@ const _mockSuccess = (
 
     method.mockImplementationOnce(() => {
         return new Promise((resolve) =>
-            window.setTimeout(() => resolve(resolveResult), delay)
+            window.setTimeout(() => {
+                resolve(resolveResult);
+            }, delay)
         );
     });
 };

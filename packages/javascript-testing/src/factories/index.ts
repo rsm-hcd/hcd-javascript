@@ -1,8 +1,8 @@
+import type { FactoryInitializerOptions } from "./factory-initializer";
 import { axiosResponseFactoryInitializer } from "./axios-response-factory";
-import { FactoryInitializerOptions } from "factories/factory-initializer";
 import { stubResourceRecordFactoryInitializer } from "./stub-resource-record-factory";
 
-export function initializeFactories(options: FactoryInitializerOptions) {
+export function initializeFactories(options: FactoryInitializerOptions): void {
     axiosResponseFactoryInitializer(options);
     stubResourceRecordFactoryInitializer(options);
 }

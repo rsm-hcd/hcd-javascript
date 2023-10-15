@@ -50,7 +50,7 @@ describe("CoreUtils", () => {
                 testEnum.second,
                 testEnum.third,
             ];
-            let resultArray = [];
+            const resultArray = [];
 
             // Act
             const singleResult = CoreUtils.getRandomEnum(testEnum);

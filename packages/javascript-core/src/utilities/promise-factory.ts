@@ -1,4 +1,4 @@
-import { CancellablePromise } from "../types/cancellable-promise";
+import type { CancellablePromise } from "../types/cancellable-promise";
 
 // -----------------------------------------------------------------------------------------
 // #region Public Methods
@@ -10,12 +10,12 @@ const PromiseFactory = {
 
         const wrappedPromise = new Promise<T>((resolve, reject) =>
             promise
-                .then((value: T) =>
-                    isCanceled ? PromiseFactory.pending() : resolve(value)
-                )
-                .catch((error: any) =>
-                    isCanceled ? PromiseFactory.pending() : reject(error)
-                )
+                .then((value: T) => {
+                    isCanceled ? PromiseFactory.pending() : resolve(value);
+                })
+                .catch((error: any) => {
+                    isCanceled ? PromiseFactory.pending() : reject(error);
+                })
         );
 
         return {

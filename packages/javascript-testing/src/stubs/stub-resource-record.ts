@@ -1,5 +1,5 @@
-import { StubResource } from "./stub-resource";
 import { Record } from "immutable";
+import type { StubResource } from "./stub-resource";
 
 class StubResourceRecord
     extends Record({

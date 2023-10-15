@@ -1,5 +1,5 @@
-import { NavigatorConnectionVariant } from "../enumerations/navigator-connection-variant";
-import { NetworkInformation } from "../interfaces/network-information";
+import type { NavigatorConnectionVariant } from "../enumerations/navigator-connection-variant";
+import type { NetworkInformation } from "../interfaces/network-information";
 
 export declare interface Navigator {
     [NavigatorConnectionVariant.Standard]?: NetworkInformation;

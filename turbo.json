@@ -29,7 +29,14 @@
             ]
         },
         "dev": {},
-        "lint": {},
+        "lint": {
+            "dependsOn": [
+                "^build:prod"
+            ]},
+        "lint:fix": {
+            "dependsOn": [
+                "^build:prod"
+            ]},
         "docs": {},
         "test": {
             "dependsOn": [

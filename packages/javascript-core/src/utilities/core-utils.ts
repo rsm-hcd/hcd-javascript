@@ -1,16 +1,12 @@
-import { CollectionUtils } from "./collection-utils";
-import {
+import type {
     DebouncedFunc,
-    bindAll,
-    curry,
-    memoize,
-    merge,
-    range,
-    throttle,
-    times,
+    CurriedFunction1,
+    MemoizedFunction,
+    ThrottleSettings,
 } from "lodash";
-import { CurriedFunction1, MemoizedFunction, ThrottleSettings } from "lodash";
-import { TimerFunctionReturn } from "../types/timer-function-return";
+import { bindAll, curry, memoize, merge, range, throttle, times } from "lodash";
+import type { TimerFunctionReturn } from "../types/timer-function-return";
+import { CollectionUtils } from "./collection-utils";
 
 // -----------------------------------------------------------------------------------------
 // #region Public Methods
@@ -29,7 +25,7 @@ const CoreUtils = {
      * method names.
      * @return Returns object.
      */
-    bindAll<T>(object: T, ...methodNames: Array<string | string[]>): T {
+    bindAll<T>(object: T, ...methodNames: (string | string[])[]): T {
         return bindAll(object, ...methodNames);
     },
 
@@ -123,7 +119,7 @@ const CoreUtils = {
      * @returns {*}
      */
     numericEnumToPojo(enumObject: any): any {
-        let pojo: { [k: string]: any } = {};
+        const pojo: Record<string, any> = {};
 
         for (const key in enumObject) {
             if (isNaN(parseInt(key))) {
@@ -175,7 +171,7 @@ const CoreUtils = {
      * @param milliseconds
      * @param debug
      */
-    sleep(milliseconds: number, debug: boolean = false): Promise<void> {
+    sleep(milliseconds: number, debug = false): Promise<void> {
         if (debug) {
             console.log("sleep start");
         }
@@ -240,8 +236,8 @@ const CoreUtils = {
              * @param log Optional flag if you'd like the timer to log to the console
              */
             stop(log?: boolean): number {
-                var end = new Date();
-                var time = end.getTime() - start.getTime();
+                const end = new Date();
+                const time = end.getTime() - start.getTime();
 
                 if (log === true) {
                     console.log("Timer:", name, "finished in", time, "ms");

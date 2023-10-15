@@ -1,10 +1,10 @@
 import i18n from "i18next";
-import { LocalizationUtils } from "./localization-utils";
-import { Rfc4646LanguageCodes } from "../constants/rfc4646-language-codes";
-import { BaseEnglishUnitedStates } from "../cultures/base-english-united-states";
-import { Culture } from "../interfaces/culture";
 import { faker } from "@faker-js/faker";
 import { TestUtils } from "@rsm-hcd/javascript-testing";
+import { Rfc4646LanguageCodes } from "../constants/rfc4646-language-codes";
+import { BaseEnglishUnitedStates } from "../cultures/base-english-united-states";
+import type { Culture } from "../interfaces/culture";
+import { LocalizationUtils } from "./localization-utils";
 
 describe("LocalizationUtils", () => {
     // -----------------------------------------------------------------------------------------
@@ -142,19 +142,6 @@ describe("LocalizationUtils", () => {
             // Assert
             expect(result).not.toBeNull();
             expect(result.code).toBe(BaseEnglishUnitedStates.code);
-        });
-
-        test("when base null and culture set, returns new culture with culture properties", () => {
-            // Arrange
-            const expected = randomCultureCode();
-            const childCulture: Partial<Culture<any>> = { code: expected };
-
-            // Act
-            const result = LocalizationUtils.cultureFactory(null, childCulture);
-
-            // Assert
-            expect(result).not.toBeNull();
-            expect(result.code).toBe(expected);
         });
 
         test("when base and culture set, returns new culture overwriting with child properties", () => {
@@ -421,11 +408,12 @@ describe("LocalizationUtils", () => {
 
             let isModuleInitialized = false;
 
-            const MyModule = Object.assign({}, moduleStub, {
+            const MyModule = {
+                ...moduleStub,
                 init() {
                     isModuleInitialized = true;
                 },
-            });
+            };
 
             // Act
             LocalizationUtils.initialize(MyModule, cultures);

@@ -1,7 +1,7 @@
 import Humanize from "humanize-plus";
+import type { TemplateOptions, TemplateExecutor } from "lodash";
 import _ from "lodash";
 import { CollectionUtils } from "./collection-utils";
-import { TemplateOptions, TemplateExecutor } from "lodash";
 
 // -----------------------------------------------------------------------------------------
 // #region Constants
@@ -60,7 +60,7 @@ const filename = (value?: string): string | undefined =>
  */
 const hasValue = (value?: string): value is string =>
     // toString is called here to ensure handling all edge cases when a non string value is passed in this function
-    value != null && value?.toString().trim() !== "";
+    value != null && value.toString().trim() !== "";
 
 /**
  * Determines whether or not the provided value is `undefined`, `null`, or an empty string
@@ -97,7 +97,7 @@ const isValidEmail = (value?: string): value is string =>
  * @param {string} [separator=","] String to separate each of the given values.
  * @returns {string}
  */
-const join = (values: string[], separator: string = ","): string => {
+const join = (values: string[], separator = ","): string => {
     if (CollectionUtils.isEmpty(values)) {
         return "";
     }

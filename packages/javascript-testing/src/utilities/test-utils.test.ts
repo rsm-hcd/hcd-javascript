@@ -1,5 +1,5 @@
-import { TestUtils } from "./test-utils";
 import { faker } from "@faker-js/faker";
+import { TestUtils } from "./test-utils";
 import { testLoop } from "./shared-specs";
 
 describe("TestUtils", () => {
@@ -174,7 +174,7 @@ describe("TestUtils", () => {
 
         testLoop("given an array without values, it returns undefined", () => {
             // Arrange
-            const obj: any[] = [];
+            const obj: unknown[] = [];
 
             // Act
             const result = TestUtils.randomValue(obj);
@@ -228,9 +228,9 @@ describe("TestUtils", () => {
             const result = TestUtils.randomWords();
 
             // Assert
-            result.forEach((word: string) =>
-                expect(word).toMatch(/^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)?$/)
-            );
+            result.forEach((word: string) => {
+                expect(word).toMatch(/^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)?$/);
+            });
         });
     });
 

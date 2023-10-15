@@ -5,12 +5,12 @@
 /**
  * Promise.finally is not natively supported in Internet Explorer.
  */
-/* tslint:disable */
+
 const registerPromiseFinallyPolyfill = () => {
     Promise.prototype.finally =
         Promise.prototype.finally ??
         function (callback: () => any) {
-            // @ts-ignore
+            // @ts-expect-error - this is expected
             return this.then(
                 (value: any) => Promise.resolve(callback()).then(() => value),
                 (reason: any) =>
@@ -20,7 +20,6 @@ const registerPromiseFinallyPolyfill = () => {
             );
         };
 };
-/* tslint:enable */
 
 // #endregion Functions
 

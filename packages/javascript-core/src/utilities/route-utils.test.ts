@@ -1,4 +1,4 @@
-import { QueryStringArrayFormat } from "enumerations/query-string-array-format";
+import { QueryStringArrayFormat } from "../enumerations/query-string-array-format";
 import { RouteUtils } from "./route-utils";
 
 describe("RouteUtils", () => {
@@ -362,7 +362,7 @@ describe("RouteUtils", () => {
             // Assert
             expect(result).not.toBeNull();
             expect(result.testProp1).toBe(expectedTypedValue1);
-            expect((<any>result)[expectedUntypedProperty2]).toBe(
+            expect((result as any)[expectedUntypedProperty2]).toBe(
                 expectedUntypedValue2
             );
         });
