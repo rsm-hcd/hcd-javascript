@@ -56,12 +56,11 @@
         "directory": "packages/javascript-testing"
     },
     "scripts": {
-        "build": "tsup ./src/index.ts --format cjs,esm",
-        "build:prod": "pnpm run clean && pnpm run build --dts",
-        "build:dev": "pnpm run build --onSuccess \"tsc --emitDeclarationOnly --declaration\"",
+        "build": "tsup ./src/index.ts --format cjs,esm --onSuccess \"tsc --emitDeclarationOnly --declaration\"",
+        "build:prod": "pnpm run clean && tsup ./src/index.ts --format cjs,esmc --dts",
         "clean": "rimraf dist && rimraf coverage",
         "coverage": "jest ./src --coverage",
-        "dev": "pnpm run build:dev --watch",
+        "dev": "pnpm run build --watch",
         "format": "pnpm run lint:fix && prettier --write \"src/**/*.ts\" --trailing-comma es5",
         "lint": "eslint \"src/**/*.ts\" --ext .ts --fix",
         "lint:fix": "pnpm run lint --fix",
