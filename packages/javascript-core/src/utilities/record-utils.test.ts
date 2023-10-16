@@ -1,15 +1,12 @@
-import { RecordUtils } from "./record-utils";
 import { Record } from "immutable";
-import { ResultRecord } from "../view-models/result-record";
-import {
-    TestUtils,
-    StubResourceRecord,
-    StubResource,
-} from "@rsm-hcd/javascript-testing";
-import { FactoryType } from "../tests/factories/factory-type";
+import type { StubResource } from "@rsm-hcd/javascript-testing";
+import { TestUtils, StubResourceRecord } from "@rsm-hcd/javascript-testing";
 import { Factory } from "rosie";
-import { User } from "../interfaces/user";
-import { RequiredOrUndefined } from "../types/required-or-undefined";
+import type { ResultRecord } from "../view-models/result-record";
+import { FactoryType } from "../tests/factories/factory-type";
+import type { User } from "../interfaces/user";
+import type { RequiredOrUndefined } from "../types/required-or-undefined";
+import { RecordUtils } from "./record-utils";
 
 describe("RecordUtils", () => {
     // -----------------------------------------------------------------------------------------

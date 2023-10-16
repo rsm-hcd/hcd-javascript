@@ -1,9 +1,9 @@
 import { ResultRecord } from "../view-models/result-record";
-import { DoTryConfig } from "../interfaces/do-try-config";
-import { AsyncWorkload } from "../types/async-workload";
-import { CatchResultHandler } from "../types/catch-result-handler";
-import { FinallyHandler } from "../types/finally-handler";
-import { SyncWorkload } from "../types/sync-workload";
+import type { DoTryConfig } from "../interfaces/do-try-config";
+import type { AsyncWorkload } from "../types/async-workload";
+import type { CatchResultHandler } from "../types/catch-result-handler";
+import type { FinallyHandler } from "../types/finally-handler";
+import type { SyncWorkload } from "../types/sync-workload";
 
 // -----------------------------------------------------------------------------------------
 // #region Do
@@ -43,9 +43,7 @@ class Do<TResourceType, TReturnVal = void> {
      * @param errorHandler handle errors, either as a {ResultRecord} or {any}
      * @returns this
      */
-    public catch(
-        errorHandler: CatchResultHandler<TResourceType>
-    ): Do<TResourceType, TReturnVal> {
+    public catch(errorHandler: CatchResultHandler<TResourceType>): this {
         this.promise = this.promise.catch((err: any) => {
             if (err instanceof ResultRecord) {
                 errorHandler(err, undefined);
@@ -72,9 +70,7 @@ class Do<TResourceType, TReturnVal = void> {
      * @param finallyHandler
      * @returns this
      */
-    public finally(
-        finallyHandler: FinallyHandler
-    ): Do<TResourceType, TReturnVal> {
+    public finally(finallyHandler: FinallyHandler): this {
         this.promise = this.promise.finally(finallyHandler);
         return this;
     }
@@ -131,9 +127,7 @@ class DoSync<TResourceType, TReturnVal = void> {
      * you'll get an {any} as the second parameter.
      * @param errorHandler handle errors, either as a {ResultRecord} or {any}
      */
-    public catch(
-        errorHandler: CatchResultHandler<TResourceType>
-    ): DoSync<TResourceType, TReturnVal> {
+    public catch(errorHandler: CatchResultHandler<TResourceType>): this {
         this.catchHandler = (err: any) => {
             if (err instanceof ResultRecord) {
                 errorHandler(err, undefined);
@@ -182,9 +176,7 @@ class DoSync<TResourceType, TReturnVal = void> {
      * @param finallyHandler
      * @returns this
      */
-    public finally(
-        finallyHandler: FinallyHandler
-    ): DoSync<TResourceType, TReturnVal> {
+    public finally(finallyHandler: FinallyHandler): this {
         this.finallyHandler = finallyHandler;
         return this;
     }

@@ -1,5 +1,6 @@
+import type { StringifyOptions } from "query-string";
+import QueryString from "query-string";
 import { QueryStringArrayFormat } from "../enumerations/query-string-array-format";
-import QueryString, { StringifyOptions } from "query-string";
 
 // -----------------------------------------------------------------------------------------
 // #region Constants
@@ -21,7 +22,7 @@ const _routeParamRegEx = /(:[a-z_-]*)/gi;
  * @param arrayFormatSeparator Seaparator character to use if using arrayFormat="separator"
  */
 const appendQueryParams = (
-    path: string,
+    path: string | null | undefined,
     queryParams: any,
     arrayFormat: QueryStringArrayFormat = QueryStringArrayFormat.Index,
     arrayFormatSeparator: string | undefined = undefined
@@ -68,7 +69,11 @@ const getUrl = (path: string, pathParams?: any) => {
  * @param pathParams Object with keys matching supplied path template components
  * @param queryParams Object to get translated to the query string of the url
  */
-const getUrlFromPath = (path: string, pathParams?: any, queryParams?: any) => {
+const getUrlFromPath = (
+    path: string | null | undefined,
+    pathParams?: any,
+    queryParams?: any
+) => {
     if (path == null) {
         return path;
     }
@@ -101,8 +106,8 @@ const isAbsoluteUrl = (url?: string | null): boolean =>
 const queryStringToObject = <T>(
     queryString: string,
     arrayFormat: QueryStringArrayFormat = QueryStringArrayFormat.Index,
-    parseNumbers: boolean = true,
-    parseBooleans: boolean = true
+    parseNumbers = true,
+    parseBooleans = true
 ): T =>
     QueryString.parse(queryString, {
         arrayFormat,

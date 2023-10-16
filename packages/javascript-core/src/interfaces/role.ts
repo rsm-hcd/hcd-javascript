@@ -1,4 +1,4 @@
-import { Auditable } from "./auditable";
+import type { Auditable } from "./auditable";
 
 export interface Role extends Auditable {
     description?: string;

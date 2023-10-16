@@ -1,15 +1,15 @@
-import { LocalizationUtils } from "./localization-utils";
-import { ServiceUtils } from "./service-utils";
 import { Factory } from "rosie";
-import { AxiosResponse } from "axios";
-import { FactoryType } from "../tests/factories/factory-type";
+import type { AxiosResponse } from "axios";
 import {
     FactoryType as AndcultureCodeFactoryType,
     StubResourceRecord,
     TestUtils,
 } from "@rsm-hcd/javascript-testing";
-import { ResultRecord } from "../view-models/result-record";
 import axios from "axios";
+import { FactoryType } from "../tests/factories/factory-type";
+import { ResultRecord } from "../view-models/result-record";
+import { ServiceUtils } from "./service-utils";
+import { LocalizationUtils } from "./localization-utils";
 
 describe("ServiceUtils", () => {
     // -----------------------------------------------------------------------------------------
@@ -124,7 +124,7 @@ describe("ServiceUtils", () => {
             // Arrange & Act
             const result = ServiceUtils.mapAxiosResponse(
                 StubResourceRecord,
-                undefined!
+                undefined
             );
 
             // Assert
@@ -135,7 +135,7 @@ describe("ServiceUtils", () => {
             // Arrange & Act
             const result = ServiceUtils.mapAxiosResponse(
                 StubResourceRecord,
-                null!
+                null
             );
 
             // Assert
@@ -325,7 +325,7 @@ describe("ServiceUtils", () => {
             // Arrange & Act
             const result = ServiceUtils.mapPagedAxiosResponse(
                 StubResourceRecord,
-                undefined!
+                undefined
             );
 
             // Assert
@@ -336,7 +336,7 @@ describe("ServiceUtils", () => {
             // Arrange & Act
             const result = ServiceUtils.mapPagedAxiosResponse(
                 StubResourceRecord,
-                null!
+                null
             );
 
             // Assert
@@ -429,7 +429,7 @@ describe("ServiceUtils", () => {
                 AndcultureCodeFactoryType.AxiosResponse,
                 {
                     data: {
-                        resultObject: resultObject,
+                        resultObject,
                         rowCount: undefined, // This is the important setup
                     },
                 }
@@ -455,7 +455,7 @@ describe("ServiceUtils", () => {
                 AndcultureCodeFactoryType.AxiosResponse,
                 {
                     data: {
-                        resultObject: resultObject,
+                        resultObject,
                         rowCount: null, // This is the important setup
                     },
                 }
@@ -484,8 +484,8 @@ describe("ServiceUtils", () => {
                 AndcultureCodeFactoryType.AxiosResponse,
                 {
                     data: {
-                        resultObject: resultObject,
-                        rowCount: rowCount,
+                        resultObject,
+                        rowCount,
                     },
                 }
             );

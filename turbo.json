@@ -12,14 +12,6 @@
                 "dist/**"
             ]
         },
-        "build:dev": {
-            "dependsOn": [
-                "^build:dev"
-            ],
-            "outputs": [
-                "dist/**"
-            ]
-        },
         "build:prod": {
             "dependsOn": [
                 "^build:prod"
@@ -28,12 +20,22 @@
                 "dist/**"
             ]
         },
-        "dev": {},
+        "clean": {},
+        "dev": {
+            "dependsOn": [
+                "^build"
+            ],
+            "outputs": [
+                "dist/**"
+            ]},
         "lint": {},
-        "docs": {},
+        "lint:fix": {},
         "test": {
             "dependsOn": [
-                "^build:prod"
+                "^build"
+            ],
+            "outputs": [
+                "dist/**"
             ]
         }
     }

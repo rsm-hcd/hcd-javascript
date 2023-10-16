@@ -1,12 +1,12 @@
-import { ResultRecord } from "../view-models/result-record";
-import { Do, DoSync } from "../utilities/do-try";
-import { PolyfillUtils } from "../utilities/polyfill-utils";
-import { CoreUtils } from "../utilities/core-utils";
-import { CatchResultHandler } from "../types/catch-result-handler";
 import { StubResourceRecord } from "@rsm-hcd/javascript-testing";
 import { Factory } from "rosie";
-import { ResultErrorRecord } from "view-models/result-error-record";
-import { FactoryType } from "tests/factories/factory-type";
+import type { ResultErrorRecord } from "../view-models/result-error-record";
+import { FactoryType } from "../tests/factories/factory-type";
+import type { ResultRecord } from "../view-models/result-record";
+import type { CatchResultHandler } from "../types/catch-result-handler";
+import { Do, DoSync } from "./do-try";
+import { PolyfillUtils } from "./polyfill-utils";
+import { CoreUtils } from "./core-utils";
 
 PolyfillUtils.registerPromiseFinallyPolyfill();
 
@@ -14,8 +14,8 @@ describe("do-try.ts", () => {
     describe("Do.try", () => {
         it("When a catch handler exists, finally is called after catch resolves", async () => {
             // Arrange
-            let catchRanAtTimestamp: number = 0;
-            let finallyRanAtTimestamp: number = 0;
+            let catchRanAtTimestamp = 0;
+            let finallyRanAtTimestamp = 0;
             const workload = async () => {
                 throw Error();
             };

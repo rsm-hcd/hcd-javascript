@@ -1,7 +1,6 @@
 import { NavigatorConnectionVariant } from "../enumerations/navigator-connection-variant";
-import buildNetworkInformationUtils, {
-    NetworkInformationUtils,
-} from "./network-information-utils";
+import type { NetworkInformationUtils } from "./network-information-utils";
+import buildNetworkInformationUtils from "./network-information-utils";
 
 const buildMockWindow = (navigator?: Navigator) => {
     return { navigator } as Window & typeof globalThis;
@@ -9,7 +8,7 @@ const buildMockWindow = (navigator?: Navigator) => {
 
 const buildMockNavigator = (
     connectionProperty?: string,
-    onLine: boolean = false
+    onLine = false
 ): Navigator => {
     const isOnline = onLine ?? navigator.onLine;
 

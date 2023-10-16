@@ -1,4 +1,4 @@
-import { Entity } from "./entity";
+import type { Entity } from "./entity";
 
 export interface Auditable extends Entity {
     createdById?: number;

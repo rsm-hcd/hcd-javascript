@@ -1,4 +1,4 @@
-import { ResultRecord } from "../view-models/result-record";
+import type { ResultRecord } from "../view-models/result-record";
 
 interface ServiceResponse<T> {
     /**

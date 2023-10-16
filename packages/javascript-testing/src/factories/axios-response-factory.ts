@@ -1,6 +1,6 @@
+import type { AxiosResponse } from "axios";
+import type { FactoryInitializer } from "./factory-initializer";
 import { FactoryType } from "./factory-type";
-import { AxiosResponse } from "axios";
-import { FactoryInitializer } from "factories/factory-initializer";
 
 // -----------------------------------------------------------------------------------------
 // #region Factory

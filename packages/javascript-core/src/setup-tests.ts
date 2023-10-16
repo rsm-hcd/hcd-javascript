@@ -1,10 +1,8 @@
 import "jest-extended/all";
 import { Factory } from "rosie";
-import {
-    FactoryInitializerOptions,
-    initializeFactories as initializeTestingFactories,
-} from "@rsm-hcd/javascript-testing";
-import { initializeFactories } from "tests/factories";
+import type { FactoryInitializerOptions } from "@rsm-hcd/javascript-testing";
+import { initializeFactories as initializeTestingFactories } from "@rsm-hcd/javascript-testing";
+import { initializeFactories } from "./tests/factories";
 
 beforeAll(() => {
     const options: FactoryInitializerOptions = {

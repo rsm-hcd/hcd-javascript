@@ -12,7 +12,7 @@ declare global {
  * @returns boolean
  */
 const _isIE = (): boolean => {
-    return /*@cc_on!@*/ false || !!document.documentMode;
+    return /*@cc_on!@*/ false || Boolean(document.documentMode);
 };
 
 /**

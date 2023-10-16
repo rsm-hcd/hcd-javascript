@@ -1,4 +1,4 @@
-import { RequiredOr } from "./required-or";
+import type { RequiredOr } from "./required-or";
 
 // -----------------------------------------------------------------------------------------
 // #region Types

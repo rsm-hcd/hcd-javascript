@@ -1,5 +1,5 @@
-import { ConnectionType } from "../enumerations/connection-type";
-import { EffectiveConnectionType } from "../enumerations/effective-connection-type";
+import type { ConnectionType } from "../enumerations/connection-type";
+import type { EffectiveConnectionType } from "../enumerations/effective-connection-type";
 
 // -----------------------------------------------------------------------------------------
 // #region Interfaces

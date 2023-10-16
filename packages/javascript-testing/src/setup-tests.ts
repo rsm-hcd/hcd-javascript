@@ -1,6 +1,6 @@
 import "jest-extended/all";
-import { initializeFactories } from "./factories";
 import { Factory } from "rosie";
+import { initializeFactories } from "./factories";
 
 beforeAll(() => {
     initializeFactories({

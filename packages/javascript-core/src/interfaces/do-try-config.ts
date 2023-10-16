@@ -1,4 +1,4 @@
-import { CatchResultHandler } from "../types/catch-result-handler";
+import type { CatchResultHandler } from "../types/catch-result-handler";
 
 interface DoTryConfig {
     /**

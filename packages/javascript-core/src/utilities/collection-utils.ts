@@ -1,12 +1,12 @@
 import * as Immutable from "immutable";
-import _ from "lodash";
-import {
+import type {
     Comparator2,
     Dictionary,
     List,
     ListOfRecursiveArraysOrValues,
     NumericDictionary,
 } from "lodash";
+import _ from "lodash";
 
 // -----------------------------------------------------------------------------------------
 // #region Private Methods
@@ -25,8 +25,8 @@ import {
  */
 const equalsBy = function <T, V>(
     selector: (element: T) => V,
-    array1: Array<T> | Immutable.List<any> | undefined,
-    array2: Array<T> | Immutable.List<any> | undefined
+    array1: T[] | Immutable.List<any> | undefined,
+    array2: T[] | Immutable.List<any> | undefined
 ) {
     if (array1 == null) {
         return array2 == null;
@@ -61,7 +61,7 @@ const equalsBy = function <T, V>(
  */
 const difference = <T>(
     array: List<T> | null | undefined,
-    ...values: Array<List<T>>
+    ...values: List<T>[]
 ): T[] => _.difference(array, ...values);
 
 /**
@@ -133,7 +133,7 @@ const isNotEmpty = (
  * @param arr the collection
  * @returns number the length of the collection
  */
-const length = (arr: Array<any> | Immutable.List<any>): number => {
+const length = (arr: any[] | Immutable.List<any>): number => {
     if (arr == null) {
         return -1;
     }
@@ -142,7 +142,7 @@ const length = (arr: Array<any> | Immutable.List<any>): number => {
         return (arr as Immutable.List<any>).size;
     }
 
-    return (arr as Array<any>).length;
+    return (arr as any[]).length;
 };
 
 /**
@@ -163,8 +163,7 @@ const first = <T>(array: List<T> | null | undefined): T | undefined =>
  * @param arrays The arrays to inspect.
  * @return Returns the new array of shared values.
  */
-const intersection = <T>(...arrays: Array<List<T>>) =>
-    _.intersection(...arrays);
+const intersection = <T>(...arrays: List<T>[]) => _.intersection(...arrays);
 
 /**
  * Creates an array of unique `array` values not included in the other
@@ -195,7 +194,7 @@ const intersectionWith = <T1, T2>(
  * @param source original array
  * @param index array index to remove
  */
-const removeElementAt = <T>(source: Array<T>, index: number): Array<T> => {
+const removeElementAt = <T>(source: T[], index: number): T[] => {
     if (index < 0 || index > source.length) {
         return source;
     }
@@ -215,11 +214,7 @@ const removeElementAt = <T>(source: Array<T>, index: number): Array<T> => {
  * @param index
  * @param value
  */
-const replaceElementAt = <T>(
-    source: Array<T>,
-    index: number,
-    value: T
-): Array<T> => {
+const replaceElementAt = <T>(source: T[], index: number, value: T): T[] => {
     if (source.length === 0 || index < 0) {
         return source;
     }
@@ -273,17 +268,17 @@ const sampleSize = <T>(
  * @param caseSensitive whether to consider letter case when sorting
  */
 const sortByString = <T extends any>(
-    array: Array<T>,
+    array: T[],
     selector: (element: T) => string,
-    caseSensitive: boolean = false
+    caseSensitive = false
 ) =>
     array.sort((a: T, b: T) => {
         let aString = selector(a);
         let bString = selector(b);
 
         if (!caseSensitive) {
-            aString = aString?.toLowerCase();
-            bString = bString?.toLowerCase();
+            aString = aString.toLowerCase();
+            bString = bString.toLowerCase();
         }
 
         if (aString === "" || aString == null) {

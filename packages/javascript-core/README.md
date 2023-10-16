@@ -32,9 +32,8 @@ You can also reference the global distribution package within a website which gi
 <script src="https://unpkg.com/browse/andculturecode-javascript-core@[version-number]/dist/global/index.js"></script>
 
 <script>
-    var myAuthObject = AndcultureCode.RouteUtils.queryStringToObject(
-        "#token=bada55cafe"
-    );
+    var myAuthObject =
+        AndcultureCode.RouteUtils.queryStringToObject("#token=bada55cafe");
 </script>
 ```
 

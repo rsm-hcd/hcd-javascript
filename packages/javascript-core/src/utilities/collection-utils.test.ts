@@ -283,13 +283,15 @@ describe("CollectionUtils", () => {
     // -----------------------------------------------------------------------------------------
 
     describe("#equalsBy", () => {
-        type TestType = { id: number };
+        interface TestType {
+            id: number;
+        }
         const selector = (t: TestType) => t.id;
 
         it("when collections are different lengths, then returns false", () => {
             // Arrange
-            const arr1: Array<TestType> = [{ id: 1 }, { id: 2 }];
-            const arr2: Array<TestType> = [{ id: 1 }];
+            const arr1: TestType[] = [{ id: 1 }, { id: 2 }];
+            const arr2: TestType[] = [{ id: 1 }];
 
             // Act
             const result = CollectionUtils.equalsBy(selector, arr1, arr2);
@@ -300,7 +302,7 @@ describe("CollectionUtils", () => {
 
         it("when one of the collections is null, then returns false", () => {
             // Arrange
-            const arr1: Array<TestType> = [{ id: 1 }, { id: 2 }];
+            const arr1: TestType[] = [{ id: 1 }, { id: 2 }];
 
             // Act
             const result = CollectionUtils.equalsBy(selector, arr1, undefined);
@@ -323,8 +325,8 @@ describe("CollectionUtils", () => {
 
         it("when collections are equal size but contain different elements, then returns false", () => {
             // Arrange
-            const arr1: Array<TestType> = [{ id: 1 }, { id: 2 }];
-            const arr2: Array<TestType> = [{ id: 2 }, { id: 3 }];
+            const arr1: TestType[] = [{ id: 1 }, { id: 2 }];
+            const arr2: TestType[] = [{ id: 2 }, { id: 3 }];
 
             // Act
             const result = CollectionUtils.equalsBy(selector, arr1, arr2);
@@ -335,8 +337,8 @@ describe("CollectionUtils", () => {
 
         it("when collections are identical, then returns true", () => {
             // Arrange
-            const arr1: Array<TestType> = [{ id: 1 }, { id: 2 }];
-            const arr2: Array<TestType> = [...arr1];
+            const arr1: TestType[] = [{ id: 1 }, { id: 2 }];
+            const arr2: TestType[] = [...arr1];
 
             // Act
             const result = CollectionUtils.equalsBy(selector, arr1, arr2);
@@ -475,7 +477,9 @@ describe("CollectionUtils", () => {
     // -----------------------------------------------------------------------------------------
 
     describe("#sortByString", () => {
-        type TestType = { letter: string };
+        interface TestType {
+            letter: string;
+        }
         const selector = (t: TestType) => t.letter;
 
         it("sorts an array by specified selector", () => {

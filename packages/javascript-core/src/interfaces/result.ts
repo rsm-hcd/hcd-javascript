@@ -1,4 +1,4 @@
-import { ResultErrorRecord } from "../view-models/result-error-record";
+import type { ResultErrorRecord } from "../view-models/result-error-record";
 
 // -----------------------------------------------------------------------------------------
 // #region Interfaces

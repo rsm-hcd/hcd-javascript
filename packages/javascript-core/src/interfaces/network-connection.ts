@@ -1,4 +1,4 @@
-import { NetworkInformation } from "./network-information";
+import type { NetworkInformation } from "./network-information";
 
 // -----------------------------------------------------------------------------------------
 // #region Interfaces

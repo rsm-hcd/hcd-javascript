@@ -1,15 +1,15 @@
+import type { TFunctionDetailedResult } from "i18next";
+import i18n from "i18next";
+import type { DetectorOptions } from "i18next-browser-languagedetector";
+import LanguageDetector from "i18next-browser-languagedetector";
+import type { LocalizationInitOptions } from "../interfaces/localization-init-options";
+import type { Culture } from "../interfaces/culture";
+import type { CultureParams } from "../interfaces/culture-params";
+import { Rfc4646LanguageCodes } from "../constants/rfc4646-language-codes";
 import { CollectionUtils } from "./collection-utils";
 import { EnvironmentUtils } from "./environment-utils";
-import { Culture } from "./../interfaces/culture";
-import { CultureParams } from "./../interfaces/culture-params";
 import { RouteUtils } from "./route-utils";
 import { StringUtils } from "./string-utils";
-import { Rfc4646LanguageCodes } from "./../constants/rfc4646-language-codes";
-import i18n, { TFunctionDetailedResult } from "i18next";
-import LanguageDetector, {
-    DetectorOptions,
-} from "i18next-browser-languagedetector";
-import { LocalizationInitOptions } from "../interfaces/localization-init-options";
 
 // -----------------------------------------------------------------------------------------
 // #region Constants
@@ -55,7 +55,7 @@ const changeCultureCode = (cultureCode: string) =>
  */
 const cultureCodeFromQueryString = () => {
     const queryString = window.location.search;
-    return RouteUtils.queryStringToObject<CultureParams>(queryString)?.culture;
+    return RouteUtils.queryStringToObject<CultureParams>(queryString).culture;
 };
 
 /**
@@ -69,9 +69,11 @@ const cultureCodeFromRoute = () => window.location.pathname.split("/")[1];
  * @param culture subclass culture's partial properties to override 'base'. Typically where providing culture resources
  */
 const cultureFactory = <TResources>(
-    base: Culture<any> | null,
+    base: Culture<TResources>,
     culture: Partial<Culture<TResources>> | null
-): Culture<TResources> => Object.assign({}, base, culture);
+): Culture<TResources> => {
+    return { ...base, ...(culture ?? {}) };
+};
 
 const culturesToResources = <TResources>(cultures: Culture<TResources>[]) => {
     const resources: any = {};
@@ -111,7 +113,7 @@ const detectCultureCode = () => {
         return culture;
     }
 
-    changeCultureCode(culture!);
+    changeCultureCode(culture);
 
     return culture;
 };
@@ -156,7 +158,7 @@ const initialize = <TResources>(
 const translate = (
     key: string,
     options?: any
-): string | TFunctionDetailedResult<string> => i18n.t(key, options);
+): string | TFunctionDetailedResult => i18n.t(key, options);
 
 /**
  * Retrieve translation for given key in the currently configured language

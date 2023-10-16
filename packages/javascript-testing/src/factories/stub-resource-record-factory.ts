@@ -1,6 +1,6 @@
 import { StubResourceRecord } from "../stubs/stub-resource-record";
 import { FactoryType } from "./factory-type";
-import { FactoryInitializer } from "./factory-initializer";
+import type { FactoryInitializer } from "./factory-initializer";
 
 // -----------------------------------------------------------------------------------------
 // #region Factory

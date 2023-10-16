@@ -1,4 +1,4 @@
-import { ResultRecord } from "../view-models/result-record";
+import type { ResultRecord } from "../view-models/result-record";
 
 /**
  * Handler for a typed error ResultRecord, or any type if a Javascript error occurred.

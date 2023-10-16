@@ -1,4 +1,4 @@
-import { InitOptions, InterpolationOptions } from "i18next";
+import type { InitOptions, InterpolationOptions } from "i18next";
 
 // -----------------------------------------------------------------------------------------
 // #region Interfaces

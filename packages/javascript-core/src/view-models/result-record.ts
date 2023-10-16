@@ -1,16 +1,19 @@
+import { Record as ImmutableRecord } from "immutable";
 import { CollectionUtils } from "../utilities/collection-utils";
-import { Record } from "immutable";
-import { ResultErrorRecord } from "./result-error-record";
-import { Result } from "../interfaces/result";
+import type { Result } from "../interfaces/result";
 import { ErrorType } from "../enumerations/error-type";
 import { RecordUtils } from "../utilities/record-utils";
+import { ResultErrorRecord } from "./result-error-record";
 
 const defaultValues: Result<any> = {
     errors: undefined,
     resultObject: undefined,
 };
 
-class ResultRecord<T> extends Record(defaultValues) implements Result<T> {
+class ResultRecord<T>
+    extends ImmutableRecord(defaultValues)
+    implements Result<T>
+{
     // Do NOT set properties on immutable records due to babel and typescript transpilation issue
     // See https://github.com/facebook/create-react-app/issues/6506
 
@@ -24,7 +27,7 @@ class ResultRecord<T> extends Record(defaultValues) implements Result<T> {
         }
 
         if (CollectionUtils.hasValues(params.errors)) {
-            const errors = params.errors as any[];
+            const errors = params.errors;
             params.errors = errors.map((error) =>
                 RecordUtils.ensureRecord(error, ResultErrorRecord)
             );
@@ -41,9 +44,9 @@ class ResultRecord<T> extends Record(defaultValues) implements Result<T> {
 
     /**
      * Adds a new error with the supplied details and returns a new ResultRecord
-     * @param key error key value (typically property name)
-     * @param message error message value
-     * @param type type of error (default of 'Error')
+     * @param key - error key value (typically property name)
+     * @param message - error message value
+     * @param type - type of error (default of 'Error')
      */
     public addError(key: string, message: string): ResultRecord<T> {
         return this._addErrorByType(key, message, ErrorType.Error);
@@ -74,7 +77,7 @@ class ResultRecord<T> extends Record(defaultValues) implements Result<T> {
             return 0;
         }
 
-        return this.errors!.length;
+        return this.errors?.length ?? 0;
     }
 
     /**
@@ -113,7 +116,7 @@ class ResultRecord<T> extends Record(defaultValues) implements Result<T> {
         if (this.doesNotHaveErrors()) {
             return [];
         }
-        const errors = this.errors as ResultErrorRecord[];
+        const errors = this.errors!;
         return errors.map((e) => e.fullError());
     }
 
@@ -125,7 +128,7 @@ class ResultRecord<T> extends Record(defaultValues) implements Result<T> {
             return [];
         }
 
-        const errors = this.errors as ResultErrorRecord[];
+        const errors = this.errors!;
         return errors
             .map((e) => String(e.message) || "")
             .filter((e) => e !== "");
@@ -157,8 +160,8 @@ class ResultRecord<T> extends Record(defaultValues) implements Result<T> {
 
         result.push(
             new ResultErrorRecord({
-                key: key,
-                message: message,
+                key,
+                message,
                 type: errorType,
             })
         );
