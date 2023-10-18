@@ -1,4 +1,4 @@
-import { Record } from "immutable";
+import { Record as ImmutableRecord } from "immutable";
 import { AuditableDefaultValues } from "../constants/auditable-default-values";
 import type { Auditable } from "../interfaces/auditable";
 import type { Constructor } from "../types/constructor";
@@ -38,15 +38,15 @@ const RecordUtils = {
      * If `maybeRecord` is already an instance of `T`, it returns that value.
      *
      * @param maybeRecord Object or Record to be coalesced into a Record.
-     * @param record Type of the Record to be instantiated
+     * @param Record Type of the Record to be instantiated
      */
     ensureRecord<TValue, TRecord extends TValue>(
         maybeRecord: TValue,
-        record: Constructor<TRecord>
+        Record: Constructor<TRecord>
     ): TRecord {
-        return RecordUtils.isRecord(maybeRecord, record)
+        return RecordUtils.isRecord(maybeRecord, Record)
             ? maybeRecord
-            : new record(maybeRecord);
+            : new Record(maybeRecord);
     },
 
     /**
@@ -77,7 +77,10 @@ const RecordUtils = {
         maybeRecord: TValue,
         record: Constructor<TRecord>
     ): maybeRecord is TRecord {
-        return Record.isRecord(maybeRecord) && maybeRecord instanceof record;
+        return (
+            ImmutableRecord.isRecord(maybeRecord) &&
+            maybeRecord instanceof record
+        );
     },
 };
 

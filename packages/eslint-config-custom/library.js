@@ -64,7 +64,6 @@ module.exports = {
         "import/no-default-export": "off", // TODO: https://github.com/rsm-hcd/hcd-javascript/issues/59
         "import/no-named-as-default-member": "off", // TODO: https://github.com/rsm-hcd/hcd-javascript/issues/60
         "import/no-named-as-default": "off", // TODO: https://github.com/rsm-hcd/hcd-javascript/issues/63
-        "new-cap": "off", // TODO: https://github.com/rsm-hcd/hcd-javascript/issues/64
         "no-await-in-loop": "off", // TODO: https://github.com/rsm-hcd/hcd-javascript/issues/65
         "no-console": "off", // TODO: https://github.com/rsm-hcd/hcd-javascript/issues/66
         "no-constant-binary-expression": "off", // TODO: https://github.com/rsm-hcd/hcd-javascript/issues/67
