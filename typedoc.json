@@ -1,0 +1,6 @@
+{
+    "entryPoints": ["packages/javascript-*"],
+    "name": "RSM - HCD JavaScript",
+    "entryPointStrategy": "packages",
+    "includeVersion": false
+}

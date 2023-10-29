@@ -127,7 +127,7 @@ const detectCultureCode = () => {
 const initialize = <TResources>(
     module: any,
     cultures: Culture<TResources>[],
-    options: LocalizationInitOptions = defaultInitOptions
+    options: Partial<LocalizationInitOptions> = defaultInitOptions
 ) => {
     if (CollectionUtils.isEmpty(cultures)) {
         throw new Error(errorCultureIsRequired);
