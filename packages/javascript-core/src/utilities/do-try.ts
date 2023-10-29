@@ -10,10 +10,7 @@ import type { SyncWorkload } from "../types/sync-workload";
 // -----------------------------------------------------------------------------------------
 
 /**
- * Utility class to be able to use strong typing in a catch handler.
- * the Do.catch method takes a callback where the parameters are:
- * - result?: Result<TResourceType> -- if it's an error from the server, will not be null
- * - error?: any -- if it's a Javascript error, will not be null
+ * A class that allows you to chain together a workload, catch handler, and finally handler.
  */
 class Do<TResourceType, TReturnVal = void> {
     private promise: Promise<TReturnVal>;

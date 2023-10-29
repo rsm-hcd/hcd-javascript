@@ -1,5 +1,6 @@
 {
     "name": "rsm-hcd-javscript",
+    "homepage": "https://rsm-hcd.github.io/hcd-javascript",
     "private": true,
     "license": "MIT",
     "repository": {
@@ -11,6 +12,7 @@
         "build:prod": "turbo run build:prod",
         "clean": "turbo run clean",
         "dev": "turbo run dev",
+        "docs": "typedoc",
         "test": "turbo run test",
         "test:watch": "turbo run test -- --watch",
         "lint": "turbo run lint",
@@ -23,9 +25,10 @@
         "@changesets/cli": "^2.26.2",
         "@rsm-hcd/tsconfig": "workspace:*",
         "husky": "^8.0.3",
-        "lint-staged": "^15.0.1",
+        "lint-staged": "^15.0.2",
         "prettier": "^3.0.3",
-        "turbo": "latest"
+        "turbo": "latest",
+        "typedoc": "^0.25.2"
     },
     "packageManager": "pnpm@8.9.0",
     "volta": {
