@@ -1,7 +1,7 @@
 import { Factory } from "rosie";
 import type { AxiosResponse } from "axios";
 import {
-    FactoryType as AndcultureCodeFactoryType,
+    FactoryType as JavascriptTestingFactoryType,
     StubResourceRecord,
     TestUtils,
 } from "@rsm-hcd/javascript-testing";
@@ -145,7 +145,7 @@ describe("ServiceUtils", () => {
         test("when response.data is undefined, it returns the mapped resultObject as undefined", () => {
             // Arrange
             const axiosResponse = Factory.build<AxiosResponse>(
-                AndcultureCodeFactoryType.AxiosResponse,
+                JavascriptTestingFactoryType.AxiosResponse,
                 { data: undefined }
             );
 
@@ -162,7 +162,7 @@ describe("ServiceUtils", () => {
         test("when response.data is null, it returns the mapped resultObject as undefined", () => {
             // Arrange
             const axiosResponse = Factory.build<AxiosResponse>(
-                AndcultureCodeFactoryType.AxiosResponse,
+                JavascriptTestingFactoryType.AxiosResponse,
                 { data: null }
             );
 
@@ -179,7 +179,7 @@ describe("ServiceUtils", () => {
         test("when response.data.resultObject is undefined, it returns the mapped resultObject as undefined", () => {
             // Arrange
             const axiosResponse = Factory.build<AxiosResponse>(
-                AndcultureCodeFactoryType.AxiosResponse,
+                JavascriptTestingFactoryType.AxiosResponse,
                 {
                     data: {
                         resultObject: undefined,
@@ -200,7 +200,7 @@ describe("ServiceUtils", () => {
         test("when response.data.resultObject is null, it returns the mapped resultObject as undefined", () => {
             // Arrange
             const axiosResponse = Factory.build<AxiosResponse>(
-                AndcultureCodeFactoryType.AxiosResponse,
+                JavascriptTestingFactoryType.AxiosResponse,
                 {
                     data: {
                         resultObject: null,
@@ -221,7 +221,7 @@ describe("ServiceUtils", () => {
         test("when response.data.resultObject is not null, it wraps the result object in a record.", () => {
             // Arrange
             const axiosResponse = Factory.build<AxiosResponse>(
-                AndcultureCodeFactoryType.AxiosResponse,
+                JavascriptTestingFactoryType.AxiosResponse,
                 {
                     data: {
                         resultObject: {
@@ -244,7 +244,7 @@ describe("ServiceUtils", () => {
         test("it returns rowCount as 1", () => {
             // Arrange
             const axiosResponse = Factory.build<AxiosResponse>(
-                AndcultureCodeFactoryType.AxiosResponse
+                JavascriptTestingFactoryType.AxiosResponse
             );
 
             // Act
@@ -260,7 +260,7 @@ describe("ServiceUtils", () => {
         test("it returns the mapped status from the original response", () => {
             // Arrange
             const axiosResponse = Factory.build<AxiosResponse>(
-                AndcultureCodeFactoryType.AxiosResponse
+                JavascriptTestingFactoryType.AxiosResponse
             );
 
             // Act
@@ -276,7 +276,7 @@ describe("ServiceUtils", () => {
         test("it returns result as a ResultRecord", () => {
             // Arrange
             const axiosResponse = Factory.build<AxiosResponse>(
-                AndcultureCodeFactoryType.AxiosResponse
+                JavascriptTestingFactoryType.AxiosResponse
             );
 
             // Act
@@ -300,7 +300,7 @@ describe("ServiceUtils", () => {
         test("when resultObject is empty array, it properly maps an empty array to resultObjects", () => {
             // Arrange
             const response = Factory.build<AxiosResponse>(
-                AndcultureCodeFactoryType.AxiosResponse,
+                JavascriptTestingFactoryType.AxiosResponse,
                 {
                     data: {
                         resultObject: [],
@@ -346,7 +346,7 @@ describe("ServiceUtils", () => {
         test("when response.data is undefined, it returns the mapped resultObjects as empty array", () => {
             // Arrange
             const axiosResponse = Factory.build<AxiosResponse>(
-                AndcultureCodeFactoryType.AxiosResponse,
+                JavascriptTestingFactoryType.AxiosResponse,
                 { data: undefined }
             );
 
@@ -363,7 +363,7 @@ describe("ServiceUtils", () => {
         test("when response.data is null, it returns the mapped resultObjects as empty array", () => {
             // Arrange
             const axiosResponse = Factory.build<AxiosResponse>(
-                AndcultureCodeFactoryType.AxiosResponse,
+                JavascriptTestingFactoryType.AxiosResponse,
                 { data: null }
             );
 
@@ -380,7 +380,7 @@ describe("ServiceUtils", () => {
         test("when response.data.resultObject is undefined, it returns the mapped resultObjects as empty array", () => {
             // Arrange
             const axiosResponse = Factory.build<AxiosResponse>(
-                AndcultureCodeFactoryType.AxiosResponse,
+                JavascriptTestingFactoryType.AxiosResponse,
                 {
                     data: {
                         resultObject: undefined,
@@ -401,7 +401,7 @@ describe("ServiceUtils", () => {
         test("when response.data.resultObject is null, it returns the mapped resultObjects as empty array", () => {
             // Arrange
             const axiosResponse = Factory.build<AxiosResponse>(
-                AndcultureCodeFactoryType.AxiosResponse,
+                JavascriptTestingFactoryType.AxiosResponse,
                 {
                     data: {
                         resultObject: null,
@@ -426,7 +426,7 @@ describe("ServiceUtils", () => {
                 2
             );
             const axiosResponse = Factory.build<AxiosResponse>(
-                AndcultureCodeFactoryType.AxiosResponse,
+                JavascriptTestingFactoryType.AxiosResponse,
                 {
                     data: {
                         resultObject,
@@ -452,7 +452,7 @@ describe("ServiceUtils", () => {
                 2
             );
             const axiosResponse = Factory.build<AxiosResponse>(
-                AndcultureCodeFactoryType.AxiosResponse,
+                JavascriptTestingFactoryType.AxiosResponse,
                 {
                     data: {
                         resultObject,
@@ -481,7 +481,7 @@ describe("ServiceUtils", () => {
                 min: resultObject.length + 1,
             }); // This is the important setup (should be different from resultObject.length)
             const axiosResponse = Factory.build<AxiosResponse>(
-                AndcultureCodeFactoryType.AxiosResponse,
+                JavascriptTestingFactoryType.AxiosResponse,
                 {
                     data: {
                         resultObject,
@@ -503,7 +503,7 @@ describe("ServiceUtils", () => {
         test("it returns the mapped status from the original response", () => {
             // Arrange
             const axiosResponse = Factory.build<AxiosResponse>(
-                AndcultureCodeFactoryType.AxiosResponse
+                JavascriptTestingFactoryType.AxiosResponse
             );
 
             // Act
@@ -519,7 +519,7 @@ describe("ServiceUtils", () => {
         test("it returns results as a ResultRecord", () => {
             // Arrange
             const axiosResponse = Factory.build<AxiosResponse>(
-                AndcultureCodeFactoryType.AxiosResponse
+                JavascriptTestingFactoryType.AxiosResponse
             );
 
             // Act

@@ -57,7 +57,7 @@
     },
     "scripts": {
         "build": "tsup ./src/index.ts --format cjs,esm --onSuccess \"tsc --emitDeclarationOnly --declaration\"",
-        "build:prod": "pnpm run clean && tsup ./src/index.ts --format cjs,esmc --dts",
+        "build:prod": "pnpm run clean && tsup ./src/index.ts --minify --format cjs,esm --dts",
         "clean": "rimraf dist && rimraf coverage",
         "coverage": "jest ./src --coverage",
         "dev": "pnpm run build --watch",
