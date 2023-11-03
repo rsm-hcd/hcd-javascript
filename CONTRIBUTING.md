@@ -16,4 +16,4 @@ This repo is now distributing packages for both module loaded applications as we
 
 This repo uses a simple Cypress test to open and test [test-global-distribution.html](./test-global-distribution.html) to validate there are no javascript errors. Also, any unhandled dependencies within `package.json/dependencies` will throw errors during the build process. Make sure you add them either as externals or bundles to prevent these build errors.
 
-Additional information on contributing to this repo is in the [Contributing Guide](https://github.com/AndcultureCode/AndcultureCode/blob/master/CONTRIBUTING.md) in the Home repo.
+Additional information on contributing to this repo is in the [Contributing Guide](https://github.com/rsm-hcd/hcd-javascript/blob/master/CONTRIBUTING.md) in the Home repo.

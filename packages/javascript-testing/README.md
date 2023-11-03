@@ -4,7 +4,7 @@ Commonly used actors for automated testing javascript applications
 
 ## Getting started
 
-This package is installed via npm or yarn
+This package is installed via npm, yarn, pnpm
 
 ```shell
 # npm
