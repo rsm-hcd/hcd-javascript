@@ -16,7 +16,7 @@
     },
     "dependencies": {
         "@rsm-hcd/javascript-testing": "workspace:*",
-        "query-string": "6.13.1"
+        "query-string": "8.1.0"
     },
     "devDependencies": {
         "@faker-js/faker": "^8.2.0",
