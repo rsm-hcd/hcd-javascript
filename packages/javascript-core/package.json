@@ -23,7 +23,7 @@
         "@rsm-hcd/eslint-config-custom": "workspace:*",
         "@rsm-hcd/tsconfig": "workspace:*",
         "@swc/core": "^1.3.92",
-        "@types/jest": "^29.5.5",
+        "@types/jest": "^29.5.9",
         "@types/node": "18.18.0",
         "@types/rosie": "^0.0.43",
         "@types/humanize-plus": "^1.8.0",
