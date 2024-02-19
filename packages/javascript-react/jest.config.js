@@ -1,9 +1,12 @@
 module.exports = {
-    globals: {
-        "ts-jest": {
-            diagnostics: false,
-            tsConfig: "<rootDir>/tsconfig.json",
-        },
+    transform: {
+        "^.+\\.tsx?$": [
+            "ts-jest",
+            {
+                diagnostics: false,
+                tsconfig: "<rootDir>/tsconfig.json",
+            },
+        ],
     },
     moduleDirectories: ["node_modules", "src"],
     modulePathIgnorePatterns: ["<rootDir>/dist"],

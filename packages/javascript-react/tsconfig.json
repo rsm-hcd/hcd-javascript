@@ -1,26 +1,17 @@
 {
+    "extends": "@rsm-hcd/tsconfig/base.json",
     "compilerOptions": {
         "allowJs": true,
-        "allowSyntheticDefaultImports": true,
-        "declaration": true,
+        "baseUrl": "./src",
         "emitDecoratorMetadata": true,
-        "esModuleInterop": true,
         "experimentalDecorators": true,
-        "forceConsistentCasingInFileNames": false,
-        "inlineSourceMap": true,
-        "inlineSources": true,
-        "lib": ["dom", "dom.iterable", "esnext"],
-        "jsx": "react",
+        "lib": ["dom", "dom.iterable", "ES2015"],
         "module": "commonjs",
-        "moduleResolution": "node",
         "noUnusedParameters": true,
-        "outDir": "./dist",
         "removeComments": false,
         "resolveJsonModule": true,
-        "skipLibCheck": true,
-        "strict": true,
-        "target": "es5"
+        "target": "es5",
+        "outDir": "dist"
     },
-    "exclude": ["**/*.test.*", "node_modules", "src/setupTests.ts"],
     "include": ["src"]
 }
