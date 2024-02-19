@@ -22,17 +22,21 @@
         "prepare": "pnpm husky install"
     },
     "devDependencies": {
-        "@changesets/cli": "^2.26.2",
+        "@changesets/cli": "^2.27.1",
         "@rsm-hcd/tsconfig": "workspace:*",
         "husky": "^8.0.3",
-        "lint-staged": "^15.0.2",
-        "prettier": "^3.0.3",
+        "lint-staged": "^15.2.2",
+        "prettier": "^3.2.5",
         "turbo": "latest",
-        "typedoc": "^0.25.3"
+        "typedoc": "^0.25.8"
     },
-    "packageManager": "pnpm@8.9.0",
+    "engines": {
+        "node": ">=20",
+        "pnpm": ">=8"
+    },
+    "packageManager": "pnpm@8.15.3",
     "volta": {
-        "node": "18.18.0",
-        "pnpm": "8.9.0"
+        "node": "20.11.1",
+        "pnpm": "8.15.3"
     }
 }
