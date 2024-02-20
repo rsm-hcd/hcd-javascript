@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Factory } from "rosie";
-import { render, wait, waitFor } from "@testing-library/react";
+import { render, waitFor } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
 import {
     MockAxios,
     StubResourceRecord,
-} from "andculturecode-javascript-testing";
+    FactoryType as AndcultureCodeFactoryType,
+} from "@rsm-hcd/javascript-testing";
+import { CoreUtils } from "@rsm-hcd/javascript-core";
 import { ServiceHookFactory } from "./service-hook-factory";
-import { FactoryType as AndcultureCodeFactoryType } from "andculturecode-javascript-testing";
-import { CoreUtils } from "andculturecode-javascript-core";
 
 // ---------------------------------------------------------------------------------------------
 // #region Variables
@@ -73,21 +73,21 @@ describe("ServiceHookFactory", () => {
 
             const UpdateStubComponent = () => {
                 const { update } = useBulkUpdate();
-                const [records, setRecords] = useState<
-                    Array<StubResourceRecord>
-                >(null as any);
+                const [records, setRecords] = useState<StubResourceRecord[]>(
+                    null as any
+                );
 
                 useEffect(() => {
                     async function updateUser() {
                         const result = await update([expectedStubRecord], {
-                            id: expectedStubRecord.id!,
+                            id: expectedStubRecord.id,
                         });
-                        setRecords(result.resultObjects!);
+                        setRecords(result.resultObjects);
                     }
                     updateUser();
                 }, []);
 
-                return <div>{records != null && records[0].name}</div>;
+                return <div>{records?.[0].name}</div>;
             };
 
             // Act
@@ -95,7 +95,7 @@ describe("ServiceHookFactory", () => {
 
             // Assert
             await waitFor(() => {
-                expect(getByText(expectedStubRecord.name!)).toBeInTheDocument();
+                expect(getByText(expectedStubRecord.name)).toBeInTheDocument();
             });
         });
 
@@ -126,16 +126,16 @@ describe("ServiceHookFactory", () => {
 
             const UpdateStubComponent = () => {
                 const { update } = useBulkUpdate();
-                const [records, setRecords] = useState<
-                    Array<StubResourceRecord>
-                >(null as any);
+                const [records, setRecords] = useState<StubResourceRecord[]>(
+                    null as any
+                );
 
                 useEffect(() => {
                     async function updateUser() {
                         const result = await update([record], {
-                            id: record.id!,
+                            id: record.id,
                         });
-                        setRecords(result.resultObjects!);
+                        setRecords(result.resultObjects);
                     }
 
                     updateUser();
@@ -145,7 +145,7 @@ describe("ServiceHookFactory", () => {
                     };
                 }, []);
 
-                return <div>{records != null && records[0].name}</div>;
+                return <div>{records?.[0].name}</div>;
             };
 
             // Act
@@ -197,7 +197,7 @@ describe("ServiceHookFactory", () => {
                     createRecord();
                 }, []);
 
-                return <div>{record != null && record!.name}</div>;
+                return <div>{record?.name}</div>;
             };
 
             // Act
@@ -205,7 +205,7 @@ describe("ServiceHookFactory", () => {
 
             // Assert
             await waitFor(() => {
-                expect(getByText(expectedStubRecord.name!)).toBeInTheDocument();
+                expect(getByText(expectedStubRecord.name)).toBeInTheDocument();
             });
         });
 
@@ -250,7 +250,7 @@ describe("ServiceHookFactory", () => {
                     };
                 }, []);
 
-                return <div>{record != null && record!.name}</div>;
+                return <div>{record?.name}</div>;
             };
 
             // Act
@@ -281,6 +281,7 @@ describe("ServiceHookFactory", () => {
             const useDelete = sut.useDelete(resourceEndpoint);
             const recordIdToDelete = 10;
 
+            // eslint-disable-next-line no-new-wrappers -- Required for test
             MockAxios.deleteSuccess(new Boolean(true));
 
             const DeleteStubComponent = () => {
@@ -290,13 +291,14 @@ describe("ServiceHookFactory", () => {
                 useEffect(() => {
                     async function deleteStubRecord() {
                         try {
-                            const deleteResult = await deleteRecord(
-                                recordIdToDelete
-                            );
+                            const deleteResult =
+                                await deleteRecord(recordIdToDelete);
                             setIsDeleted(
                                 (deleteResult.resultObject || false) as boolean
                             );
-                        } catch (e) {}
+                        } catch (e) {
+                            /* empty */
+                        }
                     }
                     deleteStubRecord();
                 }, []);
@@ -352,7 +354,7 @@ describe("ServiceHookFactory", () => {
                     };
                 }, []);
 
-                return <div>{record != null && record!.id}</div>;
+                return <div>{record?.id}</div>;
             };
 
             // Act
@@ -398,16 +400,18 @@ describe("ServiceHookFactory", () => {
                     async function getRecord() {
                         try {
                             const result = await get({
-                                id: expectedStubRecord.id!,
+                                id: expectedStubRecord.id,
                             });
                             setRecord(result.resultObject!);
-                        } catch (e) {}
+                        } catch (e) {
+                            /* empty */
+                        }
                     }
 
                     getRecord();
                 }, []);
 
-                return <div>{record != null && record.name}</div>;
+                return <div>{record?.name}</div>;
             };
 
             // Act
@@ -415,7 +419,7 @@ describe("ServiceHookFactory", () => {
 
             // Assert
             await waitFor(() => {
-                expect(getByText(expectedStubRecord.name!)).toBeInTheDocument();
+                expect(getByText(expectedStubRecord.name)).toBeInTheDocument();
             });
         });
 
@@ -447,7 +451,7 @@ describe("ServiceHookFactory", () => {
 
                 useEffect(() => {
                     async function getRecord() {
-                        const result = await get(record.id!);
+                        const result = await get(record.id);
                         setRecord(result.resultObject!);
                     }
 
@@ -458,7 +462,7 @@ describe("ServiceHookFactory", () => {
                     };
                 }, []);
 
-                return <div>{record != null && record!.name}</div>;
+                return <div>{record?.name}</div>;
             };
 
             // Act
@@ -504,15 +508,15 @@ describe("ServiceHookFactory", () => {
                     async function listUsers() {
                         try {
                             const result = await list();
-                            setRecords(result.resultObjects!);
-                        } catch (e) {}
+                            setRecords(result.resultObjects);
+                        } catch (e) {
+                            /* empty */
+                        }
                     }
                     listUsers();
                 }, []);
 
-                return (
-                    <div>{records != null && records.map((u) => u.name!)}</div>
-                );
+                return <div>{records?.map((u) => u.name)}</div>;
             };
 
             // Act
@@ -522,7 +526,7 @@ describe("ServiceHookFactory", () => {
             await waitFor(() => {
                 expectedStubRecords.forEach((expected) => {
                     expect(
-                        getByText(expected.name!, { exact: false })
+                        getByText(expected.name, { exact: false })
                     ).toBeInTheDocument();
                 });
             });
@@ -557,7 +561,7 @@ describe("ServiceHookFactory", () => {
                 useEffect(() => {
                     async function listUsers() {
                         const result = await list();
-                        setRecords(result.resultObjects!);
+                        setRecords(result.resultObjects);
                     }
 
                     listUsers();
@@ -567,9 +571,7 @@ describe("ServiceHookFactory", () => {
                     };
                 }, []);
 
-                return (
-                    <div>{records != null && records.map((u) => u.name!)}</div>
-                );
+                return <div>{records?.map((u) => u.name)}</div>;
             };
 
             // Act
@@ -623,7 +625,7 @@ describe("ServiceHookFactory", () => {
                     createLogin();
                 }, []);
 
-                return <div>{record != null && record!.name}</div>;
+                return <div>{record?.name}</div>;
             };
 
             // Act
@@ -631,7 +633,7 @@ describe("ServiceHookFactory", () => {
 
             // Assert
             await waitFor(() => {
-                expect(getByText(expectedStubRecord.name!)).toBeInTheDocument();
+                expect(getByText(expectedStubRecord.name)).toBeInTheDocument();
             });
         });
 
@@ -678,7 +680,7 @@ describe("ServiceHookFactory", () => {
                     };
                 }, []);
 
-                return <div>{record != null && record.name!}</div>;
+                return <div>{record?.name}</div>;
             };
 
             // Act
@@ -729,14 +731,12 @@ describe("ServiceHookFactory", () => {
                         const result = await list({
                             nestedId: 10,
                         });
-                        setRecords(result.resultObjects!);
+                        setRecords(result.resultObjects);
                     }
                     getRecords();
                 }, []);
 
-                return (
-                    <div>{records != null && records.map((u) => u.name!)}</div>
-                );
+                return <div>{records?.map((u) => u.name)}</div>;
             };
 
             // Act
@@ -746,7 +746,7 @@ describe("ServiceHookFactory", () => {
             await waitFor(() => {
                 expectedStubRecords.forEach((expected) => {
                     expect(
-                        getByText(expected.name!, { exact: false })
+                        getByText(expected.name, { exact: false })
                     ).toBeInTheDocument();
                 });
             });
@@ -785,7 +785,7 @@ describe("ServiceHookFactory", () => {
                 useEffect(() => {
                     async function listUsers() {
                         const result = await list({ nestedId: 10 });
-                        setRecords(result.resultObjects!);
+                        setRecords(result.resultObjects);
                     }
 
                     listUsers();
@@ -795,9 +795,7 @@ describe("ServiceHookFactory", () => {
                     };
                 }, []);
 
-                return (
-                    <div>{records != null && records.map((u) => u.name!)}</div>
-                );
+                return <div>{records?.map((u) => u.name)}</div>;
             };
 
             // Act
@@ -850,7 +848,7 @@ describe("ServiceHookFactory", () => {
                     updateUser();
                 }, []);
 
-                return <div>{record != null && record!.name}</div>;
+                return <div>{record?.name}</div>;
             };
 
             // Act
@@ -858,7 +856,7 @@ describe("ServiceHookFactory", () => {
 
             // Assert
             await waitFor(() => {
-                expect(getByText(expectedStubRecord.name!)).toBeInTheDocument();
+                expect(getByText(expectedStubRecord.name)).toBeInTheDocument();
             });
         });
 
@@ -903,7 +901,7 @@ describe("ServiceHookFactory", () => {
                     };
                 }, []);
 
-                return <div>{record != null && record!.name}</div>;
+                return <div>{record?.name}</div>;
             };
 
             // Act

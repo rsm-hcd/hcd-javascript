@@ -19,6 +19,8 @@
     },
     "devDependencies": {
         "@faker-js/faker": "^8.4.1",
+        "@rsm-hcd/eslint-config-custom": "workspace:*",
+        "@rsm-hcd/tsconfig": "workspace:*",
         "@rsm-hcd/javascript-core": "workspace:*",
         "@rsm-hcd/javascript-testing": "workspace:*",
         "@testing-library/jest-dom": "^6.4.2",

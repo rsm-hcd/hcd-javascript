@@ -19,7 +19,8 @@
         "lint:fix": "turbo run lint:fix",
         "format": "prettier --write \"**/*.{ts,tsx,md}\"",
         "publish-packages": "turbo run build:prod lint test && changeset version && changeset publish",
-        "prepare": "pnpm husky install"
+        "prepare": "pnpm husky install",
+        "watch:test": "turbo run watch:test"
     },
     "devDependencies": {
         "@changesets/cli": "^2.27.1",

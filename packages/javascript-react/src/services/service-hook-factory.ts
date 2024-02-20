@@ -2,19 +2,19 @@
  * Disabling eslint rule as currently it does not support currying of custom hooks
  * and thinks we are calling it
  */
-/* eslint-disable react-hooks/rules-of-hooks */
 import { useCallback } from "react";
-import { ServiceFactory } from "./service-factory";
-import { ServiceResponse } from "andculturecode-javascript-core";
+import type { ServiceResponse } from "@rsm-hcd/javascript-core";
 import { useCancellablePromise } from "../hooks/use-cancellable-promise";
-import { BulkUpdateServiceHook } from "../types/bulk-update-service-hook-type";
-import { CreateServiceHook } from "../types/create-service-hook-type";
-import { DeleteServiceHook } from "../types/delete-service-hook-type";
-import { GetServiceHook } from "../types/get-service-hook-type";
-import { ListServiceHook } from "../types/list-service-hook-type";
-import { NestedCreateServiceHook } from "../types/nested-create-service-hook-type";
-import { NestedListServiceHook } from "../types/nested-list-service-hook-type";
-import { UpdateServiceHook } from "../types/update-service-hook-type";
+import type { BulkUpdateServiceHook } from "../types/bulk-update-service-hook-type";
+import type { CreateServiceHook } from "../types/create-service-hook-type";
+import type { DeleteServiceHook } from "../types/delete-service-hook-type";
+import type { GetServiceHook } from "../types/get-service-hook-type";
+import type { ListServiceHook } from "../types/list-service-hook-type";
+import type { NestedCreateServiceHook } from "../types/nested-create-service-hook-type";
+import type { NestedListServiceHook } from "../types/nested-list-service-hook-type";
+import type { UpdateServiceHook } from "../types/update-service-hook-type";
+import type { RecordType } from "./service-factory";
+import { ServiceFactory } from "./service-factory";
 
 // ---------------------------------------------------------------------------------------------
 // #region Functions
@@ -30,8 +30,8 @@ const ServiceHookFactory = {
      * @param recordType
      * @param resourceEndpoint
      */
-    useBulkUpdate<TRecord, TPathParams>(
-        recordType: { new (): TRecord },
+    useBulkUpdate<TRecord extends RecordType, TPathParams>(
+        recordType: new () => TRecord,
         resourceEndpoint: string
     ): BulkUpdateServiceHook<TRecord, TPathParams> {
         return () => {
@@ -43,12 +43,10 @@ const ServiceHookFactory = {
             );
 
             function update(
-                records: Array<TRecord>,
+                records: TRecord[],
                 pathParams: TPathParams
             ): Promise<ServiceResponse<TRecord>> {
-                return cancellablePromise(
-                    serviceUpdate(records, pathParams)
-                ) as Promise<ServiceResponse<TRecord>>;
+                return cancellablePromise(serviceUpdate(records, pathParams));
             }
 
             return { update: useCallback(update, []) };
@@ -65,8 +63,8 @@ const ServiceHookFactory = {
      * @param recordType
      * @param baseEndpoint
      */
-    useCreate<TRecord extends any>(
-        recordType: { new (): TRecord },
+    useCreate<TRecord extends RecordType>(
+        recordType: new () => TRecord,
         baseEndpoint: string
     ): CreateServiceHook<TRecord> {
         return () => {
@@ -80,9 +78,7 @@ const ServiceHookFactory = {
             function create(
                 record?: TRecord
             ): Promise<ServiceResponse<TRecord>> {
-                return cancellablePromise(serviceCreate(record)) as Promise<
-                    ServiceResponse<TRecord>
-                >;
+                return cancellablePromise(serviceCreate(record));
             }
 
             return { create: useCallback(create, []) };
@@ -105,9 +101,7 @@ const ServiceHookFactory = {
                 id: number,
                 pathParams?: any
             ): Promise<ServiceResponse<Boolean>> {
-                return cancellablePromise(
-                    serviceDelete(id, pathParams)
-                ) as Promise<ServiceResponse<Boolean>>;
+                return cancellablePromise(serviceDelete(id, pathParams));
             }
 
             return { delete: useCallback(_delete, []) };
@@ -121,7 +115,7 @@ const ServiceHookFactory = {
      * @param resourceEndpoint
      */
     useGet<TRecord, TPathParams, TQueryParams = undefined>(
-        recordType: { new (): TRecord },
+        recordType: new () => TRecord,
         resourceEndpoint: string
     ): GetServiceHook<TRecord, TPathParams, TQueryParams> {
         return () => {
@@ -137,9 +131,7 @@ const ServiceHookFactory = {
                 pathParams: TPathParams,
                 queryParams?: TQueryParams
             ): Promise<ServiceResponse<TRecord>> {
-                return cancellablePromise(
-                    serviceGet(pathParams, queryParams)
-                ) as Promise<ServiceResponse<TRecord>>;
+                return cancellablePromise(serviceGet(pathParams, queryParams));
             }
 
             return { get: useCallback(get, []) };
@@ -157,7 +149,7 @@ const ServiceHookFactory = {
      * @param baseEndpoint
      */
     useList<TRecord, TQueryParams>(
-        recordType: { new (): TRecord },
+        recordType: new () => TRecord,
         baseEndpoint: string
     ): ListServiceHook<TRecord, TQueryParams> {
         return () => {
@@ -171,9 +163,7 @@ const ServiceHookFactory = {
             function list(
                 queryParams?: TQueryParams
             ): Promise<ServiceResponse<TRecord>> {
-                return cancellablePromise(serviceList(queryParams)) as Promise<
-                    ServiceResponse<TRecord>
-                >;
+                return cancellablePromise(serviceList(queryParams));
             }
 
             return { list: useCallback(list, []) };
@@ -186,8 +176,8 @@ const ServiceHookFactory = {
      * @param recordType
      * @param baseEndpoint
      */
-    useNestedCreate<TRecord extends any, TPathParams>(
-        recordType: { new (): TRecord },
+    useNestedCreate<TRecord extends RecordType, TPathParams>(
+        recordType: new () => TRecord,
         baseEndpoint: string
     ): NestedCreateServiceHook<TRecord, TPathParams> {
         return () => {
@@ -202,9 +192,7 @@ const ServiceHookFactory = {
                 record: TRecord,
                 pathParams: TPathParams
             ): Promise<ServiceResponse<TRecord>> {
-                return cancellablePromise(
-                    serviceCreate(record, pathParams)
-                ) as Promise<ServiceResponse<TRecord>>;
+                return cancellablePromise(serviceCreate(record, pathParams));
             }
 
             return { create: useCallback(create, []) };
@@ -218,7 +206,7 @@ const ServiceHookFactory = {
      * @param baseEndpoint
      */
     useNestedList<TRecord, TPathParams, TQueryParams>(
-        recordType: { new (): TRecord },
+        recordType: new () => TRecord,
         baseEndpoint: string
     ): NestedListServiceHook<TRecord, TPathParams, TQueryParams> {
         return () => {
@@ -234,9 +222,7 @@ const ServiceHookFactory = {
                 pathParams: TPathParams,
                 queryParams?: TQueryParams
             ): Promise<ServiceResponse<TRecord>> {
-                return cancellablePromise(
-                    serviceList(pathParams, queryParams)
-                ) as Promise<ServiceResponse<TRecord>>;
+                return cancellablePromise(serviceList(pathParams, queryParams));
             }
 
             return { list: useCallback(list, []) };
@@ -249,8 +235,8 @@ const ServiceHookFactory = {
      * @param recordType
      * @param baseEndpoint
      */
-    useUpdate<TRecord, TPathParams>(
-        recordType: { new (): TRecord },
+    useUpdate<TRecord extends RecordType, TPathParams>(
+        recordType: new () => TRecord,
         resourceEndpoint: string
     ): UpdateServiceHook<TRecord, TPathParams> {
         return () => {
@@ -265,9 +251,7 @@ const ServiceHookFactory = {
                 record: TRecord,
                 pathParams?: TPathParams
             ): Promise<ServiceResponse<TRecord>> {
-                return cancellablePromise(
-                    serviceUpdate(record, pathParams)
-                ) as Promise<ServiceResponse<TRecord>>;
+                return cancellablePromise(serviceUpdate(record, pathParams));
             }
 
             return { update: useCallback(update, []) };

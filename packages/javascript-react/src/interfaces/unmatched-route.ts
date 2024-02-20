@@ -2,7 +2,7 @@
 // #region Interfaces
 // -----------------------------------------------------------------------------------------
 
-interface UnmatchedRoute {
+export interface UnmatchedRoute {
     /**
      * Route to redirect to if the specified route cannot be matched.
      *
@@ -13,11 +13,3 @@ interface UnmatchedRoute {
 }
 
 // #endregion Interfaces
-
-// -----------------------------------------------------------------------------------------
-// #region Export
-// -----------------------------------------------------------------------------------------
-
-export { UnmatchedRoute };
-
-// #endregion Export

@@ -1,11 +1,11 @@
 import { useState, useCallback } from "react";
-import { ResultRecord } from "andculturecode-javascript-core";
+import type { ResultRecord } from "@rsm-hcd/javascript-core";
 
 /**
  * Hook to bundle common page error handling functionality
  */
 export function usePageErrors() {
-    const [pageErrors, setPageErrors] = useState<Array<string>>([]);
+    const [pageErrors, setPageErrors] = useState<string[]>([]);
 
     const handlePageLoadError = useCallback(
         (result: string | ResultRecord<any>) => {

@@ -1,9 +1,6 @@
 import { renderHook, act } from "@testing-library/react-hooks";
+import { ResultRecord, ResultErrorRecord } from "@rsm-hcd/javascript-core";
 import { usePageErrors } from "./use-page-errors";
-import {
-    ResultRecord,
-    ResultErrorRecord,
-} from "andculturecode-javascript-core";
 
 describe("usePageErrors", () => {
     // -----------------------------------------------------------------------------------------

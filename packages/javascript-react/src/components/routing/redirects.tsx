@@ -1,43 +1,45 @@
-import React from "react";
-import { RedirectDefinition } from "../../interfaces/redirect-definition";
-import { Redirect } from "react-router-dom";
+// TODO: The original purpose for this was to provide a helper component for routing when using react-router-dom.This needs to be re-implemented in the new project structure.
 
-// -----------------------------------------------------------------------------------------
-// #region Interfaces
-// -----------------------------------------------------------------------------------------
+// import React from "react";
+// import { RedirectDefinition } from "../../interfaces/redirect-definition";
+// import { Navigate } from "react-router-dom";
 
-interface RedirectsProps {
-    redirects: RedirectDefinition[];
-}
+// // -----------------------------------------------------------------------------------------
+// // #region Interfaces
+// // -----------------------------------------------------------------------------------------
 
-// #endregion Interfaces
+// interface RedirectsProps {
+//     redirects: RedirectDefinition[];
+// }
 
-// -----------------------------------------------------------------------------------------
-// #region Component
-// -----------------------------------------------------------------------------------------
+// // #endregion Interfaces
 
-/**
- * Simple way to redirect a flat array of RedirectDefinitions
- */
-const Redirects: React.FC<RedirectsProps> = (props: RedirectsProps) => {
-    const { redirects } = props;
+// // -----------------------------------------------------------------------------------------
+// // #region Component
+// // -----------------------------------------------------------------------------------------
 
-    // TODO: Remove Fragment when issue fixed https://github.com/microsoft/TypeScript/issues/21699
-    return (
-        <React.Fragment>
-            {redirects.map((redirect: RedirectDefinition, i: number) => (
-                <Redirect key={i} from={redirect.from} to={redirect.to} />
-            ))}
-        </React.Fragment>
-    );
-};
+// /**
+//  * Simple way to redirect a flat array of RedirectDefinitions
+//  */
+// const Redirects: React.FC<RedirectsProps> = (props: RedirectsProps) => {
+//     const { redirects } = props;
 
-// #endregion Component
+//     // TODO: Remove Fragment when issue fixed https://github.com/microsoft/TypeScript/issues/21699
+//     return (
+//         <React.Fragment>
+//             {redirects.map((redirect: RedirectDefinition, i: number) => (
+//                 <Redirect key={i} from={redirect.from} to={redirect.to} />
+//             ))}
+//         </React.Fragment>
+//     );
+// };
 
-// -----------------------------------------------------------------------------------------
-// #region Exports
-// -----------------------------------------------------------------------------------------
+// // #endregion Component
 
-export { Redirects, RedirectsProps };
+// // -----------------------------------------------------------------------------------------
+// // #region Exports
+// // -----------------------------------------------------------------------------------------
 
-// #endregion Exports
+// export { Redirects, RedirectsProps };
+
+// // #endregion Exports

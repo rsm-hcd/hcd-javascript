@@ -1,19 +1,9 @@
-import { RouteDefinition } from "./route-definition";
+import type { RouteDefinition } from "./route-definition";
 
 // -----------------------------------------------------------------------------------------
 // #region Interfaces
 // -----------------------------------------------------------------------------------------
 
-interface RouteMap {
-    [route: string]: RouteDefinition;
-}
+export type RouteMap = Record<string, RouteDefinition>;
 
 // #endregion Interfaces
-
-// -----------------------------------------------------------------------------------------
-// #region Export
-// -----------------------------------------------------------------------------------------
-
-export { RouteMap };
-
-// #endregion Export

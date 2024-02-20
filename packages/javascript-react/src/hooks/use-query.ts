@@ -1,31 +1,22 @@
-import {
-    Do,
-    EnvironmentUtils,
-    ResultRecord,
-} from "andculturecode-javascript-core";
+import type { ResultRecord } from "@rsm-hcd/javascript-core";
+import { Do, EnvironmentUtils } from "@rsm-hcd/javascript-core";
 import { useCallback, useEffect, useState } from "react";
-import { UseQueryOptions } from "../interfaces/use-query-options";
-import { ListService } from "../types/list-service-type";
-import { NestedListService } from "../types/nested-list-service-type";
+import type { UseQueryOptions } from "../interfaces/use-query-options";
+import type { ListService } from "../types/list-service-type";
+import type { NestedListService } from "../types/nested-list-service-type";
 
 export function useQuery<TRecord, TQueryParams, TPathParams = undefined>(
     options: UseQueryOptions<TRecord, TQueryParams, TPathParams>
 ) {
-    const {
-        initialPathParams,
-        initialQuery,
-        onError,
-        onSuccess,
-        serviceHook,
-    } = options;
+    const { initialPathParams, initialQuery, onError, onSuccess, serviceHook } =
+        options;
 
     const { list: listApi } = serviceHook();
 
     const handleSuccess = useCallback(
-        (records: Array<TRecord>) => {
+        (records: TRecord[]) => {
             if (onSuccess != null) {
                 onSuccess(records);
-                return;
             }
         },
         [onSuccess]
@@ -49,7 +40,7 @@ export function useQuery<TRecord, TQueryParams, TPathParams = undefined>(
     const [loading, setLoading] = useState(false);
     const [query, setQuery] = useState(initialQuery);
     const [pathParams, setPathParams] = useState(initialPathParams);
-    const [values, setValues] = useState<Array<TRecord>>([]);
+    const [values, setValues] = useState<TRecord[]>([]);
 
     useEffect(() => {
         Do.try(async () => {
@@ -57,8 +48,8 @@ export function useQuery<TRecord, TQueryParams, TPathParams = undefined>(
             if (pathParams == null) {
                 const api = listApi as ListService<TRecord, TQueryParams>;
                 const result = await api(query);
-                setValues(result.resultObjects!);
-                handleSuccess(result.resultObjects!);
+                setValues(result.resultObjects);
+                handleSuccess(result.resultObjects);
                 return;
             }
 
@@ -69,8 +60,8 @@ export function useQuery<TRecord, TQueryParams, TPathParams = undefined>(
                 TQueryParams
             >;
             const result = await api(pathParams, query);
-            setValues(result.resultObjects!);
-            handleSuccess(result.resultObjects!);
+            setValues(result.resultObjects);
+            handleSuccess(result.resultObjects);
         })
             .catch(handleError)
             .finally(() => setLoading(false));

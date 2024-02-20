@@ -1,11 +1,11 @@
-import React from "react";
-import { RouteMap } from "./route-map";
+import type React from "react";
+import type { RouteMap } from "./route-map";
 
 // -----------------------------------------------------------------------------------------
 // #region Interfaces
 // -----------------------------------------------------------------------------------------
 
-interface RouteDefinition {
+export interface RouteDefinition {
     authRequired: boolean;
     component: React.ComponentType;
     exact?: boolean;
@@ -17,11 +17,3 @@ interface RouteDefinition {
 }
 
 // #endregion Interfaces
-
-// -----------------------------------------------------------------------------------------
-// #region Export
-// -----------------------------------------------------------------------------------------
-
-export { RouteDefinition };
-
-// #endregion Export

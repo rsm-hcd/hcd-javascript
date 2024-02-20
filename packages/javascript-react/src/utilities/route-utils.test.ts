@@ -1,9 +1,9 @@
+import "jest-extended";
 import { Factory } from "rosie";
 import { FactoryType } from "../tests/factories/factory-type";
-import "jest-extended";
+import type { RouteDefinition } from "../interfaces/route-definition";
+import type { RouteMap } from "../interfaces/route-map";
 import { RouteUtils } from "./route-utils";
-import { RouteDefinition } from "../interfaces/route-definition";
-import { RouteMap } from "../interfaces/route-map";
 
 describe("RouteUtils", () => {
     // -----------------------------------------------------------------------------------------
@@ -64,7 +64,7 @@ describe("RouteUtils", () => {
 
         test("when routes are already in a flattened state, it returns an equivalent array", () => {
             // Arrange
-            const routes = Factory.buildList(
+            const routes: RouteDefinition[] = Factory.buildList(
                 FactoryType.RouteDefinition.Default,
                 3
             );

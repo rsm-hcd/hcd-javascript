@@ -1,4 +1,4 @@
-import { ServiceResponse } from "andculturecode-javascript-core";
+import type { ServiceResponse } from "@rsm-hcd/javascript-core";
 
 /**
  * Type defining the service function for listing resources by supplied type when resource is nested

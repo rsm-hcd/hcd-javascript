@@ -14,10 +14,10 @@ This package is installed via npm or yarn
 
 ```shell
 # npm
-npm install --save-dev andculturecode-javascript-react
+npm install --save-dev @rsm-hcd/javascript-react
 
 # yarn
-yarn add andculturecode-javascript-react --dev
+yarn add @rsm-hcd/javascript-react --dev
 ```
 
 From there you can import the variety of modules.
@@ -27,7 +27,7 @@ import {
     AuthenticatedRoute,
     NestedRoute,
     NestedRoutes,
-} from "andculturecode-javascript-react";
+} from "@rsm-hcd/javascript-react";
 ```
 
 ## Documentation

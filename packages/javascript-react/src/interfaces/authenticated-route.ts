@@ -2,7 +2,7 @@
 // #region Interfaces
 // -----------------------------------------------------------------------------------------
 
-interface AuthenticatedRoute {
+export interface AuthenticatedRoute {
     /**
      * Flag to determine whether the current user is authenticated or not.
      *
@@ -21,11 +21,3 @@ interface AuthenticatedRoute {
 }
 
 // #endregion Interfaces
-
-// -----------------------------------------------------------------------------------------
-// #region Export
-// -----------------------------------------------------------------------------------------
-
-export { AuthenticatedRoute };
-
-// #endregion Export

@@ -1,59 +1,61 @@
-import { CollectionUtils, StringUtils } from "andculturecode-javascript-core";
-import { NestedRoute } from "./nested-route";
-import { Redirect, Switch } from "react-router-dom";
-import React from "react";
-import { RouteDefinition } from "../../interfaces/route-definition";
-import { UnmatchedRoute } from "../../interfaces/unmatched-route";
-import { AuthenticatedRoute } from "../../interfaces/authenticated-route";
+// TODO: The original purpose for this was to provide a helper component for routing when using react-router-dom.This needs to be re-implemented in the new project structure.
 
-// -----------------------------------------------------------------------------------------
-// #region Interfaces
-// -----------------------------------------------------------------------------------------
+// import { CollectionUtils, StringUtils } from "@rsm-hcd/javascript-core";
+// import { NestedRoute } from "./nested-route";
+// import { Redirect, Switch } from "react-router-dom";
+// import React from "react";
+// import { RouteDefinition } from "../../interfaces/route-definition";
+// import { UnmatchedRoute } from "../../interfaces/unmatched-route";
+// import { AuthenticatedRoute } from "../../interfaces/authenticated-route";
 
-interface NestedRoutesProps extends UnmatchedRoute, AuthenticatedRoute {
-    routes: RouteDefinition[];
-}
+// // -----------------------------------------------------------------------------------------
+// // #region Interfaces
+// // -----------------------------------------------------------------------------------------
 
-// #endregion Interfaces
+// interface NestedRoutesProps extends UnmatchedRoute, AuthenticatedRoute {
+//     routes: RouteDefinition[];
+// }
 
-// -----------------------------------------------------------------------------------------
-// #region Component
-// -----------------------------------------------------------------------------------------
+// // #endregion Interfaces
 
-/**
- * Component to easily render nested sub-route components from a list of routes.
- * Commonly used when setting up a layout
- */
-const NestedRoutes: React.FC<NestedRoutesProps> = (
-    props: NestedRoutesProps
-) => {
-    const { redirectToIfNotFound, routes } = props;
+// // -----------------------------------------------------------------------------------------
+// // #region Component
+// // -----------------------------------------------------------------------------------------
 
-    if (CollectionUtils.isEmpty(routes)) {
-        return null;
-    }
+// /**
+//  * Component to easily render nested sub-route components from a list of routes.
+//  * Commonly used when setting up a layout
+//  */
+// const NestedRoutes: React.FC<NestedRoutesProps> = (
+//     props: NestedRoutesProps
+// ) => {
+//     const { redirectToIfNotFound, routes } = props;
 
-    // TODO: Remove Fragment when issue fixed https://github.com/microsoft/TypeScript/issues/21699
-    return (
-        <React.Fragment>
-            <Switch>
-                {routes.map((route: RouteDefinition, i: number) => (
-                    <NestedRoute {...props} {...route} key={i} route={route} />
-                ))}
-                {StringUtils.hasValue(redirectToIfNotFound) && (
-                    <Redirect to={redirectToIfNotFound!} />
-                )}
-            </Switch>
-        </React.Fragment>
-    );
-};
+//     if (CollectionUtils.isEmpty(routes)) {
+//         return null;
+//     }
 
-// #endregion Component
+//     // TODO: Remove Fragment when issue fixed https://github.com/microsoft/TypeScript/issues/21699
+//     return (
+//         <React.Fragment>
+//             <Switch>
+//                 {routes.map((route: RouteDefinition, i: number) => (
+//                     <NestedRoute {...props} {...route} key={i} route={route} />
+//                 ))}
+//                 {StringUtils.hasValue(redirectToIfNotFound) && (
+//                     <Redirect to={redirectToIfNotFound!} />
+//                 )}
+//             </Switch>
+//         </React.Fragment>
+//     );
+// };
 
-// -----------------------------------------------------------------------------------------
-// #region Exports
-// -----------------------------------------------------------------------------------------
+// // #endregion Component
 
-export { NestedRoutes, NestedRoutesProps };
+// // -----------------------------------------------------------------------------------------
+// // #region Exports
+// // -----------------------------------------------------------------------------------------
 
-// #endregion Exports
+// export { NestedRoutes, NestedRoutesProps };
+
+// // #endregion Exports

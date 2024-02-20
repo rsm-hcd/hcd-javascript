@@ -1,14 +1,15 @@
+/* eslint-disable @typescript-eslint/no-empty-interface -- for testing purposes */
+
 import { Factory } from "rosie";
 import { useEffect, useState } from "react";
-import React from "react";
 import { act, render } from "@testing-library/react";
-import { ServiceFactory } from "./service-factory";
-import { CoreUtils } from "andculturecode-javascript-core";
+import { CoreUtils } from "@rsm-hcd/javascript-core";
 import {
     MockAxios,
     StubResourceRecord,
-} from "andculturecode-javascript-testing";
-import { FactoryType as AndcultureCodeFactoryType } from "andculturecode-javascript-testing";
+    FactoryType as AndcultureCodeFactoryType,
+} from "@rsm-hcd/javascript-testing";
+import { ServiceFactory } from "./service-factory";
 
 // -----------------------------------------------------------------------------------------
 // #region Variables
@@ -88,12 +89,12 @@ describe("ServiceFactory", () => {
 
             const BulkUpdateStubComponent = () => {
                 const [stubRecords, setStubRecords] = useState<
-                    Array<StubResourceRecord>
+                    StubResourceRecord[]
                 >([]);
 
                 useEffect(() => {
                     async function updateStubRecords() {
-                        const result = await sut([record], { id: record.id! });
+                        const result = await sut([record], { id: record.id });
                         setStubRecords(result.resultObjects || []);
                     }
 
@@ -142,12 +143,12 @@ describe("ServiceFactory", () => {
             MockAxios.putSuccess([expected]);
 
             // Act
-            const response = await sut([expected], { id: expected.id! });
+            const response = await sut([expected], { id: expected.id });
 
             // Assert
             expect(response.resultObjects).not.toBeNull();
             expect(response.resultObjects).toBeInstanceOf(Array);
-            expect(response.resultObjects![0].name).toEqual(expected.name);
+            expect(response.resultObjects[0].name).toEqual(expected.name);
         });
     });
 
@@ -195,9 +196,9 @@ describe("ServiceFactory", () => {
             let isUnmounted = false;
 
             const CreateStubComponent = () => {
-                const [stubRecord, setStubRecord] = useState<
-                    StubResourceRecord
-                >(null as any);
+                const [, setStubRecord] = useState<StubResourceRecord>(
+                    null as any
+                );
 
                 useEffect(() => {
                     async function createStubRecord() {
@@ -216,7 +217,7 @@ describe("ServiceFactory", () => {
                     };
                 }, []);
 
-                return <div>{record != null && record!.name}</div>;
+                return <div>{record?.name}</div>;
             };
 
             // Act
@@ -285,7 +286,7 @@ describe("ServiceFactory", () => {
 
                 useEffect(() => {
                     async function deleteUser() {
-                        const result = await sut(record.id!);
+                        const result = await sut(record.id);
                         setDeleted((result.resultObject || false) as boolean);
                     }
 
@@ -359,13 +360,13 @@ describe("ServiceFactory", () => {
             let isUnmounted = false;
 
             const GetStubComponent = () => {
-                const [stubRecord, setStubRecord] = useState<
-                    StubResourceRecord
-                >(null as any);
+                const [, setStubRecord] = useState<StubResourceRecord>(
+                    null as any
+                );
 
                 useEffect(() => {
                     async function getRecord() {
-                        const result = await sut({ id: record.id! });
+                        const result = await sut({ id: record.id });
                         setStubRecord(result.resultObject!);
                     }
 
@@ -376,7 +377,7 @@ describe("ServiceFactory", () => {
                     };
                 }, []);
 
-                return <div>{record != null && record!.name}</div>;
+                return <div>{record?.name}</div>;
             };
 
             // Act
@@ -408,7 +409,7 @@ describe("ServiceFactory", () => {
             MockAxios.getSuccess(expected);
 
             // Act
-            const response = await sut({ id: expected.id! });
+            const response = await sut({ id: expected.id });
 
             // Assert
             expect(response.resultObject).not.toBeNull();
@@ -444,7 +445,7 @@ describe("ServiceFactory", () => {
             const expectedResults = Factory.buildList(
                 AndcultureCodeFactoryType.StubResourceRecord,
                 2
-            ) as StubResourceRecord[];
+            );
 
             MockAxios.listSuccess(expectedResults, cancellationTestsApiDelay);
 
@@ -458,7 +459,7 @@ describe("ServiceFactory", () => {
                 useEffect(() => {
                     async function listStubRecords() {
                         const result = await sut();
-                        setRecords(result.resultObjects!);
+                        setRecords(result.resultObjects);
                     }
 
                     listStubRecords();
@@ -468,9 +469,7 @@ describe("ServiceFactory", () => {
                     };
                 }, []);
 
-                return (
-                    <div>{records != null && records.map((u) => u.name!)}</div>
-                );
+                return <div>{records?.map((u) => u.name)}</div>;
             };
 
             // Act
@@ -506,9 +505,9 @@ describe("ServiceFactory", () => {
             expect(resultObjects).not.toBeNull();
             expect(response.rowCount).toEqual(expectedResults.length);
 
-            for (let i = 0; i < resultObjects!.length; i++) {
+            for (let i = 0; i < resultObjects.length; i++) {
                 const expected = expectedResults[i];
-                const resultObject = resultObjects![i];
+                const resultObject = resultObjects[i];
                 expect(resultObject).toBeInstanceOf(StubResourceRecord);
                 expect(resultObject.name).toEqual(expected.name);
             }
@@ -563,9 +562,8 @@ describe("ServiceFactory", () => {
             let isUnmounted = false;
 
             const NestedCreateStubComponent = () => {
-                const [stubRecord, setStubRecord] = useState<
-                    StubResourceRecord
-                >(null as any);
+                const [stubRecord, setStubRecord] =
+                    useState<StubResourceRecord>(null as any);
 
                 useEffect(() => {
                     async function createUser() {
@@ -580,7 +578,7 @@ describe("ServiceFactory", () => {
                     };
                 }, []);
 
-                return <div>{stubRecord != null && stubRecord!.name}</div>;
+                return <div>{stubRecord?.name}</div>;
             };
 
             // Act
@@ -660,7 +658,7 @@ describe("ServiceFactory", () => {
                 useEffect(() => {
                     async function listStubRecords() {
                         const result = await sut({ nestedId: 20 });
-                        setRecords(result.resultObjects!);
+                        setRecords(result.resultObjects);
                     }
 
                     listStubRecords();
@@ -670,9 +668,7 @@ describe("ServiceFactory", () => {
                     };
                 }, []);
 
-                return (
-                    <div>{records != null && records.map((u) => u.name!)}</div>
-                );
+                return <div>{records?.map((u) => u.name)}</div>;
             };
 
             // Act
@@ -710,9 +706,9 @@ describe("ServiceFactory", () => {
             expect(resultObjects).not.toBeNull();
             expect(response.rowCount).toEqual(expectedResults.length);
 
-            for (let i = 0; i < resultObjects!.length; i++) {
+            for (let i = 0; i < resultObjects.length; i++) {
                 const expected = expectedResults[i];
-                const resultObject = resultObjects![i];
+                const resultObject = resultObjects[i];
                 expect(resultObject).toBeInstanceOf(StubResourceRecord);
                 expect(resultObject.name).toEqual(expected.name);
             }
@@ -754,9 +750,8 @@ describe("ServiceFactory", () => {
             let isUnmounted = false;
 
             const UpdateStubComponent = () => {
-                const [stubRecord, setStubRecord] = useState<
-                    StubResourceRecord
-                >(null as any);
+                const [stubRecord, setStubRecord] =
+                    useState<StubResourceRecord>(null as any);
 
                 useEffect(() => {
                     async function updateUser() {
@@ -771,7 +766,7 @@ describe("ServiceFactory", () => {
                     };
                 }, []);
 
-                return <div>{stubRecord != null && stubRecord!.name}</div>;
+                return <div>{stubRecord?.name}</div>;
             };
 
             // Act

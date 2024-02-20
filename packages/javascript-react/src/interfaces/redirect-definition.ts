@@ -2,17 +2,9 @@
 // #region Interfaces
 // -----------------------------------------------------------------------------------------
 
-interface RedirectDefinition {
+export interface RedirectDefinition {
     from: string;
     to: string;
 }
 
 // #endregion Interfaces
-
-// -----------------------------------------------------------------------------------------
-// #region Export
-// -----------------------------------------------------------------------------------------
-
-export { RedirectDefinition };
-
-// #endregion Export

@@ -1,11 +1,6 @@
-import { CollectionUtils } from "andculturecode-javascript-core";
-import {
-    Dispatch,
-    Reducer,
-    ReducerAction,
-    ReducerState,
-    useReducer,
-} from "react";
+import { CollectionUtils } from "@rsm-hcd/javascript-core";
+import type { Dispatch, Reducer, ReducerAction, ReducerState } from "react";
+import { useReducer } from "react";
 
 // -----------------------------------------------------------------------------------------
 // #region Hook
@@ -17,15 +12,15 @@ import {
  * @param sortBySelector a function which takes an array element, and returns a string property by which to sort alphabetically.
  */
 function useSortedAlphabetically<T>(
-    initialValue: Array<T>,
+    initialValue: T[],
     sortBySelector: (value: T) => string
 ): [
-    ReducerState<Reducer<Array<T>, Array<T>>>,
-    Dispatch<ReducerAction<Reducer<Array<T>, Array<T>>>>
+    ReducerState<Reducer<T[], T[]>>,
+    Dispatch<ReducerAction<Reducer<T[], T[]>>>,
 ] {
-    const [values, setValues] = useReducer<Reducer<Array<T>, Array<T>>>(
+    const [values, setValues] = useReducer<Reducer<T[], T[]>>(
         // first parameter prevState is unused, replace with discard _
-        (_: Array<T>, newState: Array<T>) =>
+        (_: T[], newState: T[]) =>
             CollectionUtils.sortByString(newState, sortBySelector),
         CollectionUtils.sortByString(initialValue, sortBySelector)
     );
