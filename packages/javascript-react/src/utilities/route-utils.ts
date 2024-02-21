@@ -1,9 +1,9 @@
 import {
     CoreUtils,
     RouteUtils as CoreRouteUtils,
-} from "andculturecode-javascript-core";
-import { RouteDefinition } from "../interfaces/route-definition";
-import { RouteMap } from "../interfaces/route-map";
+} from "@rsm-hcd/javascript-core";
+import type { RouteDefinition } from "../interfaces/route-definition";
+import type { RouteMap } from "../interfaces/route-map";
 
 // -----------------------------------------------------------------------------------------
 // #region Private Methods
@@ -15,7 +15,6 @@ import { RouteMap } from "../interfaces/route-map";
 const debugRoutes = (routes: RouteMap) => {
     const flattenedRoutes = getFlattenedRoutes(CoreUtils.objectToArray(routes));
     flattenedRoutes.forEach((route: RouteDefinition) => {
-        // tslint:disable-next-line:no-console
         console.log(JSON.stringify(route));
     });
 };

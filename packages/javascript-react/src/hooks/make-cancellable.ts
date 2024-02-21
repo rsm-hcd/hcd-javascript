@@ -1,4 +1,4 @@
-import { PromiseFactory } from "andculturecode-javascript-core";
+import { PromiseFactory } from "@rsm-hcd/javascript-core";
 
 // ---------------------------------------------------------
 // #region Public Methods
@@ -16,7 +16,11 @@ const makeCancellable = (promise: Promise<any>) => {
                 isCanceled ? PromiseFactory.pending() : resolve(value)
             )
             .catch((error: any) =>
-                isCanceled ? PromiseFactory.pending() : reject(error)
+                isCanceled
+                    ? PromiseFactory.pending()
+                    : reject(
+                          error instanceof Error ? error : new Error(`${error}`)
+                      )
             )
     );
 

@@ -1,61 +1,51 @@
-import React from "react";
-import { Redirect, Route, RouteComponentProps } from "react-router-dom";
-import { RouteDefinition } from "../../interfaces/route-definition";
-import { AuthenticatedRoute } from "../../interfaces/authenticated-route";
+// TODO: The original purpose for this was to provide a helper for authenticated routes when using react-router-dom.This needs to be re-implemented in the new project structure.
 
-// -----------------------------------------------------------------------------------------
-// #region Interfaces
-// -----------------------------------------------------------------------------------------
+// import React from "react";
+// import { Navigate, Route, RouteProps } from "react-router-dom";
+// import { RouteDefinition } from "../../interfaces/route-definition";
+// import { AuthenticatedRoute } from "../../interfaces/authenticated-route";
 
-interface AuthenticatedRouteProps
-    extends RouteComponentProps<any>,
-        AuthenticatedRoute {
-    route: RouteDefinition;
-    render: (props: any) => any;
-}
+// // -----------------------------------------------------------------------------------------
+// // #region Interfaces
+// // -----------------------------------------------------------------------------------------
 
-// #endregion Interfaces
+// type AuthenticatedRouteProps = RouteProps &
+//     AuthenticatedRoute & {
+//         route: RouteDefinition;
+//         render: (props: any) => any;
+//     };
 
-/**
- * Locks a route behind authentication. Can optionally redirect a user to another location if
- * attempting to access the route while unauthenticated.
- */
-const AuthenticatedRoute: React.FC<AuthenticatedRouteProps> = (
-    props: AuthenticatedRouteProps
-) => {
-    const {
-        isAuthenticated,
-        redirectToIfUnauthenticated,
-        render,
-        route,
-    } = props;
+// // #endregion Interfaces
 
-    const renderIfAuthenticated = (props: any): any => {
-        if (isAuthenticated || !route.authRequired) {
-            return render(props);
-        }
+// /**
+//  * Locks a route behind authentication. Can optionally redirect a user to another location if
+//  * attempting to access the route while unauthenticated.
+//  */
+// const AuthenticatedRoute: React.FC<AuthenticatedRouteProps> = ({
+//     render,
+//     ...props
+// }: AuthenticatedRouteProps) => {
+//     const { isAuthenticated, redirectToIfUnauthenticated, route } = props;
 
-        if (!isAuthenticated && redirectToIfUnauthenticated != null) {
-            return (
-                <Redirect
-                    to={{
-                        pathname: redirectToIfUnauthenticated,
-                        state: { from: props.location },
-                    }}
-                />
-            );
-        }
+//     const renderIfAuthenticated = (props: any): any => {
+//         if (isAuthenticated || !route.authRequired) {
+//             return render(props);
+//         }
 
-        return render(props);
-    };
+//         if (!isAuthenticated && redirectToIfUnauthenticated != null) {
+//             return <Navigate to={redirectToIfUnauthenticated} replace />;
+//         }
 
-    return <Route {...props} render={renderIfAuthenticated} />;
-};
+//         return render(props);
+//     };
 
-// -----------------------------------------------------------------------------------------
-// #region Exports
-// -----------------------------------------------------------------------------------------
+//     return <Route {...props} render={renderIfAuthenticated} />;
+// };
 
-export { AuthenticatedRoute, AuthenticatedRouteProps };
+// // -----------------------------------------------------------------------------------------
+// // #region Exports
+// // -----------------------------------------------------------------------------------------
 
-// #endregion Exports
+// export { AuthenticatedRoute, AuthenticatedRouteProps };
+
+// // #endregion Exports

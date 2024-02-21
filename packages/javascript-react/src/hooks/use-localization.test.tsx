@@ -1,19 +1,18 @@
-import React, { useEffect } from "react";
 import "jest-extended";
-import faker from "faker";
+import type { Culture } from "@rsm-hcd/javascript-core";
 import {
     BaseEnglishUnitedStates,
-    Culture,
     LocalizationUtils,
-} from "andculturecode-javascript-core";
-import { useLocalization } from "./use-localization";
-import { render, wait, waitFor } from "@testing-library/react";
+} from "@rsm-hcd/javascript-core";
+import { render, waitFor } from "@testing-library/react";
 import { initReactI18next } from "react-i18next";
+import { faker } from "@faker-js/faker";
+import { useLocalization } from "./use-localization";
 
 describe("useLocalization", () => {
     test("when invalid key, returns key", async () => {
         // Arrange
-        const expectedKey = faker.random.word();
+        const expectedKey = faker.word.sample(10);
         const culture: Partial<Culture<any>> = { resources: {} };
         const EnglishUnitedStates = LocalizationUtils.cultureFactory<any>(
             BaseEnglishUnitedStates,
@@ -46,7 +45,7 @@ describe("useLocalization", () => {
     test("when valid key, returns translation", async () => {
         // Arrange
         const key = "testkey";
-        const expectedValue = faker.random.words();
+        const expectedValue = faker.word.sample(10);
         const culture: Partial<Culture<any>> = { resources: {} };
         culture.resources[key] = expectedValue;
 

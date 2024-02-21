@@ -1,8 +1,8 @@
 import React from "react";
 import { render, waitFor } from "@testing-library/react";
+import { CoreUtils } from "@rsm-hcd/javascript-core";
+import type { AsyncEffectCallback } from "../types/async-effect-callback-type";
 import { useAsyncEffect } from "./use-async-effect";
-import { CoreUtils } from "andculturecode-javascript-core";
-import { AsyncEffectCallback } from "../types/async-effect-callback-type";
 
 describe("useAsyncEffect", () => {
     const setupUseAsyncEffect = (asyncEffect: AsyncEffectCallback) => {
@@ -48,8 +48,8 @@ describe("useAsyncEffect", () => {
 
     test("isMounted initially equals true", async () => {
         // Arrange
-        let actualIsMountedValue: boolean = false;
-        const expectedIsMountedValue: boolean = true;
+        let actualIsMountedValue = false;
+        const expectedIsMountedValue = true;
 
         // Act
         const { unmount } = setupUseAsyncEffect(async (isMounted) => {
@@ -64,8 +64,8 @@ describe("useAsyncEffect", () => {
 
     test("isMounted equals false after cleanup", async () => {
         // Arrange
-        let actualIsMountedValue: boolean;
-        const expectedIsMountedValue: boolean = false;
+        let actualIsMountedValue = true;
+        const expectedIsMountedValue = false;
         const mockedMethod = jest.fn();
 
         // Act
@@ -77,7 +77,7 @@ describe("useAsyncEffect", () => {
 
         // Assert
         unmount();
-        await waitFor(() => expect(mockedMethod).toBeCalledTimes(1));
+        await waitFor(() => expect(mockedMethod).toHaveBeenCalledTimes(1));
         expect(actualIsMountedValue).toBe(expectedIsMountedValue);
     });
 });

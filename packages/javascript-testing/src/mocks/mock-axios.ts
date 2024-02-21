@@ -1,6 +1,6 @@
-import axios from "axios";
+import type { AxiosMockType } from "jest-mock-axios";
+import type mockAxios from "jest-mock-axios";
 import { Record } from "immutable";
-import { axiosMock } from "./axios";
 
 // ---------------------------------------------------------
 // #region Interfaces & Types
@@ -10,13 +10,8 @@ import { axiosMock } from "./axios";
  * MockAxios is merely a typed wrapper around the dynamically
  * mocked __mocks__/axios implementation.
  */
-
-type AxiosJestMock = jest.Mock<Promise<{ data: {} }>, []>;
-
 interface MockAxios {
-    default: typeof axiosMock;
-
-    delete: AxiosJestMock;
+    delete: typeof mockAxios.delete;
 
     /**
      * Simple way to mock a successful axios delete request
@@ -25,7 +20,7 @@ interface MockAxios {
      */
     deleteSuccess: (record?: any, delay?: number) => void;
 
-    get: AxiosJestMock;
+    get: typeof mockAxios.get;
 
     /**
      * Simple way to mock a successful axios get/find request
@@ -41,7 +36,7 @@ interface MockAxios {
      */
     listSuccess: (records: any[], delay?: number) => void;
 
-    post: AxiosJestMock;
+    post: typeof mockAxios.post;
 
     /**
      * Simple way to mock a successful axios post request
@@ -50,7 +45,7 @@ interface MockAxios {
      */
     postSuccess: (record: any, delay?: number) => void;
 
-    put: AxiosJestMock;
+    put: typeof mockAxios.put;
 
     /**
      * Simple way to mock a successful axios put request
@@ -63,37 +58,11 @@ interface MockAxios {
 // #endregion Interfaces & Types
 
 // ---------------------------------------------------------
-// #region Public Functions
-// ---------------------------------------------------------
-
-const deleteSuccess = (record?: any, delay?: number) => {
-    _mockSuccess(MockAxios.delete, record, delay);
-};
-
-const getSuccess = (record: any, delay?: number) => {
-    _mockSuccess(MockAxios.get, record, delay);
-};
-
-const listSuccess = (records: any[], delay?: number) => {
-    _mockSuccess(MockAxios.get, records, delay);
-};
-
-const postSuccess = (record: any, delay?: number) => {
-    _mockSuccess(MockAxios.post, record, delay);
-};
-
-const putSuccess = (record: any, delay?: number) => {
-    _mockSuccess(MockAxios.put, record, delay);
-};
-
-// #endregion Public Functions
-
-// ---------------------------------------------------------
 // #region Private Functions
 // ---------------------------------------------------------
 
 const _mockSuccess = (
-    method: AxiosJestMock,
+    method: jest.Mock,
     resultObject: any | any[],
     delay?: number
 ) => {
@@ -141,19 +110,40 @@ const _resultObjectToJS = (resultObject: any | any[]): any | any[] => {
 // #region Exports
 // ---------------------------------------------------------
 
-const MockAxios: MockAxios = {
-    default: axiosMock,
-    delete: axios.delete as AxiosJestMock,
-    deleteSuccess,
-    get: axios.get as AxiosJestMock,
-    getSuccess,
-    listSuccess,
-    post: axios.post as AxiosJestMock,
-    postSuccess,
-    put: axios.put as AxiosJestMock,
-    putSuccess,
+const MockAxiosUtils: (mockAxios: AxiosMockType) => MockAxios = (mockAxios) => {
+    const deleteSuccess = (record?: any, delay?: number) => {
+        _mockSuccess(mockAxios.delete, record, delay);
+    };
+
+    const getSuccess = (record: any, delay?: number) => {
+        _mockSuccess(mockAxios.get, record, delay);
+    };
+
+    const listSuccess = (records: any[], delay?: number) => {
+        _mockSuccess(mockAxios.get, records, delay);
+    };
+
+    const postSuccess = (record: any, delay?: number) => {
+        _mockSuccess(mockAxios.post, record, delay);
+    };
+
+    const putSuccess = (record: any, delay?: number) => {
+        _mockSuccess(mockAxios.put, record, delay);
+    };
+
+    return {
+        delete: mockAxios.delete,
+        deleteSuccess,
+        get: mockAxios.get,
+        getSuccess,
+        listSuccess,
+        post: mockAxios.post,
+        postSuccess,
+        put: mockAxios.put,
+        putSuccess,
+    };
 };
 
-export { MockAxios };
+export { MockAxiosUtils };
 
 // #endregion Exports

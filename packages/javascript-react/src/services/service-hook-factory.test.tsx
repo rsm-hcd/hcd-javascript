@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Factory } from "rosie";
-import { render, wait, waitFor } from "@testing-library/react";
-import { act } from "react-dom/test-utils";
+import { render, waitFor } from "@testing-library/react";
 import {
-    MockAxios,
+    MockAxiosUtils,
     StubResourceRecord,
-} from "andculturecode-javascript-testing";
+    FactoryType,
+} from "@rsm-hcd/javascript-testing";
+import { CoreUtils } from "@rsm-hcd/javascript-core";
+import mockAxios from "jest-mock-axios";
 import { ServiceHookFactory } from "./service-hook-factory";
-import { FactoryType as AndcultureCodeFactoryType } from "andculturecode-javascript-testing";
-import { CoreUtils } from "andculturecode-javascript-core";
 
 // ---------------------------------------------------------------------------------------------
 // #region Variables
@@ -49,6 +49,7 @@ const itReturnsFunction = (func: Function, endpoint: string) => {
 // ---------------------------------------------------------------------------------------------
 
 describe("ServiceHookFactory", () => {
+    const MockAxios = MockAxiosUtils(mockAxios);
     const sut = ServiceHookFactory;
 
     // ---------------------------------------------------------------------------------------------
@@ -58,14 +59,14 @@ describe("ServiceHookFactory", () => {
     describe("useBulkUpdate", () => {
         itReturnsFunction(sut.useBulkUpdate, baseEndpoint);
 
-        it("when not-cancelled, resolves successfully", async () => {
+        fit("when not-cancelled, resolves successfully", async () => {
             // Arrange
             const useBulkUpdate = sut.useBulkUpdate(
                 StubResourceRecord,
                 resourceEndpoint
             );
             const expectedStubRecord = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 { id: 10 }
             );
 
@@ -73,21 +74,21 @@ describe("ServiceHookFactory", () => {
 
             const UpdateStubComponent = () => {
                 const { update } = useBulkUpdate();
-                const [records, setRecords] = useState<
-                    Array<StubResourceRecord>
-                >(null as any);
+                const [records, setRecords] = useState<StubResourceRecord[]>(
+                    null as any
+                );
 
                 useEffect(() => {
                     async function updateUser() {
                         const result = await update([expectedStubRecord], {
-                            id: expectedStubRecord.id!,
+                            id: expectedStubRecord.id,
                         });
-                        setRecords(result.resultObjects!);
+                        setRecords(result.resultObjects);
                     }
                     updateUser();
                 }, []);
 
-                return <div>{records != null && records[0].name}</div>;
+                return <div>{records?.[0].name}</div>;
             };
 
             // Act
@@ -95,7 +96,7 @@ describe("ServiceHookFactory", () => {
 
             // Assert
             await waitFor(() => {
-                expect(getByText(expectedStubRecord.name!)).toBeInTheDocument();
+                expect(getByText(expectedStubRecord.name)).toBeInTheDocument();
             });
         });
 
@@ -114,7 +115,7 @@ describe("ServiceHookFactory", () => {
                 baseEndpoint
             );
             const record = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 {
                     id: 10,
                 }
@@ -126,35 +127,29 @@ describe("ServiceHookFactory", () => {
 
             const UpdateStubComponent = () => {
                 const { update } = useBulkUpdate();
-                const [records, setRecords] = useState<
-                    Array<StubResourceRecord>
-                >(null as any);
+                const [records, setRecords] = useState<StubResourceRecord[]>();
 
                 useEffect(() => {
-                    async function updateUser() {
+                    (async function updateUser() {
                         const result = await update([record], {
-                            id: record.id!,
+                            id: record.id,
                         });
-                        setRecords(result.resultObjects!);
-                    }
-
-                    updateUser();
+                        setRecords(result.resultObjects);
+                    })();
 
                     return () => {
                         isUnmounted = true;
                     };
                 }, []);
 
-                return <div>{records != null && records[0].name}</div>;
+                return <div>{records?.[0].name}</div>;
             };
 
             // Act
-            await act(async () => {
-                const { unmount } = render(<UpdateStubComponent />);
-                unmount();
-                // Force a sleep longer than when API promise resolves
-                await CoreUtils.sleep(cancellationTestsAssertionDelay);
-            });
+            const { unmount } = render(<UpdateStubComponent />);
+            unmount();
+            // Force a sleep longer than when API promise resolves
+            await CoreUtils.sleep(cancellationTestsAssertionDelay);
 
             // Assert
             expect(isUnmounted).toBeTrue();
@@ -178,7 +173,7 @@ describe("ServiceHookFactory", () => {
                 baseEndpoint
             );
             const expectedStubRecord = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord
+                FactoryType.StubResourceRecord
             );
             MockAxios.postSuccess(expectedStubRecord);
 
@@ -189,15 +184,13 @@ describe("ServiceHookFactory", () => {
                 );
 
                 useEffect(() => {
-                    async function createRecord() {
+                    (async function createRecord() {
                         const result = await create(new StubResourceRecord());
                         setRecord(result.resultObject!);
-                    }
-
-                    createRecord();
+                    })();
                 }, []);
 
-                return <div>{record != null && record!.name}</div>;
+                return <div>{record?.name}</div>;
             };
 
             // Act
@@ -205,7 +198,7 @@ describe("ServiceHookFactory", () => {
 
             // Assert
             await waitFor(() => {
-                expect(getByText(expectedStubRecord.name!)).toBeInTheDocument();
+                expect(getByText(expectedStubRecord.name)).toBeInTheDocument();
             });
         });
 
@@ -225,7 +218,7 @@ describe("ServiceHookFactory", () => {
             );
 
             const record = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord
+                FactoryType.StubResourceRecord
             );
             MockAxios.postSuccess(record, cancellationTestsApiDelay);
 
@@ -250,16 +243,14 @@ describe("ServiceHookFactory", () => {
                     };
                 }, []);
 
-                return <div>{record != null && record!.name}</div>;
+                return <div>{record?.name}</div>;
             };
 
             // Act
-            await act(async () => {
-                const { unmount } = render(<CreateStubComponent />);
-                unmount();
-                // Force a sleep longer than when API promise resolves
-                await CoreUtils.sleep(cancellationTestsAssertionDelay);
-            });
+            const { unmount } = render(<CreateStubComponent />);
+            unmount();
+            // Force a sleep longer than when API promise resolves
+            await CoreUtils.sleep(cancellationTestsAssertionDelay);
 
             // Assert
             expect(isUnmounted).toBeTrue();
@@ -281,6 +272,7 @@ describe("ServiceHookFactory", () => {
             const useDelete = sut.useDelete(resourceEndpoint);
             const recordIdToDelete = 10;
 
+            // eslint-disable-next-line no-new-wrappers -- Required for test
             MockAxios.deleteSuccess(new Boolean(true));
 
             const DeleteStubComponent = () => {
@@ -290,13 +282,14 @@ describe("ServiceHookFactory", () => {
                 useEffect(() => {
                     async function deleteStubRecord() {
                         try {
-                            const deleteResult = await deleteRecord(
-                                recordIdToDelete
-                            );
+                            const deleteResult =
+                                await deleteRecord(recordIdToDelete);
                             setIsDeleted(
                                 (deleteResult.resultObject || false) as boolean
                             );
-                        } catch (e) {}
+                        } catch (e) {
+                            /* empty */
+                        }
                     }
                     deleteStubRecord();
                 }, []);
@@ -325,7 +318,7 @@ describe("ServiceHookFactory", () => {
 
             const useDelete = sut.useDelete(baseEndpoint);
             const record = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 {
                     id: 10,
                 }
@@ -352,16 +345,14 @@ describe("ServiceHookFactory", () => {
                     };
                 }, []);
 
-                return <div>{record != null && record!.id}</div>;
+                return <div>{record?.id}</div>;
             };
 
             // Act
-            await act(async () => {
-                const { unmount } = render(<DeleteStubComponent />);
-                unmount();
-                // Force a sleep longer than when API promise resolves
-                await CoreUtils.sleep(cancellationTestsAssertionDelay);
-            });
+            const { unmount } = render(<DeleteStubComponent />);
+            unmount();
+            // Force a sleep longer than when API promise resolves
+            await CoreUtils.sleep(cancellationTestsAssertionDelay);
 
             // Assert
             expect(isUnmounted).toBeTrue();
@@ -382,7 +373,7 @@ describe("ServiceHookFactory", () => {
             // Arrange
             const useGet = sut.useGet(StubResourceRecord, resourceEndpoint);
             const expectedStubRecord = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 { id: 10 }
             );
 
@@ -398,16 +389,18 @@ describe("ServiceHookFactory", () => {
                     async function getRecord() {
                         try {
                             const result = await get({
-                                id: expectedStubRecord.id!,
+                                id: expectedStubRecord.id,
                             });
                             setRecord(result.resultObject!);
-                        } catch (e) {}
+                        } catch (e) {
+                            /* empty */
+                        }
                     }
 
                     getRecord();
                 }, []);
 
-                return <div>{record != null && record.name}</div>;
+                return <div>{record?.name}</div>;
             };
 
             // Act
@@ -415,7 +408,7 @@ describe("ServiceHookFactory", () => {
 
             // Assert
             await waitFor(() => {
-                expect(getByText(expectedStubRecord.name!)).toBeInTheDocument();
+                expect(getByText(expectedStubRecord.name)).toBeInTheDocument();
             });
         });
 
@@ -431,7 +424,7 @@ describe("ServiceHookFactory", () => {
 
             const useGet = sut.useGet(StubResourceRecord, baseEndpoint);
             const record = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 {
                     id: 10,
                 }
@@ -447,7 +440,7 @@ describe("ServiceHookFactory", () => {
 
                 useEffect(() => {
                     async function getRecord() {
-                        const result = await get(record.id!);
+                        const result = await get(record.id);
                         setRecord(result.resultObject!);
                     }
 
@@ -458,16 +451,14 @@ describe("ServiceHookFactory", () => {
                     };
                 }, []);
 
-                return <div>{record != null && record!.name}</div>;
+                return <div>{record?.name}</div>;
             };
 
             // Act
-            await act(async () => {
-                const { unmount } = render(<GetStubComponent />);
-                unmount();
-                // Force a sleep longer than when API promise resolves
-                await CoreUtils.sleep(cancellationTestsAssertionDelay);
-            });
+            const { unmount } = render(<GetStubComponent />);
+            unmount();
+            // Force a sleep longer than when API promise resolves
+            await CoreUtils.sleep(cancellationTestsAssertionDelay);
 
             // Assert
             expect(isUnmounted).toBeTrue();
@@ -488,7 +479,7 @@ describe("ServiceHookFactory", () => {
             // Arrange
             const useList = sut.useList(StubResourceRecord, baseEndpoint);
             const expectedStubRecords: StubResourceRecord[] = Factory.buildList(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 2
             );
 
@@ -504,15 +495,15 @@ describe("ServiceHookFactory", () => {
                     async function listUsers() {
                         try {
                             const result = await list();
-                            setRecords(result.resultObjects!);
-                        } catch (e) {}
+                            setRecords(result.resultObjects);
+                        } catch (e) {
+                            /* empty */
+                        }
                     }
                     listUsers();
                 }, []);
 
-                return (
-                    <div>{records != null && records.map((u) => u.name!)}</div>
-                );
+                return <div>{records?.map((u) => u.name)}</div>;
             };
 
             // Act
@@ -522,7 +513,7 @@ describe("ServiceHookFactory", () => {
             await waitFor(() => {
                 expectedStubRecords.forEach((expected) => {
                     expect(
-                        getByText(expected.name!, { exact: false })
+                        getByText(expected.name, { exact: false })
                     ).toBeInTheDocument();
                 });
             });
@@ -540,7 +531,7 @@ describe("ServiceHookFactory", () => {
 
             const useList = sut.useList(StubResourceRecord, baseEndpoint);
             const record = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 {
                     id: 10,
                 }
@@ -557,7 +548,7 @@ describe("ServiceHookFactory", () => {
                 useEffect(() => {
                     async function listUsers() {
                         const result = await list();
-                        setRecords(result.resultObjects!);
+                        setRecords(result.resultObjects);
                     }
 
                     listUsers();
@@ -567,18 +558,14 @@ describe("ServiceHookFactory", () => {
                     };
                 }, []);
 
-                return (
-                    <div>{records != null && records.map((u) => u.name!)}</div>
-                );
+                return <div>{records?.map((u) => u.name)}</div>;
             };
 
             // Act
-            await act(async () => {
-                const { unmount } = render(<ListStubComponent />);
-                unmount();
-                // Force a sleep longer than when API promise resolves
-                await CoreUtils.sleep(cancellationTestsAssertionDelay);
-            });
+            const { unmount } = render(<ListStubComponent />);
+            unmount();
+            // Force a sleep longer than when API promise resolves
+            await CoreUtils.sleep(cancellationTestsAssertionDelay);
 
             // Assert
             expect(isUnmounted).toBeTrue();
@@ -602,7 +589,7 @@ describe("ServiceHookFactory", () => {
                 StubNestedParams
             >(StubResourceRecord, nestedBaseEndpoint);
             const expectedStubRecord = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord
+                FactoryType.StubResourceRecord
             );
 
             MockAxios.postSuccess(expectedStubRecord);
@@ -623,7 +610,7 @@ describe("ServiceHookFactory", () => {
                     createLogin();
                 }, []);
 
-                return <div>{record != null && record!.name}</div>;
+                return <div>{record?.name}</div>;
             };
 
             // Act
@@ -631,7 +618,7 @@ describe("ServiceHookFactory", () => {
 
             // Assert
             await waitFor(() => {
-                expect(getByText(expectedStubRecord.name!)).toBeInTheDocument();
+                expect(getByText(expectedStubRecord.name)).toBeInTheDocument();
             });
         });
 
@@ -650,7 +637,7 @@ describe("ServiceHookFactory", () => {
                 StubNestedParams
             >(StubResourceRecord, nestedBaseEndpoint);
             const record = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord
+                FactoryType.StubResourceRecord
             );
 
             MockAxios.postSuccess(record, cancellationTestsApiDelay);
@@ -678,16 +665,14 @@ describe("ServiceHookFactory", () => {
                     };
                 }, []);
 
-                return <div>{record != null && record.name!}</div>;
+                return <div>{record?.name}</div>;
             };
 
             // Act
-            await act(async () => {
-                const { unmount } = render(<NestedCreateStubComponent />);
-                unmount();
-                // Force a sleep longer than when API promise resolves
-                await CoreUtils.sleep(cancellationTestsAssertionDelay);
-            });
+            const { unmount } = render(<NestedCreateStubComponent />);
+            unmount();
+            // Force a sleep longer than when API promise resolves
+            await CoreUtils.sleep(cancellationTestsAssertionDelay);
 
             // Assert
             expect(isUnmounted).toBeTrue();
@@ -712,7 +697,7 @@ describe("ServiceHookFactory", () => {
                 {}
             >(StubResourceRecord, nestedBaseEndpoint);
             const expectedStubRecords: StubResourceRecord[] = Factory.buildList(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 2
             );
 
@@ -729,14 +714,12 @@ describe("ServiceHookFactory", () => {
                         const result = await list({
                             nestedId: 10,
                         });
-                        setRecords(result.resultObjects!);
+                        setRecords(result.resultObjects);
                     }
                     getRecords();
                 }, []);
 
-                return (
-                    <div>{records != null && records.map((u) => u.name!)}</div>
-                );
+                return <div>{records?.map((u) => u.name)}</div>;
             };
 
             // Act
@@ -746,7 +729,7 @@ describe("ServiceHookFactory", () => {
             await waitFor(() => {
                 expectedStubRecords.forEach((expected) => {
                     expect(
-                        getByText(expected.name!, { exact: false })
+                        getByText(expected.name, { exact: false })
                     ).toBeInTheDocument();
                 });
             });
@@ -768,7 +751,7 @@ describe("ServiceHookFactory", () => {
                 {}
             >(StubResourceRecord, nestedBaseEndpoint);
             const records: StubResourceRecord[] = Factory.buildList(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 2
             );
 
@@ -785,7 +768,7 @@ describe("ServiceHookFactory", () => {
                 useEffect(() => {
                     async function listUsers() {
                         const result = await list({ nestedId: 10 });
-                        setRecords(result.resultObjects!);
+                        setRecords(result.resultObjects);
                     }
 
                     listUsers();
@@ -795,18 +778,14 @@ describe("ServiceHookFactory", () => {
                     };
                 }, []);
 
-                return (
-                    <div>{records != null && records.map((u) => u.name!)}</div>
-                );
+                return <div>{records?.map((u) => u.name)}</div>;
             };
 
             // Act
-            await act(async () => {
-                const { unmount } = render(<NestedListStubComponent />);
-                unmount();
-                // Force a sleep longer than when API promise resolves
-                await CoreUtils.sleep(cancellationTestsAssertionDelay);
-            });
+            const { unmount } = render(<NestedListStubComponent />);
+            unmount();
+            // Force a sleep longer than when API promise resolves
+            await CoreUtils.sleep(cancellationTestsAssertionDelay);
 
             // Assert
             expect(isUnmounted).toBeTrue();
@@ -830,7 +809,7 @@ describe("ServiceHookFactory", () => {
                 resourceEndpoint
             );
             const expectedStubRecord = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 { id: 10 }
             );
 
@@ -850,7 +829,7 @@ describe("ServiceHookFactory", () => {
                     updateUser();
                 }, []);
 
-                return <div>{record != null && record!.name}</div>;
+                return <div>{record?.name}</div>;
             };
 
             // Act
@@ -858,7 +837,7 @@ describe("ServiceHookFactory", () => {
 
             // Assert
             await waitFor(() => {
-                expect(getByText(expectedStubRecord.name!)).toBeInTheDocument();
+                expect(getByText(expectedStubRecord.name)).toBeInTheDocument();
             });
         });
 
@@ -874,7 +853,7 @@ describe("ServiceHookFactory", () => {
 
             const useUpdate = sut.useUpdate(StubResourceRecord, baseEndpoint);
             const record = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 {
                     id: 10,
                 }
@@ -903,16 +882,14 @@ describe("ServiceHookFactory", () => {
                     };
                 }, []);
 
-                return <div>{record != null && record!.name}</div>;
+                return <div>{record?.name}</div>;
             };
 
             // Act
-            await act(async () => {
-                const { unmount } = render(<UpdateStubComponent />);
-                unmount();
-                // Force a sleep longer than when API promise resolves
-                await CoreUtils.sleep(cancellationTestsAssertionDelay);
-            });
+            const { unmount } = render(<UpdateStubComponent />);
+            unmount();
+            // Force a sleep longer than when API promise resolves
+            await CoreUtils.sleep(cancellationTestsAssertionDelay);
 
             // Assert
             expect(isUnmounted).toBeTrue();

@@ -2,23 +2,21 @@
 // #region Components
 // -----------------------------------------------------------------------------------------
 
-export {
-    AuthenticatedRoute,
-    AuthenticatedRouteProps,
-} from "./components/routing/authenticated-route";
-export {
-    NestedRoute,
-    NestedRouteProps,
-} from "./components/routing/nested-route";
-export {
-    NestedRoutes,
-    NestedRoutesProps,
-} from "./components/routing/nested-routes";
-export {
-    NestedRoutesByProperty,
-    NestedRoutesByPropertyProps,
-} from "./components/routing/nested-routes-by-property";
-export { Redirects, RedirectsProps } from "./components/routing/redirects";
+// TODO: The original purpose for this was to provide a helper routes when using react-router-dom.This needs to be re-implemented in the new project structure.
+// export {
+//     AuthenticatedRoute,
+//     AuthenticatedRouteProps,
+// } from "./components/routing/authenticated-route";
+// export {
+//     NestedRoute,
+//     NestedRouteProps,
+// } from "./components/routing/nested-route";
+// export { NestedRoutes } from "./components/routing/nested-routes";
+// export type { NestedRoutesProps } from "./components/routing/nested-routes";
+// export { NestedRoutesByProperty } from "./components/routing/nested-routes-by-property";
+// export type { NestedRoutesByPropertyProps } from "./components/routing/nested-routes-by-property";
+// export { Redirects } from "./components/routing/redirects";
+// export type { RedirectsProps } from "./components/routing/redirects";
 
 // #endregion Components
 
@@ -43,10 +41,10 @@ export { useWindow } from "./hooks/use-window";
 // #region Interfaces
 // -----------------------------------------------------------------------------------------
 
-export { RedirectDefinition } from "./interfaces/redirect-definition";
-export { RouteDefinition } from "./interfaces/route-definition";
-export { RouteMap } from "./interfaces/route-map";
-export { UnmatchedRoute } from "./interfaces/unmatched-route";
+export type { RedirectDefinition } from "./interfaces/redirect-definition";
+export type { RouteDefinition } from "./interfaces/route-definition";
+export type { RouteMap } from "./interfaces/route-map";
+export type { UnmatchedRoute } from "./interfaces/unmatched-route";
 
 // #endregion Interfaces
 
@@ -63,23 +61,23 @@ export { ServiceHookFactory } from "./services/service-hook-factory";
 // #region Types
 // -----------------------------------------------------------------------------------------
 
-export { AsyncEffectCallback } from "./types/async-effect-callback-type";
-export { BulkUpdateService } from "./types/bulk-update-service-type";
-export { BulkUpdateServiceHook } from "./types/bulk-update-service-hook-type";
-export { CreateService } from "./types/create-service-type";
-export { CreateServiceHook } from "./types/create-service-hook-type";
-export { DeleteService } from "./types/delete-service-type";
-export { DeleteServiceHook } from "./types/delete-service-hook-type";
-export { GetService } from "./types/get-service-type";
-export { GetServiceHook } from "./types/get-service-hook-type";
-export { ListService } from "./types/list-service-type";
-export { ListServiceHook } from "./types/list-service-hook-type";
-export { NestedCreateService } from "./types/nested-create-service-type";
-export { NestedCreateServiceHook } from "./types/nested-create-service-hook-type";
-export { NestedListService } from "./types/nested-list-service-type";
-export { NestedListServiceHook } from "./types/nested-list-service-hook-type";
-export { UpdateService } from "./types/update-service-type";
-export { UpdateServiceHook } from "./types/update-service-hook-type";
+export type { AsyncEffectCallback } from "./types/async-effect-callback-type";
+export type { BulkUpdateService } from "./types/bulk-update-service-type";
+export type { BulkUpdateServiceHook } from "./types/bulk-update-service-hook-type";
+export type { CreateService } from "./types/create-service-type";
+export type { CreateServiceHook } from "./types/create-service-hook-type";
+export type { DeleteService } from "./types/delete-service-type";
+export type { DeleteServiceHook } from "./types/delete-service-hook-type";
+export type { GetService } from "./types/get-service-type";
+export type { GetServiceHook } from "./types/get-service-hook-type";
+export type { ListService } from "./types/list-service-type";
+export type { ListServiceHook } from "./types/list-service-hook-type";
+export type { NestedCreateService } from "./types/nested-create-service-type";
+export type { NestedCreateServiceHook } from "./types/nested-create-service-hook-type";
+export type { NestedListService } from "./types/nested-list-service-type";
+export type { NestedListServiceHook } from "./types/nested-list-service-hook-type";
+export type { UpdateService } from "./types/update-service-type";
+export type { UpdateServiceHook } from "./types/update-service-hook-type";
 
 // #endregion Types
 
