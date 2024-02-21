@@ -192,12 +192,12 @@ const _bulkUpdate = async function <
         );
     }
 
-    return axios
-        .put(
-            url,
-            records.map((r: TRecord) => r.toJS())
-        )
-        .then((r) => ServiceUtils.mapPagedAxiosResponse(recordType, r));
+    const response = await axios.put(
+        url,
+        records.map((r: TRecord) => r.toJS())
+    );
+
+    return ServiceUtils.mapPagedAxiosResponse(recordType, response);
 };
 
 const _create = async function <TRecord extends RecordType>(

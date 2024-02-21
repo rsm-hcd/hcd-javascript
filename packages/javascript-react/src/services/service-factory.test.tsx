@@ -5,10 +5,11 @@ import { useEffect, useState } from "react";
 import { render } from "@testing-library/react";
 import { CoreUtils } from "@rsm-hcd/javascript-core";
 import {
-    MockAxios,
+    MockAxiosUtils,
     StubResourceRecord,
     FactoryType as AndcultureCodeFactoryType,
 } from "@rsm-hcd/javascript-testing";
+import mockAxios from "jest-mock-axios";
 import { ServiceFactory } from "./service-factory";
 
 // -----------------------------------------------------------------------------------------
@@ -56,6 +57,7 @@ const itReturnsFunction = (func: Function, endpoint: string) => {
 
 describe("ServiceFactory", () => {
     const consoleErrorSpy = jest.spyOn(console, "error");
+    const MockAxios = MockAxiosUtils(mockAxios);
 
     afterEach(() => {
         consoleErrorSpy.mockReset();

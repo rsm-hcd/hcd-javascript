@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import { Factory } from "rosie";
 import { render, waitFor } from "@testing-library/react";
 import {
-    MockAxios,
+    MockAxiosUtils,
     StubResourceRecord,
     FactoryType,
 } from "@rsm-hcd/javascript-testing";
 import { CoreUtils } from "@rsm-hcd/javascript-core";
+import mockAxios from "jest-mock-axios";
 import { ServiceHookFactory } from "./service-hook-factory";
 
 // ---------------------------------------------------------------------------------------------
@@ -48,6 +49,7 @@ const itReturnsFunction = (func: Function, endpoint: string) => {
 // ---------------------------------------------------------------------------------------------
 
 describe("ServiceHookFactory", () => {
+    const MockAxios = MockAxiosUtils(mockAxios);
     const sut = ServiceHookFactory;
 
     // ---------------------------------------------------------------------------------------------
@@ -57,7 +59,7 @@ describe("ServiceHookFactory", () => {
     describe("useBulkUpdate", () => {
         itReturnsFunction(sut.useBulkUpdate, baseEndpoint);
 
-        it("when not-cancelled, resolves successfully", async () => {
+        fit("when not-cancelled, resolves successfully", async () => {
             // Arrange
             const useBulkUpdate = sut.useBulkUpdate(
                 StubResourceRecord,

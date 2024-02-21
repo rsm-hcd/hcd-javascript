@@ -1,4 +1,5 @@
-import mockAxios from "jest-mock-axios";
+import type { AxiosMockType } from "jest-mock-axios";
+import type mockAxios from "jest-mock-axios";
 import { Record } from "immutable";
 
 // ---------------------------------------------------------
@@ -10,8 +11,6 @@ import { Record } from "immutable";
  * mocked __mocks__/axios implementation.
  */
 interface MockAxios {
-    default: typeof mockAxios;
-
     delete: typeof mockAxios.delete;
 
     /**
@@ -57,32 +56,6 @@ interface MockAxios {
 }
 
 // #endregion Interfaces & Types
-
-// ---------------------------------------------------------
-// #region Public Functions
-// ---------------------------------------------------------
-
-const deleteSuccess = (record?: any, delay?: number) => {
-    _mockSuccess(MockAxios.delete, record, delay);
-};
-
-const getSuccess = (record: any, delay?: number) => {
-    _mockSuccess(MockAxios.get, record, delay);
-};
-
-const listSuccess = (records: any[], delay?: number) => {
-    _mockSuccess(MockAxios.get, records, delay);
-};
-
-const postSuccess = (record: any, delay?: number) => {
-    _mockSuccess(MockAxios.post, record, delay);
-};
-
-const putSuccess = (record: any, delay?: number) => {
-    _mockSuccess(MockAxios.put, record, delay);
-};
-
-// #endregion Public Functions
 
 // ---------------------------------------------------------
 // #region Private Functions
@@ -137,19 +110,40 @@ const _resultObjectToJS = (resultObject: any | any[]): any | any[] => {
 // #region Exports
 // ---------------------------------------------------------
 
-const MockAxios: MockAxios = {
-    default: mockAxios,
-    delete: mockAxios.delete,
-    deleteSuccess,
-    get: mockAxios.get,
-    getSuccess,
-    listSuccess,
-    post: mockAxios.post,
-    postSuccess,
-    put: mockAxios.put,
-    putSuccess,
+const MockAxiosUtils: (mockAxios: AxiosMockType) => MockAxios = (mockAxios) => {
+    const deleteSuccess = (record?: any, delay?: number) => {
+        _mockSuccess(mockAxios.delete, record, delay);
+    };
+
+    const getSuccess = (record: any, delay?: number) => {
+        _mockSuccess(mockAxios.get, record, delay);
+    };
+
+    const listSuccess = (records: any[], delay?: number) => {
+        _mockSuccess(mockAxios.get, records, delay);
+    };
+
+    const postSuccess = (record: any, delay?: number) => {
+        _mockSuccess(mockAxios.post, record, delay);
+    };
+
+    const putSuccess = (record: any, delay?: number) => {
+        _mockSuccess(mockAxios.put, record, delay);
+    };
+
+    return {
+        delete: mockAxios.delete,
+        deleteSuccess,
+        get: mockAxios.get,
+        getSuccess,
+        listSuccess,
+        post: mockAxios.post,
+        postSuccess,
+        put: mockAxios.put,
+        putSuccess,
+    };
 };
 
-export { MockAxios };
+export { MockAxiosUtils };
 
 // #endregion Exports

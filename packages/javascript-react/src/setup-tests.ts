@@ -5,8 +5,6 @@ import mockAxios from "jest-mock-axios";
 import type { GlobalWithFetchMock } from "jest-fetch-mock";
 import { initializeFactories } from "./tests/factories";
 
-require("tests/factories");
-
 const customGlobal: GlobalWithFetchMock =
     global as unknown as GlobalWithFetchMock;
 customGlobal.fetch = require("jest-fetch-mock");
