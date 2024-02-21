@@ -1,14 +1,19 @@
 // TODO: The original purpose for this was to provide a helper component for routing when using react-router-dom.This needs to be re-implemented in the new project structure.
 
-// import React from "react";
-// import { NestedRoutes } from "./nested-routes";
 // import { createMemoryHistory } from "history";
 // import { render } from "@testing-library/react";
 // import { Router } from "react-router-dom";
-// import { RouteDefinition } from "../../interfaces/route-definition";
 // import { Factory } from "rosie";
+// import {faker} from "@faker-js/faker";
+// import type { RouteDefinition } from "../../interfaces/route-definition";
 // import { FactoryType } from "../../tests/factories/factory-type";
-// import faker from "faker";
+// import { NestedRoutes } from "./nested-routes";
+
+describe("NestedRoutes", () => {
+    it.skip("TODO: needs tests", () => {
+        expect(true).toBe(true);
+    });
+});
 
 // describe("NestedRoutes", () => {
 //     let nonExistentRoute: string;
@@ -30,6 +35,7 @@
 //         { path: "/404", component: NotFoundPage }
 //     );
 
+//     // eslint-disable-next-line @typescript-eslint/no-unused-vars -- This is used in the beforeEach
 //     let routes: RouteDefinition[] = [];
 
 //     beforeEach(() => {

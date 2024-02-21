@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import { Factory } from "rosie";
 import { render, waitFor } from "@testing-library/react";
-import { act } from "react-dom/test-utils";
 import {
     MockAxios,
     StubResourceRecord,
-    FactoryType as AndcultureCodeFactoryType,
+    FactoryType,
 } from "@rsm-hcd/javascript-testing";
 import { CoreUtils } from "@rsm-hcd/javascript-core";
 import { ServiceHookFactory } from "./service-hook-factory";
@@ -65,7 +64,7 @@ describe("ServiceHookFactory", () => {
                 resourceEndpoint
             );
             const expectedStubRecord = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 { id: 10 }
             );
 
@@ -114,7 +113,7 @@ describe("ServiceHookFactory", () => {
                 baseEndpoint
             );
             const record = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 {
                     id: 10,
                 }
@@ -126,19 +125,15 @@ describe("ServiceHookFactory", () => {
 
             const UpdateStubComponent = () => {
                 const { update } = useBulkUpdate();
-                const [records, setRecords] = useState<StubResourceRecord[]>(
-                    null as any
-                );
+                const [records, setRecords] = useState<StubResourceRecord[]>();
 
                 useEffect(() => {
-                    async function updateUser() {
+                    (async function updateUser() {
                         const result = await update([record], {
                             id: record.id,
                         });
                         setRecords(result.resultObjects);
-                    }
-
-                    updateUser();
+                    })();
 
                     return () => {
                         isUnmounted = true;
@@ -149,12 +144,10 @@ describe("ServiceHookFactory", () => {
             };
 
             // Act
-            await act(async () => {
-                const { unmount } = render(<UpdateStubComponent />);
-                unmount();
-                // Force a sleep longer than when API promise resolves
-                await CoreUtils.sleep(cancellationTestsAssertionDelay);
-            });
+            const { unmount } = render(<UpdateStubComponent />);
+            unmount();
+            // Force a sleep longer than when API promise resolves
+            await CoreUtils.sleep(cancellationTestsAssertionDelay);
 
             // Assert
             expect(isUnmounted).toBeTrue();
@@ -178,7 +171,7 @@ describe("ServiceHookFactory", () => {
                 baseEndpoint
             );
             const expectedStubRecord = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord
+                FactoryType.StubResourceRecord
             );
             MockAxios.postSuccess(expectedStubRecord);
 
@@ -189,12 +182,10 @@ describe("ServiceHookFactory", () => {
                 );
 
                 useEffect(() => {
-                    async function createRecord() {
+                    (async function createRecord() {
                         const result = await create(new StubResourceRecord());
                         setRecord(result.resultObject!);
-                    }
-
-                    createRecord();
+                    })();
                 }, []);
 
                 return <div>{record?.name}</div>;
@@ -225,7 +216,7 @@ describe("ServiceHookFactory", () => {
             );
 
             const record = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord
+                FactoryType.StubResourceRecord
             );
             MockAxios.postSuccess(record, cancellationTestsApiDelay);
 
@@ -254,12 +245,10 @@ describe("ServiceHookFactory", () => {
             };
 
             // Act
-            await act(async () => {
-                const { unmount } = render(<CreateStubComponent />);
-                unmount();
-                // Force a sleep longer than when API promise resolves
-                await CoreUtils.sleep(cancellationTestsAssertionDelay);
-            });
+            const { unmount } = render(<CreateStubComponent />);
+            unmount();
+            // Force a sleep longer than when API promise resolves
+            await CoreUtils.sleep(cancellationTestsAssertionDelay);
 
             // Assert
             expect(isUnmounted).toBeTrue();
@@ -327,7 +316,7 @@ describe("ServiceHookFactory", () => {
 
             const useDelete = sut.useDelete(baseEndpoint);
             const record = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 {
                     id: 10,
                 }
@@ -358,12 +347,10 @@ describe("ServiceHookFactory", () => {
             };
 
             // Act
-            await act(async () => {
-                const { unmount } = render(<DeleteStubComponent />);
-                unmount();
-                // Force a sleep longer than when API promise resolves
-                await CoreUtils.sleep(cancellationTestsAssertionDelay);
-            });
+            const { unmount } = render(<DeleteStubComponent />);
+            unmount();
+            // Force a sleep longer than when API promise resolves
+            await CoreUtils.sleep(cancellationTestsAssertionDelay);
 
             // Assert
             expect(isUnmounted).toBeTrue();
@@ -384,7 +371,7 @@ describe("ServiceHookFactory", () => {
             // Arrange
             const useGet = sut.useGet(StubResourceRecord, resourceEndpoint);
             const expectedStubRecord = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 { id: 10 }
             );
 
@@ -435,7 +422,7 @@ describe("ServiceHookFactory", () => {
 
             const useGet = sut.useGet(StubResourceRecord, baseEndpoint);
             const record = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 {
                     id: 10,
                 }
@@ -466,12 +453,10 @@ describe("ServiceHookFactory", () => {
             };
 
             // Act
-            await act(async () => {
-                const { unmount } = render(<GetStubComponent />);
-                unmount();
-                // Force a sleep longer than when API promise resolves
-                await CoreUtils.sleep(cancellationTestsAssertionDelay);
-            });
+            const { unmount } = render(<GetStubComponent />);
+            unmount();
+            // Force a sleep longer than when API promise resolves
+            await CoreUtils.sleep(cancellationTestsAssertionDelay);
 
             // Assert
             expect(isUnmounted).toBeTrue();
@@ -492,7 +477,7 @@ describe("ServiceHookFactory", () => {
             // Arrange
             const useList = sut.useList(StubResourceRecord, baseEndpoint);
             const expectedStubRecords: StubResourceRecord[] = Factory.buildList(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 2
             );
 
@@ -544,7 +529,7 @@ describe("ServiceHookFactory", () => {
 
             const useList = sut.useList(StubResourceRecord, baseEndpoint);
             const record = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 {
                     id: 10,
                 }
@@ -575,12 +560,10 @@ describe("ServiceHookFactory", () => {
             };
 
             // Act
-            await act(async () => {
-                const { unmount } = render(<ListStubComponent />);
-                unmount();
-                // Force a sleep longer than when API promise resolves
-                await CoreUtils.sleep(cancellationTestsAssertionDelay);
-            });
+            const { unmount } = render(<ListStubComponent />);
+            unmount();
+            // Force a sleep longer than when API promise resolves
+            await CoreUtils.sleep(cancellationTestsAssertionDelay);
 
             // Assert
             expect(isUnmounted).toBeTrue();
@@ -604,7 +587,7 @@ describe("ServiceHookFactory", () => {
                 StubNestedParams
             >(StubResourceRecord, nestedBaseEndpoint);
             const expectedStubRecord = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord
+                FactoryType.StubResourceRecord
             );
 
             MockAxios.postSuccess(expectedStubRecord);
@@ -652,7 +635,7 @@ describe("ServiceHookFactory", () => {
                 StubNestedParams
             >(StubResourceRecord, nestedBaseEndpoint);
             const record = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord
+                FactoryType.StubResourceRecord
             );
 
             MockAxios.postSuccess(record, cancellationTestsApiDelay);
@@ -684,12 +667,10 @@ describe("ServiceHookFactory", () => {
             };
 
             // Act
-            await act(async () => {
-                const { unmount } = render(<NestedCreateStubComponent />);
-                unmount();
-                // Force a sleep longer than when API promise resolves
-                await CoreUtils.sleep(cancellationTestsAssertionDelay);
-            });
+            const { unmount } = render(<NestedCreateStubComponent />);
+            unmount();
+            // Force a sleep longer than when API promise resolves
+            await CoreUtils.sleep(cancellationTestsAssertionDelay);
 
             // Assert
             expect(isUnmounted).toBeTrue();
@@ -714,7 +695,7 @@ describe("ServiceHookFactory", () => {
                 {}
             >(StubResourceRecord, nestedBaseEndpoint);
             const expectedStubRecords: StubResourceRecord[] = Factory.buildList(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 2
             );
 
@@ -768,7 +749,7 @@ describe("ServiceHookFactory", () => {
                 {}
             >(StubResourceRecord, nestedBaseEndpoint);
             const records: StubResourceRecord[] = Factory.buildList(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 2
             );
 
@@ -799,12 +780,10 @@ describe("ServiceHookFactory", () => {
             };
 
             // Act
-            await act(async () => {
-                const { unmount } = render(<NestedListStubComponent />);
-                unmount();
-                // Force a sleep longer than when API promise resolves
-                await CoreUtils.sleep(cancellationTestsAssertionDelay);
-            });
+            const { unmount } = render(<NestedListStubComponent />);
+            unmount();
+            // Force a sleep longer than when API promise resolves
+            await CoreUtils.sleep(cancellationTestsAssertionDelay);
 
             // Assert
             expect(isUnmounted).toBeTrue();
@@ -828,7 +807,7 @@ describe("ServiceHookFactory", () => {
                 resourceEndpoint
             );
             const expectedStubRecord = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 { id: 10 }
             );
 
@@ -872,7 +851,7 @@ describe("ServiceHookFactory", () => {
 
             const useUpdate = sut.useUpdate(StubResourceRecord, baseEndpoint);
             const record = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 {
                     id: 10,
                 }
@@ -905,12 +884,10 @@ describe("ServiceHookFactory", () => {
             };
 
             // Act
-            await act(async () => {
-                const { unmount } = render(<UpdateStubComponent />);
-                unmount();
-                // Force a sleep longer than when API promise resolves
-                await CoreUtils.sleep(cancellationTestsAssertionDelay);
-            });
+            const { unmount } = render(<UpdateStubComponent />);
+            unmount();
+            // Force a sleep longer than when API promise resolves
+            await CoreUtils.sleep(cancellationTestsAssertionDelay);
 
             // Assert
             expect(isUnmounted).toBeTrue();

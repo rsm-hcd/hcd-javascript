@@ -40,14 +40,6 @@
             "outputs": [
                 "dist/**"
             ]
-        },
-        "watch:test": {
-            "dependsOn": [
-                "^build"
-            ],
-            "outputs": [
-                "dist/**"
-            ]
         }
     }
 }

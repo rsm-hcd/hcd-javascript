@@ -1,6 +1,5 @@
-import axios from "axios";
+import mockAxios from "jest-mock-axios";
 import { Record } from "immutable";
-import { axiosMock } from "./axios";
 
 // ---------------------------------------------------------
 // #region Interfaces & Types
@@ -10,13 +9,10 @@ import { axiosMock } from "./axios";
  * MockAxios is merely a typed wrapper around the dynamically
  * mocked __mocks__/axios implementation.
  */
-
-type AxiosJestMock = jest.Mock<Promise<{ data: {} }>, []>;
-
 interface MockAxios {
-    default: typeof axiosMock;
+    default: typeof mockAxios;
 
-    delete: AxiosJestMock;
+    delete: typeof mockAxios.delete;
 
     /**
      * Simple way to mock a successful axios delete request
@@ -25,7 +21,7 @@ interface MockAxios {
      */
     deleteSuccess: (record?: any, delay?: number) => void;
 
-    get: AxiosJestMock;
+    get: typeof mockAxios.get;
 
     /**
      * Simple way to mock a successful axios get/find request
@@ -41,7 +37,7 @@ interface MockAxios {
      */
     listSuccess: (records: any[], delay?: number) => void;
 
-    post: AxiosJestMock;
+    post: typeof mockAxios.post;
 
     /**
      * Simple way to mock a successful axios post request
@@ -50,7 +46,7 @@ interface MockAxios {
      */
     postSuccess: (record: any, delay?: number) => void;
 
-    put: AxiosJestMock;
+    put: typeof mockAxios.put;
 
     /**
      * Simple way to mock a successful axios put request
@@ -93,7 +89,7 @@ const putSuccess = (record: any, delay?: number) => {
 // ---------------------------------------------------------
 
 const _mockSuccess = (
-    method: AxiosJestMock,
+    method: jest.Mock,
     resultObject: any | any[],
     delay?: number
 ) => {
@@ -142,15 +138,15 @@ const _resultObjectToJS = (resultObject: any | any[]): any | any[] => {
 // ---------------------------------------------------------
 
 const MockAxios: MockAxios = {
-    default: axiosMock,
-    delete: axios.delete as AxiosJestMock,
+    default: mockAxios,
+    delete: mockAxios.delete,
     deleteSuccess,
-    get: axios.get as AxiosJestMock,
+    get: mockAxios.get,
     getSuccess,
     listSuccess,
-    post: axios.post as AxiosJestMock,
+    post: mockAxios.post,
     postSuccess,
-    put: axios.put as AxiosJestMock,
+    put: mockAxios.put,
     putSuccess,
 };
 

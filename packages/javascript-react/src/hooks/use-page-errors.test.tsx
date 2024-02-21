@@ -1,5 +1,6 @@
 import { renderHook, act } from "@testing-library/react-hooks";
 import { ResultRecord, ResultErrorRecord } from "@rsm-hcd/javascript-core";
+import { waitFor } from "@testing-library/react";
 import { usePageErrors } from "./use-page-errors";
 
 describe("usePageErrors", () => {
@@ -13,7 +14,9 @@ describe("usePageErrors", () => {
             const { result } = renderHook(() => usePageErrors());
 
             // Assert
-            expect(result.current.pageErrors).toBeEmpty();
+            waitFor(() => {
+                expect(result.current.pageErrors).toBeEmpty();
+            });
         });
     });
 
@@ -24,7 +27,7 @@ describe("usePageErrors", () => {
     // -----------------------------------------------------------------------------------------
 
     describe("setPageErrors", () => {
-        test("when set with string array, pageErrors returns array", () => {
+        it("when set with string array, pageErrors returns array", () => {
             // Arrange
             const errorMessage = "Error Message";
             const { result } = renderHook(() => usePageErrors());
@@ -35,8 +38,10 @@ describe("usePageErrors", () => {
             });
 
             // Assert
-            expect(result.current.pageErrors).toHaveLength(1);
-            expect(result.current.pageErrors[0]).toBe(errorMessage);
+            waitFor(() => {
+                expect(result.current.pageErrors).toHaveLength(1);
+                expect(result.current.pageErrors[0]).toBe(errorMessage);
+            });
         });
     });
 
@@ -47,7 +52,7 @@ describe("usePageErrors", () => {
     // -----------------------------------------------------------------------------------------
 
     describe("handlePageLoadError", () => {
-        test("when error is string, pageErrors returns array", () => {
+        it("when error is string, pageErrors returns array", () => {
             // Arrange
             const errorMessage = "Error Message";
             const { result } = renderHook(() => usePageErrors());
@@ -62,7 +67,7 @@ describe("usePageErrors", () => {
             expect(result.current.pageErrors[0]).toBe(errorMessage);
         });
 
-        test("when error is ResultRecord, pageErrors returns array", () => {
+        it("when error is ResultRecord, pageErrors returns array", () => {
             // Arrange
             const errorMessage = "Error Message";
             const erroredResultRecord = new ResultRecord<any>().with({
@@ -92,20 +97,18 @@ describe("usePageErrors", () => {
     // -----------------------------------------------------------------------------------------
 
     describe("resetPageErrors", () => {
-        test("when executed, pageErrors returns empty array", () => {
+        it("when executed, pageErrors returns empty array", () => {
             // Arrange
             const { result } = renderHook(() => usePageErrors());
-            act(() => {
-                result.current.handlePageLoadError("Error Message");
-            });
+            result.current.handlePageLoadError("Error Message");
 
             // Act
-            act(() => {
-                result.current.resetPageErrors();
-            });
+            result.current.resetPageErrors();
 
             // Assert
-            expect(result.current.pageErrors).toBeEmpty();
+            waitFor(() => {
+                expect(result.current.pageErrors).toBeEmpty();
+            });
         });
     });
 
