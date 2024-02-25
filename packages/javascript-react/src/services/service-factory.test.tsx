@@ -7,7 +7,7 @@ import { CoreUtils } from "@rsm-hcd/javascript-core";
 import {
     MockAxiosUtils,
     StubResourceRecord,
-    FactoryType as AndcultureCodeFactoryType,
+    FactoryType,
 } from "@rsm-hcd/javascript-testing";
 import mockAxios from "jest-mock-axios";
 import { ServiceFactory } from "./service-factory";
@@ -84,7 +84,7 @@ describe("ServiceFactory", () => {
                 resourceEndpoint
             );
             const record = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 {
                     id: 20,
                 }
@@ -137,7 +137,7 @@ describe("ServiceFactory", () => {
         it("when successful, returns response mapped to supplied TRecord", async () => {
             // Arrange
             const expected = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 {
                     id: 20,
                 }
@@ -194,7 +194,7 @@ describe("ServiceFactory", () => {
                 baseEndpoint
             );
             const record = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord
+                FactoryType.StubResourceRecord
             );
 
             MockAxios.postSuccess(record, cancellationTestsApiDelay);
@@ -210,7 +210,7 @@ describe("ServiceFactory", () => {
                     async function createStubRecord() {
                         const result = await create(
                             Factory.build<StubResourceRecord>(
-                                AndcultureCodeFactoryType.StubResourceRecord
+                                FactoryType.StubResourceRecord
                             )
                         );
                         setStubRecord(result.resultObject!);
@@ -242,7 +242,7 @@ describe("ServiceFactory", () => {
         it("when successful, returns response mapped to supplied TRecord", async () => {
             // Arrange
             const expected = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord
+                FactoryType.StubResourceRecord
             );
 
             const sut = ServiceFactory.create(StubResourceRecord, baseEndpoint);
@@ -277,7 +277,7 @@ describe("ServiceFactory", () => {
             // Arrange
             const sut = ServiceFactory.delete(resourceEndpoint);
             const record = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 {
                     id: 20,
                 }
@@ -355,7 +355,7 @@ describe("ServiceFactory", () => {
                 StubResourceParams
             >(StubResourceRecord, resourceEndpoint);
             const record = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 {
                     id: 20,
                 }
@@ -402,7 +402,7 @@ describe("ServiceFactory", () => {
         it("when successful, returns response mapped to supplied TRecord", async () => {
             // Arrange
             const expected = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 {
                     id: 20,
                 }
@@ -449,7 +449,7 @@ describe("ServiceFactory", () => {
                 StubResourceParams
             >(StubResourceRecord, baseEndpoint);
             const expectedResults = Factory.buildList(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 2
             );
 
@@ -494,7 +494,7 @@ describe("ServiceFactory", () => {
         it("when successful, returns response mapped to supplied TRecord", async () => {
             // Arrange
             const expectedResults: StubResourceRecord[] = Factory.buildList(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 2
             );
 
@@ -557,7 +557,7 @@ describe("ServiceFactory", () => {
                 StubNestedParams
             >(StubResourceRecord, nestedBaseEndpoint);
             const record = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 {
                     id: 20,
                 }
@@ -603,7 +603,7 @@ describe("ServiceFactory", () => {
         it("when successful, returns response mapped to supplied TRecord", async () => {
             // Arrange
             const expected = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord
+                FactoryType.StubResourceRecord
             );
 
             const sut = ServiceFactory.nestedCreate<
@@ -648,7 +648,7 @@ describe("ServiceFactory", () => {
                 StubListQueryParams
             >(StubResourceRecord, nestedBaseEndpoint);
             const expectedResults: StubResourceRecord[] = Factory.buildList(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 2
             );
 
@@ -693,7 +693,7 @@ describe("ServiceFactory", () => {
         it("when successful, returns response mapped to supplied TRecord", async () => {
             // Arrange
             const expectedResults: StubResourceRecord[] = Factory.buildList(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 2
             );
 
@@ -745,7 +745,7 @@ describe("ServiceFactory", () => {
                 resourceEndpoint
             );
             const record = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 {
                     id: 20,
                 }
@@ -791,7 +791,7 @@ describe("ServiceFactory", () => {
         it("when successful, returns response mapped to supplied TRecord", async () => {
             // Arrange
             const expected = Factory.build<StubResourceRecord>(
-                AndcultureCodeFactoryType.StubResourceRecord,
+                FactoryType.StubResourceRecord,
                 {
                     id: 20,
                 }
