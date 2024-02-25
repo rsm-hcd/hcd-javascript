@@ -1,4 +1,4 @@
-import { UpdateService } from "./update-service-type";
+import type { UpdateService } from "./update-service-type";
 
 /**
  * Type defining the return object from calling `useUpdate()`

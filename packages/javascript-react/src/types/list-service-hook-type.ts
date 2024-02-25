@@ -1,4 +1,4 @@
-import { ListService } from "./list-service-type";
+import type { ListService } from "./list-service-type";
 
 /**
  * Type defining the return object from calling `useList()`

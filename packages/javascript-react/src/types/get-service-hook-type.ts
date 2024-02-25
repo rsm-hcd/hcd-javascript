@@ -1,4 +1,4 @@
-import { GetService } from "./get-service-type";
+import type { GetService } from "./get-service-type";
 
 /**
  * Type defining the return object from calling `useGet()`
@@ -6,7 +6,7 @@ import { GetService } from "./get-service-type";
 export type GetServiceHook<
     TRecord,
     TPathParams,
-    TQueryParams = undefined
+    TQueryParams = undefined,
 > = () => {
     get: GetService<TRecord, TPathParams, TQueryParams>;
 };

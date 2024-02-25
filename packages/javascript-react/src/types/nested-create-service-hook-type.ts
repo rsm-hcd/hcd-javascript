@@ -1,4 +1,4 @@
-import { NestedCreateService } from "./nested-create-service-type";
+import type { NestedCreateService } from "./nested-create-service-type";
 
 /**
  * Type defining the return object from calling `useNestedCreate()`

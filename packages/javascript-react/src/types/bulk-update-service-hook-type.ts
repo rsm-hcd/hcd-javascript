@@ -1,4 +1,4 @@
-import { BulkUpdateService } from "./bulk-update-service-type";
+import type { BulkUpdateService } from "./bulk-update-service-type";
 
 /**
  * Type defining the return object from calling `useBulkUpdate()`

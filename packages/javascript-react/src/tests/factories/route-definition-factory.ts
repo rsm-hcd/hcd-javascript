@@ -1,7 +1,7 @@
 import { Factory } from "rosie";
-import { FactoryType } from "./factory-type";
-import { RouteDefinition } from "../../interfaces/route-definition";
 import React from "react";
+import type { RouteDefinition } from "../../interfaces/route-definition";
+import { FactoryType } from "./factory-type";
 
 // -----------------------------------------------------------------------------------------
 // #region Factory

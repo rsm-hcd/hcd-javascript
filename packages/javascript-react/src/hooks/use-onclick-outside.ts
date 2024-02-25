@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import type React from "react";
+import { useEffect, useState } from "react";
 
 /**
  * Custom hook providing utility to take some action when a mouse event is fired outside of an element.

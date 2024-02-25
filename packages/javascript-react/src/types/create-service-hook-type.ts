@@ -1,4 +1,4 @@
-import { CreateService } from "./create-service-type";
+import type { CreateService } from "./create-service-type";
 
 /**
  * Type defining the return object from calling `useCreate()`

@@ -1,4 +1,5 @@
-import { RefObject, useCallback, useEffect, useState } from "react";
+import type { RefObject } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useWindow } from "./use-window";
 
 /**
@@ -20,11 +21,10 @@ export function useTextOverflow<T extends HTMLElement>(ref: RefObject<T>) {
     const { width, height } = useWindow();
     const [isOverflowed, setIsOverflowed] = useState(getIsOverflowed());
 
-    useEffect(() => setIsOverflowed(getIsOverflowed()), [
-        getIsOverflowed,
-        width,
-        height,
-    ]);
+    useEffect(
+        () => setIsOverflowed(getIsOverflowed()),
+        [getIsOverflowed, width, height]
+    );
 
     return isOverflowed;
 }

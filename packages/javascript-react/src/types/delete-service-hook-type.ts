@@ -1,4 +1,4 @@
-import { DeleteService } from "./delete-service-type";
+import type { DeleteService } from "./delete-service-type";
 
 /**
  * Type defining the return object from calling `useDelete()`

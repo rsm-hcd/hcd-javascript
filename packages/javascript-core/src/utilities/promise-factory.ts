@@ -14,7 +14,13 @@ const PromiseFactory = {
                     isCanceled ? PromiseFactory.pending() : resolve(value);
                 })
                 .catch((error: any) => {
-                    isCanceled ? PromiseFactory.pending() : reject(error);
+                    isCanceled
+                        ? PromiseFactory.pending()
+                        : reject(
+                              error instanceof Error
+                                  ? error
+                                  : new Error(`${error}`)
+                          );
                 })
         );
 

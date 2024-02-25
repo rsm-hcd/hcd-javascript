@@ -1,5 +1,6 @@
-import { useEffect, DependencyList, EffectCallback, useCallback } from "react";
-import { AsyncEffectCallback } from "../types/async-effect-callback-type";
+import type { DependencyList, EffectCallback } from "react";
+import { useEffect, useCallback } from "react";
+import type { AsyncEffectCallback } from "../types/async-effect-callback-type";
 
 /**
  * Version of the useEffect hook that accepts an async function

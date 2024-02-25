@@ -1,4 +1,4 @@
-import { EffectCallback } from "react";
+import type { EffectCallback } from "react";
 
 /**
  * Type defining the asyncEffect parameter from calling `useAsyncEffect()`
