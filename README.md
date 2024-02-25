@@ -5,6 +5,7 @@ This is a monorepo consisting of numerous core JavaScript packages utilized by e
 ## Packages
 
 - [`javascript-core`](./packages/javascript-core/README.md): Common patterns, functions, etc... used when building javascript applications (published to npm)
+- [`javascript-react`](./packages/javascript-react/README.md): Common patterns, functions, etc... used when building react applications (published to npm)
 - [`javascript-testing`](./packages/javascript-testing/README.md): Testing utilities for JavaScript (published to npm)
 - `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
 - `tsconfig`: `tsconfig.json`s used throughout the monorepo
