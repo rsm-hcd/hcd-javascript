@@ -1,5 +1,17 @@
 # @rsm-hcd/javascript-testing
 
+## 1.3.0
+
+### Minor Changes
+
+-   2b98be1: Updated eslint rules
+
+### Patch Changes
+
+-   eb9724f: update axios mocking and tests
+-   f4ac623: Updated npm dependencies
+-   11980e5: update dependencies
+
 ## 1.2.0
 
 ### Minor Changes
