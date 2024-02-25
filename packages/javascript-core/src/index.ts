@@ -39,6 +39,7 @@ export { EffectiveConnectionType } from "./enumerations/effective-connection-typ
 export { ErrorType } from "./enumerations/error-type";
 export { HttpHeader } from "./enumerations/http-header";
 export { HttpVerb } from "./enumerations/http-verb";
+export { QueryStringArrayFormat } from "./enumerations/query-string-array-format";
 export { UnitOfTime } from "./enumerations/unit-of-time";
 
 // #endregion Enumerations
