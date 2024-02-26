@@ -13,8 +13,10 @@ import type { UpdateService } from "../types/update-service-type";
 // #region Types
 // ---------------------------------------------------------------------------------------------
 
+type RecordId = string | number | null | undefined;
+
 export interface RecordType {
-    id: number;
+    id?: RecordId;
     toJS: () => unknown;
 }
 
@@ -167,7 +169,11 @@ const ServiceFactory = {
 // #region Private Functions
 // ---------------------------------------------------------------------------------------------
 
-const _buildUrl = (id: number, resourceEndpoint: string, pathParams?: any) => {
+const _buildUrl = (
+    id: RecordId,
+    resourceEndpoint: string,
+    pathParams?: any
+) => {
     if (pathParams == null) {
         pathParams = {};
     }
