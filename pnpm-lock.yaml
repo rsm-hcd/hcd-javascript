@@ -97,7 +97,7 @@ importers:
         specifier: ^7.2.0
         version: 7.2.0
       immutable:
-        specifier: ~4.3.5
+        specifier: ^4.3.5
         version: 4.3.5
       jest:
         specifier: ^29.7.0
@@ -193,7 +193,7 @@ importers:
         specifier: ^7.2.0
         version: 7.2.0
       immutable:
-        specifier: ~4.3.5
+        specifier: ^4.3.5
         version: 4.3.5
       jest:
         specifier: ^29.7.0
