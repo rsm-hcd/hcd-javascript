@@ -1,5 +1,16 @@
 # @rsm-hcd/javascript-core
 
+## 1.2.0
+
+### Minor Changes
+
+-   e2bcaa1: Update collection utils
+
+### Patch Changes
+
+-   Updated dependencies [e2bcaa1]
+    -   @rsm-hcd/javascript-testing@1.3.1
+
 ## 1.1.1
 
 ### Patch Changes
