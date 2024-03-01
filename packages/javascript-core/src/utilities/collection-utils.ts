@@ -62,7 +62,7 @@ const equalsBy = function <T, V>(
 const difference = <T>(
     array: List<T> | null | undefined,
     ...values: List<T>[]
-): T[] => _.difference(array, ...values);
+) => _.difference(array, ...values);
 
 /**
  * Recursively flattens a nested array.
@@ -80,13 +80,15 @@ const flattenDeep = <T>(
  *
  * Note: only takes a single collection as parameter to make use of Typescript Type guard ability
  *
- * @param {(any[] | Immutable.List<any> | null | undefined)} collection
+ * @param {(T[] | Immutable.List<T> | null | undefined)} collection
  * @returns {boolean} False if `collection` is `undefined`, `null`, or has 0 elements.
  * True if collection contains any elements.
  */
-const hasValues = (
-    collection: any[] | Immutable.List<any> | null | undefined
-): collection is any[] | Immutable.List<any> => !isEmpty(collection);
+const hasValues = <T>(
+    collection: T[] | Immutable.List<T> | null | undefined
+): collection is typeof collection extends Immutable.List<T>
+    ? Immutable.List<T>
+    : T[] => !isEmpty(collection);
 
 /**
  * Checks if there aren't any values in a collection. Returns true if the collection is `undefined`,
@@ -101,7 +103,7 @@ const hasValues = (
  */
 const isEmpty = (
     collection: any[] | Immutable.List<any> | null | undefined
-): collection is undefined => {
+): collection is undefined | null => {
     if (collection == null) {
         return true;
     }
