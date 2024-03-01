@@ -4,7 +4,7 @@ import type {
     MemoizedFunction,
     ThrottleSettings,
 } from "lodash";
-import { bindAll, curry, memoize, merge, range, throttle, times } from "lodash";
+import _ from "lodash";
 import type { TimerFunctionReturn } from "../types/timer-function-return";
 import { CollectionUtils } from "./collection-utils";
 
@@ -26,7 +26,7 @@ const CoreUtils = {
      * @return Returns object.
      */
     bindAll<T>(object: T, ...methodNames: (string | string[])[]): T {
-        return bindAll(object, ...methodNames);
+        return _.bindAll(object, ...methodNames);
     },
 
     /**
@@ -38,7 +38,7 @@ const CoreUtils = {
      * @return Returns the new curried function.
      */
     curry<T1, R>(func: (t1: T1) => R, arity?: number): CurriedFunction1<T1, R> {
-        return curry(func, arity);
+        return _.curry(func, arity);
     },
 
     /**
@@ -94,7 +94,7 @@ const CoreUtils = {
         func: T,
         resolver?: (...args: any[]) => any
     ): T & MemoizedFunction {
-        return memoize(func, resolver);
+        return _.memoize(func, resolver);
     },
 
     /**
@@ -109,7 +109,7 @@ const CoreUtils = {
         object: TObject,
         source: TSource
     ): TObject & TSource {
-        return merge(object, source);
+        return _.merge(object, source);
     },
 
     /**
@@ -163,7 +163,7 @@ const CoreUtils = {
      * @return Returns a new range array.
      */
     range(start: number, end?: number, step?: number): number[] {
-        return range(start, end, step);
+        return _.range(start, end, step);
     },
 
     /**
@@ -220,7 +220,7 @@ const CoreUtils = {
         wait?: number,
         options?: ThrottleSettings
     ): DebouncedFunc<T> {
-        return throttle(func, wait, options);
+        return _.throttle(func, wait, options);
     },
 
     /**
@@ -257,7 +257,7 @@ const CoreUtils = {
      * @return Returns the array of results.
      */
     times<TResult>(n: number, iteratee: (num: number) => TResult): TResult[] {
-        return times(n, iteratee);
+        return _.times(n, iteratee);
     },
 };
 
