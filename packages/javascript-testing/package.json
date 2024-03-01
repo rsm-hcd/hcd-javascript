@@ -19,7 +19,7 @@
         "@rsm-hcd/tsconfig": "workspace:*",
         "@swc/core": "^1.4.2",
         "@types/jest": "^29.5.12",
-        "@types/rosie": "^0.0.43",
+        "@types/rosie": "^0.0.45",
         "axios": "^1.6.7",
         "cross-env": "^7.0.3",
         "immutable": "^4.3.5",
