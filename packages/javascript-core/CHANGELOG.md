@@ -1,5 +1,11 @@
 # @rsm-hcd/javascript-core
 
+## 1.1.1
+
+### Patch Changes
+
+-   d18e7e1: Update package dependencies
+
 ## 1.1.0
 
 ### Minor Changes

@@ -1,5 +1,13 @@
 # @rsm-hcd/javascript-react
 
+## 1.0.2
+
+### Patch Changes
+
+-   d18e7e1: Update package dependencies
+-   Updated dependencies [d18e7e1]
+    -   @rsm-hcd/javascript-core@1.1.1
+
 ## 1.0.1
 
 ### Patch Changes
