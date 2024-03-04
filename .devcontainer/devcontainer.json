@@ -2,29 +2,15 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
 {
 	"name": "Node.js & TypeScript",
-	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/typescript-node:1-20-bullseye",
+	"image": "mcr.microsoft.com/devcontainers/base:ubuntu",
 	"features": {
 		"ghcr.io/devcontainers/features/git-lfs:1": {
 			"autoPull": true,
 			"version": "latest"
 		},
-		"ghcr.io/devcontainers-contrib/features/pnpm:2": {
-			"version": "latest"
-		},
-		"ghcr.io/devcontainers-contrib/features/volta:1": {
-			"version": "latest"
-		}
-	}
-
-	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {},
-
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
-
-	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "yarn install",
+		"ghcr.io/devcontainers/features/node:1": {}
+	},
+	"postCreateCommand": ". ${NVM_DIR}/nvm.sh && nvm install && nvm use"
 
 	// Configure tool-specific properties.
 	// "customizations": {},
