@@ -1,10 +1,19 @@
 {
+    "files.associations": {
+        "*.tsx": "typescriptreact",
+        "*.css": "tailwindcss",
+        "*.scss": "tailwindcss"
+    },
     "[typescript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[typescriptreact]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
+    "[scss]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "css.customData": ["./.vscode/css/custom-data.json"],
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,
     "editor.rulers": [100],
@@ -16,5 +25,12 @@
         {
             "mode": "auto"
         }
+    ],
+    "[tailwindcss]": {
+        "tailwindCSS.colorDecorators": true
+    },
+    "tailwindCSS.experimental.classRegex": [
+        ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+        ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
     ]
 }
