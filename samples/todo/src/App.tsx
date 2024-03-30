@@ -5,7 +5,7 @@ import {
     useDeleteService,
 } from "@rsm-hcd/javascript-react";
 import { TodoService } from "./services/todo-service";
-import { TestRecord } from "./models/todo";
+import { TodoRecord } from "./models/todo";
 import { useMemo } from "react";
 import "./App.css";
 
@@ -33,14 +33,14 @@ function App() {
     }, [created, deleted, results, updated]);
 
     const handleAdd = () => {
-        create(new TestRecord({ description: "New todo" }));
+        create(new TodoRecord({ description: "New todo" }));
     };
 
-    const handleCompleted = (record: TestRecord) => () => {
+    const handleCompleted = (record: TodoRecord) => () => {
         update(record.with({ completed: !record.completed }));
     };
 
-    const handleRemove = (record: TestRecord) => () => {
+    const handleRemove = (record: TodoRecord) => () => {
         remove(record.id);
     };
 

@@ -6,7 +6,7 @@ export interface Todo {
     completed?: boolean;
 }
 
-export class TestRecord
+export class TodoRecord
     extends Record<Todo>({
         id: 0,
         description: "",

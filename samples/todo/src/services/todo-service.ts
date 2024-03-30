@@ -1,10 +1,10 @@
 import { ServiceFactory } from "@rsm-hcd/javascript-react";
-import { TestRecord } from "../models/todo";
+import { TodoRecord } from "../models/todo";
 
 export const TodoService = {
-    list: ServiceFactory.list(TestRecord, "api/todos"),
-    create: ServiceFactory.create(TestRecord, "api/todos"),
-    update: ServiceFactory.update(TestRecord, "api/todos/:id"),
-    get: ServiceFactory.get(TestRecord, "api/todos/:id"),
+    list: ServiceFactory.list(TodoRecord, "api/todos"),
+    create: ServiceFactory.create(TodoRecord, "api/todos"),
+    update: ServiceFactory.update(TodoRecord, "api/todos/:id"),
+    get: ServiceFactory.get(TodoRecord, "api/todos/:id"),
     delete: ServiceFactory.delete("api/todos/:id"),
 };
