@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-interface -- for testing purposes */
+/* eslint-disable import/no-extraneous-dependencies -- jest-mock-axios is installed in devDependencies */
 
 import { Factory } from "rosie";
 import { useEffect, useState } from "react";

@@ -27,10 +27,10 @@ jobs:
             matrix:
                 include:
                     - os: windows-latest
-                      node: 18.18.0
+                      node: 18.20.0
                       allowed-to-fail: false
                     - os: windows-latest
-                      node: 20.8.0
+                      node: 20.12.0
                       allowed-to-fail: true
         continue-on-error: ${{matrix.allowed-to-fail}}
 

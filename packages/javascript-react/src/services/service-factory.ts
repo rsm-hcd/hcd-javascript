@@ -1,13 +1,14 @@
 import axios from "axios";
+import type { ServiceResponse } from "@rsm-hcd/javascript-core";
 import { RouteUtils, ServiceUtils } from "@rsm-hcd/javascript-core";
-import type { BulkUpdateService } from "../types/bulk-update-service-type";
-import type { DeleteService } from "../types/delete-service-type";
-import type { CreateService } from "../types/create-service-type";
-import type { ListService } from "../types/list-service-type";
-import type { GetService } from "../types/get-service-type";
-import type { NestedCreateService } from "../types/nested-create-service-type";
-import type { NestedListService } from "../types/nested-list-service-type";
-import type { UpdateService } from "../types/update-service-type";
+import type { BulkUpdateServiceWithSignal } from "../types/bulk-update-service-type";
+import type { DeleteServiceWithSignal } from "../types/delete-service-type";
+import type { CreateServiceWithSignal } from "../types/create-service-type";
+import type { ListServiceWithSignal } from "../types/list-service-type";
+import type { GetServiceWithSignal } from "../types/get-service-type";
+import type { NestedCreateServiceWithSignal } from "../types/nested-create-service-type";
+import type { NestedListServiceWithSignal } from "../types/nested-list-service-type";
+import type { UpdateServiceWithSignal } from "../types/update-service-type";
 
 // ---------------------------------------------------------------------------------------------
 // #region Types
@@ -36,13 +37,14 @@ const ServiceFactory = {
     bulkUpdate<TRecord extends RecordType, TPathParams extends any>(
         recordType: new () => TRecord,
         resourceEndpoint: string
-    ): BulkUpdateService<TRecord, TPathParams> {
-        return (records: TRecord[], pathParams?: any) =>
+    ): BulkUpdateServiceWithSignal<TRecord, TPathParams> {
+        return (records: TRecord[], pathParams?: any, signal?: AbortSignal) =>
             _bulkUpdate<TRecord, TPathParams>(
                 recordType,
                 records,
                 resourceEndpoint,
-                pathParams
+                pathParams,
+                signal
             );
     },
 
@@ -58,9 +60,9 @@ const ServiceFactory = {
     create<TRecord extends RecordType>(
         recordType: new () => TRecord,
         baseEndpoint: string
-    ): CreateService<TRecord> {
-        return (record?: TRecord) =>
-            _create<TRecord>(recordType, baseEndpoint, record);
+    ): CreateServiceWithSignal<TRecord> {
+        return (record?: TRecord, signal?: AbortSignal) =>
+            _create<TRecord>(recordType, baseEndpoint, record, signal);
     },
 
     /**
@@ -68,9 +70,9 @@ const ServiceFactory = {
      * @param recordType
      * @param resourceEndpoint
      */
-    delete(resourceEndpoint: string): DeleteService {
-        return (id: number, pathParams?: any) =>
-            _delete(id, resourceEndpoint, pathParams);
+    delete(resourceEndpoint: string): DeleteServiceWithSignal {
+        return (id: number, pathParams?: any, signal?: AbortSignal) =>
+            _delete(id, resourceEndpoint, pathParams, signal);
     },
 
     /**
@@ -81,13 +83,18 @@ const ServiceFactory = {
     get<TRecord, TPathParams, TQueryParams = undefined>(
         recordType: new () => TRecord,
         resourceEndpoint: string
-    ): GetService<TRecord, TPathParams, TQueryParams> {
-        return (pathParams: TPathParams, queryParams?: TQueryParams) =>
+    ): GetServiceWithSignal<TRecord, TPathParams, TQueryParams> {
+        return (
+            pathParams: TPathParams,
+            queryParams?: TQueryParams,
+            signal?: AbortSignal
+        ) =>
             _get<TRecord, TPathParams, TQueryParams>(
                 recordType,
                 resourceEndpoint,
                 pathParams,
-                queryParams
+                queryParams,
+                signal
             );
     },
 
@@ -103,9 +110,9 @@ const ServiceFactory = {
     list<TRecord, TQueryParams>(
         recordType: new () => TRecord,
         baseEndpoint: string
-    ): ListService<TRecord, TQueryParams> {
-        return (queryParams?: TQueryParams) =>
-            _list<TRecord>(recordType, baseEndpoint, null, queryParams);
+    ): ListServiceWithSignal<TRecord, TQueryParams> {
+        return (queryParams?: TQueryParams, signal?: AbortSignal) =>
+            _list<TRecord>(recordType, baseEndpoint, null, queryParams, signal);
     },
 
     /**
@@ -117,17 +124,20 @@ const ServiceFactory = {
     nestedCreate<TRecord extends RecordType, TPathParams>(
         recordType: new () => TRecord,
         baseEndpoint: string
-    ): NestedCreateService<TRecord, TPathParams> {
-        return (record: TRecord, pathParams: TPathParams) => {
+    ): NestedCreateServiceWithSignal<TRecord, TPathParams> {
+        return (
+            record: TRecord,
+            pathParams: TPathParams,
+            signal?: AbortSignal
+        ) => {
             const url = RouteUtils.getUrlFromPath(baseEndpoint, pathParams);
-
             if (!url) {
                 throw new Error(
                     `Could not create nested resource. URL could not be constructed from path: ${baseEndpoint}`
                 );
             }
 
-            return _create<TRecord>(recordType, url, record);
+            return _create<TRecord>(recordType, url, record, signal);
         };
     },
 
@@ -139,9 +149,19 @@ const ServiceFactory = {
     nestedList<TRecord, TPathParams, TQueryParams>(
         recordType: new () => TRecord,
         baseEndpoint: string
-    ): NestedListService<TRecord, TPathParams, TQueryParams> {
-        return (pathParams: TPathParams, queryParams?: TQueryParams) =>
-            _list<TRecord>(recordType, baseEndpoint, pathParams, queryParams);
+    ): NestedListServiceWithSignal<TRecord, TPathParams, TQueryParams> {
+        return (
+            pathParams: TPathParams,
+            queryParams?: TQueryParams,
+            signal?: AbortSignal
+        ) =>
+            _list<TRecord>(
+                recordType,
+                baseEndpoint,
+                pathParams,
+                queryParams,
+                signal
+            );
     },
 
     /**
@@ -152,13 +172,14 @@ const ServiceFactory = {
     update<TRecord extends RecordType, TPathParams extends any>(
         recordType: new () => TRecord,
         resourceEndpoint: string
-    ): UpdateService<TRecord, TPathParams> {
-        return (record: TRecord, pathParams?: any) =>
+    ): UpdateServiceWithSignal<TRecord, TPathParams> {
+        return (record: TRecord, pathParams?: any, signal?: AbortSignal) =>
             _update<TRecord, TPathParams>(
                 recordType,
                 record,
                 resourceEndpoint,
-                pathParams
+                pathParams,
+                signal
             );
     },
 };
@@ -188,7 +209,8 @@ const _bulkUpdate = async function <
     recordType: new () => TRecord,
     records: TRecord[],
     resourceEndpoint: string,
-    pathParams: TPathParams
+    pathParams: TPathParams,
+    signal?: AbortSignal
 ) {
     const url = RouteUtils.getUrlFromPath(resourceEndpoint, pathParams);
 
@@ -200,7 +222,8 @@ const _bulkUpdate = async function <
 
     const response = await axios.put(
         url,
-        records.map((r: TRecord) => r.toJS())
+        records.map((r: TRecord) => r.toJS()),
+        { signal }
     );
 
     return ServiceUtils.mapPagedAxiosResponse(recordType, response);
@@ -209,20 +232,26 @@ const _bulkUpdate = async function <
 const _create = async function <TRecord extends RecordType>(
     recordType: new () => TRecord,
     url: string,
-    record?: TRecord
+    record?: TRecord,
+    signal?: AbortSignal
 ) {
-    const requestData = record != null ? record.toJS() : null;
+    if (!record) {
+        throw new TypeError(
+            `Could not create resource. Record value was invalid.`
+        );
+    }
 
     return axios
-        .post(url, requestData)
+        .post(url, record.toJS(), { signal })
         .then((r) => ServiceUtils.mapAxiosResponse(recordType, r));
 };
 
 const _delete = async function (
     id: number,
     resourceEndpoint: string,
-    pathParams?: any
-) {
+    pathParams?: any,
+    signal?: AbortSignal
+): Promise<ServiceResponse<boolean>> {
     const url = _buildUrl(id, resourceEndpoint, pathParams);
 
     if (!url) {
@@ -231,16 +260,24 @@ const _delete = async function (
         );
     }
 
-    return axios
-        .delete(url)
-        .then((r) => ServiceUtils.mapAxiosResponse(Boolean, r));
+    return axios.delete(url, { signal }).then((r) => {
+        return {
+            resultObjects: [],
+            rowCount: 1,
+            status: r.status,
+            resultObject: r.data?.resultObject
+                ? Boolean(r.data?.resultObject)
+                : undefined,
+        };
+    });
 };
 
-const _get = async function <TRecord, TPathParams, TQueryParams = undefined>(
+const _get = function <TRecord, TPathParams, TQueryParams = undefined>(
     recordType: new () => TRecord,
     resourceEndpoint: string,
     pathParams: TPathParams,
-    queryParams?: TQueryParams
+    queryParams?: TQueryParams,
+    signal?: AbortSignal
 ) {
     const url = RouteUtils.getUrlFromPath(
         resourceEndpoint,
@@ -255,15 +292,16 @@ const _get = async function <TRecord, TPathParams, TQueryParams = undefined>(
     }
 
     return axios
-        .get(url)
-        .then((r) => ServiceUtils.mapAxiosResponse(recordType, r));
+        .get(url, { signal })
+        .then((result) => ServiceUtils.mapAxiosResponse(recordType, result));
 };
 
 const _list = async function <TRecord extends any>(
     recordType: new () => TRecord,
     baseEndpoint: string,
     pathParams?: any,
-    queryParams?: any
+    queryParams?: any,
+    signal?: AbortSignal
 ) {
     const url = RouteUtils.getUrlFromPath(
         baseEndpoint,
@@ -278,7 +316,7 @@ const _list = async function <TRecord extends any>(
     }
 
     return axios
-        .get(url)
+        .get(url, { signal })
         .then((r) => ServiceUtils.mapPagedAxiosResponse(recordType, r));
 };
 
@@ -289,7 +327,8 @@ const _update = async function <
     recordType: new () => TRecord,
     record: TRecord,
     resourceEndpoint: string,
-    pathParams?: TPathParams
+    pathParams?: TPathParams,
+    signal?: AbortSignal
 ) {
     const url = _buildUrl(record.id, resourceEndpoint, pathParams);
 
@@ -300,7 +339,7 @@ const _update = async function <
     }
 
     return axios
-        .put(url, record.toJS())
+        .put(url, record.toJS(), { signal })
         .then((r) => ServiceUtils.mapAxiosResponse(recordType, r));
 };
 

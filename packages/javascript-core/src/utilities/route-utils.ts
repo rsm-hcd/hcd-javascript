@@ -6,7 +6,7 @@ import { QueryStringArrayFormat } from "../enumerations/query-string-array-forma
 // #region Constants
 // -----------------------------------------------------------------------------------------
 
-const _routeParamRegEx = /(:[a-z_-]*)/gi;
+const _routeParamRegEx = /(:[a-z_-]+)/gi;
 
 // #endregion Constants
 
@@ -78,11 +78,11 @@ const getUrlFromPath = (
         return path;
     }
 
-    if (pathParams != null) {
+    if (pathParams != null && Object.keys(pathParams).length > 0) {
         path = replacePathParams(path, pathParams);
     }
 
-    if (queryParams != null) {
+    if (queryParams != null && Object.keys(queryParams).length > 0) {
         path = appendQueryParams(path, queryParams);
     }
 
@@ -128,17 +128,22 @@ const replacePathParams = (path: string, pathParams: any) => {
     }
 
     return path.replace(_routeParamRegEx, (a, b) => {
-        const value = pathParams[b.substring(1)];
+        const key = b.substring(1);
 
-        if (value != null) {
-            return value;
+        if (!key) {
+            return a;
         }
 
-        console.error(
-            `routeUtils::getUrl cannot find value for path parameter ${a}`
-        );
+        const value = pathParams[key];
 
-        return a;
+        if (!value) {
+            console.error(
+                `routeUtils::getUrl cannot find value for path parameter: ${key}`
+            );
+            return a;
+        }
+
+        return value;
     });
 };
 
