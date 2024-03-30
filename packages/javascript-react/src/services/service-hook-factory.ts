@@ -1,10 +1,7 @@
-/**
- * Disabling eslint rule as currently it does not support currying of custom hooks
- * and thinks we are calling it
- */
+/* eslint-disable react-hooks/rules-of-hooks -- factory methods are incorrectly identified as callbacks */
 import { useCallback } from "react";
 import type { ServiceResponse } from "@rsm-hcd/javascript-core";
-import { useCancellablePromise } from "../hooks/use-cancellable-promise";
+import { CanceledError } from "axios";
 import type { BulkUpdateServiceHook } from "../types/bulk-update-service-hook-type";
 import type { CreateServiceHook } from "../types/create-service-hook-type";
 import type { DeleteServiceHook } from "../types/delete-service-hook-type";
@@ -13,6 +10,7 @@ import type { ListServiceHook } from "../types/list-service-hook-type";
 import type { NestedCreateServiceHook } from "../types/nested-create-service-hook-type";
 import type { NestedListServiceHook } from "../types/nested-list-service-hook-type";
 import type { UpdateServiceHook } from "../types/update-service-hook-type";
+import { useAbortSignal } from "../hooks/use-abort-signal";
 import type { RecordType } from "./service-factory";
 import { ServiceFactory } from "./service-factory";
 
@@ -34,22 +32,33 @@ const ServiceHookFactory = {
         recordType: new () => TRecord,
         resourceEndpoint: string
     ): BulkUpdateServiceHook<TRecord, TPathParams> {
-        return () => {
-            const { cancellablePromise } = useCancellablePromise();
+        const serviceUpdate = ServiceFactory.bulkUpdate(
+            recordType,
+            resourceEndpoint
+        );
 
-            const serviceUpdate = ServiceFactory.bulkUpdate(
-                recordType,
-                resourceEndpoint
+        return () => {
+            const signal = useAbortSignal();
+
+            const update = useCallback(
+                async function update(
+                    records: TRecord[],
+                    pathParams?: TPathParams
+                ): Promise<ServiceResponse<TRecord>> {
+                    try {
+                        return await serviceUpdate(records, pathParams, signal);
+                    } catch (error) {
+                        if (!(error instanceof CanceledError)) {
+                            throw error;
+                        }
+                    }
+
+                    return { status: 0, resultObjects: [], rowCount: 0 };
+                },
+                [signal]
             );
 
-            function update(
-                records: TRecord[],
-                pathParams: TPathParams
-            ): Promise<ServiceResponse<TRecord>> {
-                return cancellablePromise(serviceUpdate(records, pathParams));
-            }
-
-            return { update: useCallback(update, []) };
+            return { update };
         };
     },
 
@@ -67,21 +76,29 @@ const ServiceHookFactory = {
         recordType: new () => TRecord,
         baseEndpoint: string
     ): CreateServiceHook<TRecord> {
-        return () => {
-            const { cancellablePromise } = useCancellablePromise();
+        const serviceCreate = ServiceFactory.create(recordType, baseEndpoint);
 
-            const serviceCreate = ServiceFactory.create(
-                recordType,
-                baseEndpoint
+        return () => {
+            const signal = useAbortSignal();
+
+            const create = useCallback(
+                async function create(
+                    record: TRecord
+                ): Promise<ServiceResponse<TRecord>> {
+                    try {
+                        return await serviceCreate(record, signal);
+                    } catch (error) {
+                        if (!(error instanceof CanceledError)) {
+                            throw error;
+                        }
+                    }
+
+                    return { status: 0, resultObjects: [], rowCount: 0 };
+                },
+                [signal]
             );
 
-            function create(
-                record?: TRecord
-            ): Promise<ServiceResponse<TRecord>> {
-                return cancellablePromise(serviceCreate(record));
-            }
-
-            return { create: useCallback(create, []) };
+            return { create };
         };
     },
 
@@ -92,19 +109,30 @@ const ServiceHookFactory = {
      * @param baseEndpoint
      */
     useDelete(resourceEndpoint: string): DeleteServiceHook {
+        const serviceDelete = ServiceFactory.delete(resourceEndpoint);
+
         return () => {
-            const { cancellablePromise } = useCancellablePromise();
+            const signal = useAbortSignal();
 
-            const serviceDelete = ServiceFactory.delete(resourceEndpoint);
+            const _delete = useCallback(
+                async function (
+                    id: number,
+                    pathParams?: any
+                ): Promise<ServiceResponse<boolean>> {
+                    try {
+                        return await serviceDelete(id, pathParams, signal);
+                    } catch (error) {
+                        if (!(error instanceof CanceledError)) {
+                            throw error;
+                        }
+                    }
 
-            function _delete(
-                id: number,
-                pathParams?: any
-            ): Promise<ServiceResponse<Boolean>> {
-                return cancellablePromise(serviceDelete(id, pathParams));
-            }
+                    return { status: 0, resultObjects: [], rowCount: 0 };
+                },
+                [signal]
+            );
 
-            return { delete: useCallback(_delete, []) };
+            return { delete: _delete };
         };
     },
 
@@ -118,23 +146,38 @@ const ServiceHookFactory = {
         recordType: new () => TRecord,
         resourceEndpoint: string
     ): GetServiceHook<TRecord, TPathParams, TQueryParams> {
+        const serviceGet = ServiceFactory.get<
+            TRecord,
+            TPathParams,
+            TQueryParams
+        >(recordType, resourceEndpoint);
+
         return () => {
-            const { cancellablePromise } = useCancellablePromise();
+            const signal = useAbortSignal();
 
-            const serviceGet = ServiceFactory.get<
-                TRecord,
-                TPathParams,
-                TQueryParams
-            >(recordType, resourceEndpoint);
+            const get = useCallback(
+                async function get(
+                    pathParams: TPathParams,
+                    queryParams?: TQueryParams
+                ): Promise<ServiceResponse<TRecord>> {
+                    try {
+                        return await serviceGet(
+                            pathParams,
+                            queryParams,
+                            signal
+                        );
+                    } catch (error) {
+                        if (!(error instanceof CanceledError)) {
+                            throw error;
+                        }
+                    }
 
-            function get(
-                pathParams: TPathParams,
-                queryParams?: TQueryParams
-            ): Promise<ServiceResponse<TRecord>> {
-                return cancellablePromise(serviceGet(pathParams, queryParams));
-            }
+                    return { status: 0, resultObjects: [], rowCount: 0 };
+                },
+                [signal]
+            );
 
-            return { get: useCallback(get, []) };
+            return { get };
         };
     },
 
@@ -152,21 +195,32 @@ const ServiceHookFactory = {
         recordType: new () => TRecord,
         baseEndpoint: string
     ): ListServiceHook<TRecord, TQueryParams> {
-        return () => {
-            const { cancellablePromise } = useCancellablePromise();
+        const serviceList = ServiceFactory.list<TRecord, TQueryParams>(
+            recordType,
+            baseEndpoint
+        );
 
-            const serviceList = ServiceFactory.list<TRecord, TQueryParams>(
-                recordType,
-                baseEndpoint
+        return () => {
+            const signal = useAbortSignal();
+
+            const list = useCallback(
+                async function list(
+                    queryParams?: TQueryParams
+                ): Promise<ServiceResponse<TRecord>> {
+                    try {
+                        return await serviceList(queryParams, signal);
+                    } catch (error) {
+                        if (!(error instanceof CanceledError)) {
+                            throw error;
+                        }
+                    }
+
+                    return { status: 0, resultObjects: [], rowCount: 0 };
+                },
+                [signal]
             );
 
-            function list(
-                queryParams?: TQueryParams
-            ): Promise<ServiceResponse<TRecord>> {
-                return cancellablePromise(serviceList(queryParams));
-            }
-
-            return { list: useCallback(list, []) };
+            return { list };
         };
     },
 
@@ -180,22 +234,33 @@ const ServiceHookFactory = {
         recordType: new () => TRecord,
         baseEndpoint: string
     ): NestedCreateServiceHook<TRecord, TPathParams> {
+        const serviceCreate = ServiceFactory.nestedCreate<TRecord, TPathParams>(
+            recordType,
+            baseEndpoint
+        );
+
         return () => {
-            const { cancellablePromise } = useCancellablePromise();
+            const signal = useAbortSignal();
 
-            const serviceCreate = ServiceFactory.nestedCreate<
-                TRecord,
-                TPathParams
-            >(recordType, baseEndpoint);
+            const create = useCallback(
+                async function create(
+                    record: TRecord,
+                    pathParams: TPathParams
+                ): Promise<ServiceResponse<TRecord>> {
+                    try {
+                        return await serviceCreate(record, pathParams, signal);
+                    } catch (error) {
+                        if (!(error instanceof CanceledError)) {
+                            throw error;
+                        }
+                    }
 
-            function create(
-                record: TRecord,
-                pathParams: TPathParams
-            ): Promise<ServiceResponse<TRecord>> {
-                return cancellablePromise(serviceCreate(record, pathParams));
-            }
+                    return { status: 0, resultObjects: [], rowCount: 0 };
+                },
+                [signal]
+            );
 
-            return { create: useCallback(create, []) };
+            return { create };
         };
     },
 
@@ -209,23 +274,38 @@ const ServiceHookFactory = {
         recordType: new () => TRecord,
         baseEndpoint: string
     ): NestedListServiceHook<TRecord, TPathParams, TQueryParams> {
+        const serviceList = ServiceFactory.nestedList<
+            TRecord,
+            TPathParams,
+            TQueryParams
+        >(recordType, baseEndpoint);
+
         return () => {
-            const { cancellablePromise } = useCancellablePromise();
+            const signal = useAbortSignal();
 
-            const serviceList = ServiceFactory.nestedList<
-                TRecord,
-                TPathParams,
-                TQueryParams
-            >(recordType, baseEndpoint);
+            const list = useCallback(
+                async function list(
+                    pathParams: TPathParams,
+                    queryParams?: TQueryParams
+                ): Promise<ServiceResponse<TRecord>> {
+                    try {
+                        return await serviceList(
+                            pathParams,
+                            queryParams,
+                            signal
+                        );
+                    } catch (error) {
+                        if (!(error instanceof CanceledError)) {
+                            throw error;
+                        }
+                    }
 
-            function list(
-                pathParams: TPathParams,
-                queryParams?: TQueryParams
-            ): Promise<ServiceResponse<TRecord>> {
-                return cancellablePromise(serviceList(pathParams, queryParams));
-            }
+                    return { status: 0, resultObjects: [], rowCount: 0 };
+                },
+                [signal]
+            );
 
-            return { list: useCallback(list, []) };
+            return { list };
         };
     },
 
@@ -239,22 +319,33 @@ const ServiceHookFactory = {
         recordType: new () => TRecord,
         resourceEndpoint: string
     ): UpdateServiceHook<TRecord, TPathParams> {
-        return () => {
-            const { cancellablePromise } = useCancellablePromise();
+        const serviceUpdate = ServiceFactory.update(
+            recordType,
+            resourceEndpoint
+        );
 
-            const serviceUpdate = ServiceFactory.update(
-                recordType,
-                resourceEndpoint
+        return () => {
+            const signal = useAbortSignal();
+
+            const update = useCallback(
+                async function update(
+                    record: TRecord,
+                    pathParams?: TPathParams
+                ): Promise<ServiceResponse<TRecord>> {
+                    try {
+                        return await serviceUpdate(record, pathParams, signal);
+                    } catch (error) {
+                        if (!(error instanceof CanceledError)) {
+                            throw error;
+                        }
+                    }
+
+                    return { status: 0, resultObjects: [], rowCount: 0 };
+                },
+                [signal]
             );
 
-            function update(
-                record: TRecord,
-                pathParams?: TPathParams
-            ): Promise<ServiceResponse<TRecord>> {
-                return cancellablePromise(serviceUpdate(record, pathParams));
-            }
-
-            return { update: useCallback(update, []) };
+            return { update };
         };
     },
 };

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies -- jest-mock-axios is installed in devDependencies */
 import { useState, useEffect } from "react";
 import { Factory } from "rosie";
 import { render, waitFor } from "@testing-library/react";
