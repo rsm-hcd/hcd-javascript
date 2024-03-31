@@ -25,6 +25,7 @@ export const handlers = [
     http.get("/api/todos", () => {
         return HttpResponse.json(ServiceResponseFactory.create(todos));
     }),
+
     http.get("/api/todos/:id", ({ params }) => {
         const id = Number(params.id);
         const todo = todos.find((todo) => todo.id === id);
@@ -35,6 +36,7 @@ export const handlers = [
         }
         return HttpResponse.json(ServiceResponseFactory.create(todo));
     }),
+
     http.post("/api/todos", async ({ request }) => {
         const todo = (await request.json()) as Todo;
         const newTodo = { ...todo, id: nextTodoId++ };
@@ -42,6 +44,7 @@ export const handlers = [
 
         return HttpResponse.json(ServiceResponseFactory.create(newTodo));
     }),
+
     http.put("/api/todos/:id", async ({ params, request }) => {
         const id = Number(params.id);
         const updatedTodo = (await request.json()) as Todo;
@@ -50,6 +53,7 @@ export const handlers = [
 
         return HttpResponse.json(ServiceResponseFactory.create(updatedTodo));
     }),
+
     http.delete("/api/todos/:id", ({ params }) => {
         const id = Number(params.id);
         const index = todos.findIndex((todo) => todo.id === id);
