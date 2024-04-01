@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/no-empty-interface -- for testing purposes */
-/* eslint-disable import/no-extraneous-dependencies -- jest-mock-axios is installed in devDependencies */
 
 import { Factory } from "rosie";
 import { StubResourceRecord, FactoryType } from "@rsm-hcd/javascript-testing";
 import { CanceledError } from "axios";
-import { setupMockAPI } from "../tests/setup-mock-api";
+import { setupMockApi } from "../tests/setup-mock-api";
 import { ServiceFactory } from "./service-factory";
 
 // -----------------------------------------------------------------------------------------
@@ -29,7 +28,7 @@ const {
     mockDeleteSuccess,
     mockPutSuccess,
     mockPostSuccess,
-} = setupMockAPI({
+} = setupMockApi({
     baseEndpoint,
     resourceEndpoint,
     nestedBaseEndpoint,

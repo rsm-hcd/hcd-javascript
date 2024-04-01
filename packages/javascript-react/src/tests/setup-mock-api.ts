@@ -2,17 +2,17 @@ import { Record } from "immutable";
 import { delay, HttpResponse, http } from "msw";
 import { setupServer } from "msw/node";
 
-interface SetupMockAPIOptions {
+interface SetupMockApiOptions {
     baseEndpoint: string;
     resourceEndpoint?: string;
     nestedBaseEndpoint?: string;
 }
 
-export function setupMockAPI({
+export function setupMockApi({
     baseEndpoint,
     resourceEndpoint,
     nestedBaseEndpoint,
-}: SetupMockAPIOptions) {
+}: SetupMockApiOptions) {
     let _mockGetResponse: () => Promise<any> = () => Promise.resolve();
     let _mockPutResponse: () => Promise<any> = () => Promise.resolve();
     let _mockPostResponse: () => Promise<any> = () => Promise.resolve();

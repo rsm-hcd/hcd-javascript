@@ -1,7 +1,7 @@
 import { act, renderHook, waitFor } from "@testing-library/react";
 import { Record } from "immutable";
 import { ServiceFactory } from "../../services/service-factory";
-import { setupMockAPI } from "../../tests/setup-mock-api";
+import { setupMockApi } from "../../tests/setup-mock-api";
 import { useUpdateService } from "./use-update";
 
 // ---------------------------------------------------------------------------------------------
@@ -12,7 +12,7 @@ const endpoint = "records";
 const baseEndpoint = `http://api.local/${endpoint}`;
 const resourceEndpoint = `http://api.local/${endpoint}/:id`;
 
-const { server, mockPutSuccess } = setupMockAPI({
+const { server, mockPutSuccess } = setupMockApi({
     baseEndpoint,
     resourceEndpoint,
 });

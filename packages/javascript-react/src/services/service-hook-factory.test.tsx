@@ -1,10 +1,9 @@
-/* eslint-disable import/no-extraneous-dependencies -- jest-mock-axios is installed in devDependencies */
 import { useState, useEffect } from "react";
 import { Factory } from "rosie";
 import { render, waitFor } from "@testing-library/react";
 import { StubResourceRecord, FactoryType } from "@rsm-hcd/javascript-testing";
 import { CoreUtils } from "@rsm-hcd/javascript-core";
-import { setupMockAPI } from "../tests/setup-mock-api";
+import { setupMockApi } from "../tests/setup-mock-api";
 import { ServiceHookFactory } from "./service-hook-factory";
 
 // ---------------------------------------------------------------------------------------------
@@ -30,7 +29,7 @@ const {
     mockDeleteSuccess,
     mockPutSuccess,
     mockPostSuccess,
-} = setupMockAPI({
+} = setupMockApi({
     baseEndpoint,
     resourceEndpoint,
     nestedBaseEndpoint,

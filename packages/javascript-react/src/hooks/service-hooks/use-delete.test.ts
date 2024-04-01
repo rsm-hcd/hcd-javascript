@@ -1,7 +1,7 @@
 import { renderHook, waitFor } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
 import { ServiceFactory } from "../../services/service-factory";
-import { setupMockAPI } from "../../tests/setup-mock-api";
+import { setupMockApi } from "../../tests/setup-mock-api";
 import { useDeleteService } from "./use-delete";
 
 // ---------------------------------------------------------------------------------------------
@@ -12,7 +12,7 @@ const endpoint = "records";
 const baseEndpoint = `http://api.local/${endpoint}`;
 const resourceEndpoint = `${baseEndpoint}/:id`;
 
-const { server, mockDeleteSuccess } = setupMockAPI({
+const { server, mockDeleteSuccess } = setupMockApi({
     baseEndpoint,
     resourceEndpoint,
 });
