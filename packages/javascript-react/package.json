@@ -29,7 +29,7 @@
         "@testing-library/react": "^14.2.2",
         "@testing-library/react-hooks": "^8.0.1",
         "@types/jest": "^29.5.12",
-        "@types/node": "20.11.20",
+        "@types/node": "20.12.6",
         "@types/react": "^18.2.73",
         "@types/react-dom": "^18.2.23",
         "@types/rosie": "0.0.45",
