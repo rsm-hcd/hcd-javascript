@@ -27,23 +27,23 @@ jobs:
             matrix:
                 include:
                     - os: windows-latest
-                      node: 18.20.0
+                      node: 18.20.3
                       allowed-to-fail: false
                     - os: windows-latest
-                      node: 20.12.0
+                      node: 20.15.0
                       allowed-to-fail: true
         continue-on-error: ${{matrix.allowed-to-fail}}
 
         steps:
             - name: Checkout
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
 
             - name: Install Node.js ${{matrix.node}}
-              uses: actions/setup-node@v3
+              uses: actions/setup-node@v4
               with:
                   node-version: ${{matrix.node}}
 
-            - uses: pnpm/action-setup@v2
+            - uses: pnpm/action-setup@v4
               name: Install pnpm
               with:
                   version: 8
@@ -54,7 +54,7 @@ jobs:
               run: |
                   echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
 
-            - uses: actions/cache@v3
+            - uses: actions/cache@v4
               name: Setup pnpm cache
               with:
                   path: ${{ env.STORE_PATH }}
@@ -63,7 +63,7 @@ jobs:
                       ${{ runner.os }}-pnpm-store-
 
             - name: Install dependencies
-              run: pnpm install
+              run: pnpm i -frozen-lockfile
 
             - name: Run test
               run: pnpm run test
