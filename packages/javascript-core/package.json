@@ -4,15 +4,24 @@
     "description": "Common patterns, functions, etc... used when building any JavaScript or TypeScript application",
     "homepage": "https://github.com/rsm-hcd/hcd-javascript/tree/main/packages/javascript-core",
     "license": "MIT",
-    "main": "dist/index.js",
-    "module": "dist/index.mjs",
-    "types": "dist/index.d.ts",
+    "type": "module",
+    "main": "./dist/index.cjs",
+    "module": "./dist/index.js",
+    "types": "./dist/index.d.ts",
     "exports": {
         ".": {
-            "require": "./dist/index.js",
-            "import": "./dist/index.mjs",
-            "types": "./dist/index.d.ts"
-        }
+            "import": {
+                "@rsm-hcd/source": "./src/index.ts",
+                "types": "./dist/index.d.ts",
+                "default": "./dist/index.js"
+            },
+            "require": {
+                "@rsm-hcd/source": "./src/index.ts",
+                "types": "./dist/index.d.cts",
+                "default": "./dist/index.cjs"
+            }
+        },
+        "./package.json": "./package.json"
     },
     "dependencies": {
         "@rsm-hcd/javascript-testing": "workspace:*",
@@ -73,8 +82,8 @@
         "directory": "packages/javascript-core"
     },
     "scripts": {
-        "build": "tsup ./src/index.ts --format cjs,esm --onSuccess \"tsc --emitDeclarationOnly --declaration\"",
-        "build:prod": "pnpm run clean && tsup ./src/index.ts --minify --format cjs,esm --dts",
+        "build": "tsup ./src/index.ts --format cjs,esm --dts --sourcemap",
+        "build:prod": "pnpm run clean && tsup ./src/index.ts --minify --format cjs,esm --clean --dts --sourcemap",
         "clean": "rimraf dist && rimraf coverage",
         "coverage": "jest ./src --coverage",
         "dev": "pnpm run build --watch",
@@ -92,7 +101,7 @@
             "eslint --fix",
             "prettier --write -u"
         ],
-        "*.{md}": [
+        "*.md": [
             "prettier --write -u"
         ]
     }

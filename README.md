@@ -12,10 +12,8 @@ This is a monorepo consisting of numerous core JavaScript packages utilized by e
 
 ## Getting Started
 
-- (Optional) Install [Volta](https://volta.sh/)
-  - _If Volta is installed, installing the remaining dependencies can be skipped since Volta handles that for you based it's configuration in `package.json`_
-- Install [Node.js](https://nodejs.org/en/) (v18 or higher)
-- Install [pnpm](https://pnpm.io/) (v8 or higher)
+- Install [Node.js](https://nodejs.org/en/) (v20 or higher)
+- Install [pnpm](https://pnpm.io/) (v9 or higher)
 - Commands
   - `pnpm install`: Install dependencies
   - `pnpm run build`: Build all packages

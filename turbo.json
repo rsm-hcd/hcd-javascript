@@ -20,7 +20,9 @@
                 "dist/**"
             ]
         },
-        "clean": {},
+        "clean": {
+            "cache": false
+        },
         "dev": {
             "dependsOn": [
                 "^build"

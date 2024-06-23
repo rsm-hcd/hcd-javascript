@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { CanceledError } from "axios";
-import type { RecordType } from "services/service-factory";
+import type { RecordType } from "../../services/service-factory";
 import { useAbortSignal } from "../use-abort-signal";
 import type { UpdateServiceWithSignal } from "../../types/update-service-type";
 
