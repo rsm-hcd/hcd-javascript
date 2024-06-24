@@ -74,22 +74,61 @@ export { ServiceHookFactory } from "./services/service-hook-factory";
 // -----------------------------------------------------------------------------------------
 
 export type { AsyncEffectCallback } from "./types/async-effect-callback-type";
-export type { BulkUpdateService } from "./types/bulk-update-service-type";
+export type {
+    BulkUpdateService,
+    BulkUpdateServiceWithSignal,
+} from "./types/bulk-update-service-type";
 export type { BulkUpdateServiceHook } from "./types/bulk-update-service-hook-type";
-export type { CreateService } from "./types/create-service-type";
+export type {
+    CreateService,
+    CreateServiceWithSignal,
+} from "./types/create-service-type";
 export type { CreateServiceHook } from "./types/create-service-hook-type";
-export type { DeleteService } from "./types/delete-service-type";
+export type {
+    DeleteService,
+    DeleteServiceWithSignal,
+} from "./types/delete-service-type";
 export type { DeleteServiceHook } from "./types/delete-service-hook-type";
-export type { GetService } from "./types/get-service-type";
-export type { GetServiceHook } from "./types/get-service-hook-type";
-export type { ListService } from "./types/list-service-type";
-export type { ListServiceHook } from "./types/list-service-hook-type";
-export type { NestedCreateService } from "./types/nested-create-service-type";
-export type { NestedCreateServiceHook } from "./types/nested-create-service-hook-type";
-export type { NestedListService } from "./types/nested-list-service-type";
-export type { NestedListServiceHook } from "./types/nested-list-service-hook-type";
-export type { UpdateService } from "./types/update-service-type";
-export type { UpdateServiceHook } from "./types/update-service-hook-type";
+export type {
+    GetService,
+    GetServiceWithSignal,
+} from "./types/get-service-type";
+export type {
+    GetServiceHook,
+    GetServiceHookWithSignal,
+} from "./types/get-service-hook-type";
+export type {
+    ListService,
+    ListServiceWithSignal,
+} from "./types/list-service-type";
+export type {
+    ListServiceHook,
+    ListServiceHookWithSignal,
+} from "./types/list-service-hook-type";
+export type {
+    NestedCreateService,
+    NestedCreateServiceWithSignal,
+} from "./types/nested-create-service-type";
+export type {
+    NestedCreateServiceHook,
+    NestedCreateServiceHookWithSignal,
+} from "./types/nested-create-service-hook-type";
+export type {
+    NestedListService,
+    NestedListServiceWithSignal,
+} from "./types/nested-list-service-type";
+export type {
+    NestedListServiceHook,
+    NestedListServiceHookWithSignal,
+} from "./types/nested-list-service-hook-type";
+export type {
+    UpdateService,
+    UpdateServiceWithSignal,
+} from "./types/update-service-type";
+export type {
+    UpdateServiceHook,
+    UpdateServiceHookWithSignal,
+} from "./types/update-service-hook-type";
 
 // #endregion Types
 

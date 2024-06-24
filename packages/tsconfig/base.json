@@ -2,25 +2,38 @@
     "$schema": "https://json.schemastore.org/tsconfig",
     "display": "Default",
     "compilerOptions": {
+        "allowJs": true,
         "composite": false,
         "declaration": true,
         "declarationMap": true,
+        "emitDecoratorMetadata": true,
         "esModuleInterop": true,
+        "experimentalDecorators": true,
         "forceConsistentCasingInFileNames": true,
+        "incremental": false,
         "inlineSources": false,
         "isolatedModules": true,
-        "moduleResolution": "node",
+        "lib": [
+            "ES2022",
+            "DOM",
+            "DOM.Iterable"
+        ],
+        "module": "ESNext",
+        "moduleDetection": "force",
+        "moduleResolution": "Bundler",
+        "noUncheckedIndexedAccess": true,
         "noUnusedLocals": false,
+        "noUnusedParameters": true,
         "preserveWatchOutput": true,
+        "removeComments": false,
+        "resolveJsonModule": true,
         "skipLibCheck": true,
         "strict": true,
         "strictNullChecks": true,
-        "allowJs": true,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "noUnusedParameters": true,
-        "removeComments": false,
-        "resolveJsonModule": true
+        "target": "ES5",
+        "customConditions": [
+            "@rsm-hcd/source"
+        ]
     },
     "exclude": [
         "node_modules",
