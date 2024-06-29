@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { CanceledError } from "axios";
 import { useAbortSignal } from "../use-abort-signal";
 import type { GetServiceWithSignal } from "../../types/get-service-type";
+import { useDeepMemo } from "../use-deep-memo";
 
 interface UseGetServiceHook<TRecord> {
     error?: Error;
@@ -25,7 +26,7 @@ export function useGetService<TRecord, TPathParams, TQueryParams>(
     getService: GetServiceWithSignal<TRecord, TPathParams, TQueryParams>,
     options: UseGetServiceHookOptions<TPathParams, TQueryParams>
 ): UseGetServiceHook<TRecord> {
-    const { autoLoad = true, pathParams, queryParams } = options;
+    const { autoLoad = true, pathParams, queryParams } = useDeepMemo(options);
 
     const signal = useAbortSignal();
     const [isLoading, setIsLoading] = useState(true);
