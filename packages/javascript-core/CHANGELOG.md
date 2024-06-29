@@ -1,5 +1,22 @@
 # @rsm-hcd/javascript-core
 
+## 3.0.0
+
+### Major Changes
+
+-   align all major versions
+
+### Patch Changes
+
+-   7305067: update docs build
+-   86ab2b0: npm dependency updates and monorepo config changes
+-   6a1bab5: general updates
+-   Updated dependencies [7305067]
+-   Updated dependencies
+-   Updated dependencies [86ab2b0]
+-   Updated dependencies [6a1bab5]
+    -   @rsm-hcd/javascript-testing@2.0.0
+
 ## 1.2.0
 
 ### Minor Changes

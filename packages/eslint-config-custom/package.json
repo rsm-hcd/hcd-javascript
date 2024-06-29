@@ -1,11 +1,11 @@
 {
-  "name": "@rsm-hcd/eslint-config-custom",
-  "version": "0.1.0",
-  "license": "MIT",
-  "private": true,
-  "devDependencies": {
-    "@vercel/style-guide": "^5.2.0",
-    "eslint-config-turbo": "^1.13.4",
-    "typescript": "^5.5.2"
-  }
+    "name": "@rsm-hcd/eslint-config-custom",
+    "version": "3.0.0",
+    "license": "MIT",
+    "private": true,
+    "devDependencies": {
+        "@vercel/style-guide": "^5.2.0",
+        "eslint-config-turbo": "^1.13.4",
+        "typescript": "^5.5.2"
+    }
 }

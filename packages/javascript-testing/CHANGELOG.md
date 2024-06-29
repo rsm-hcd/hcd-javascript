@@ -1,5 +1,17 @@
 # @rsm-hcd/javascript-testing
 
+## 3.0.0
+
+### Major Changes
+
+-   align all major versions
+
+### Patch Changes
+
+-   7305067: update docs build
+-   86ab2b0: npm dependency updates and monorepo config changes
+-   6a1bab5: general updates
+
 ## 1.3.1
 
 ### Patch Changes

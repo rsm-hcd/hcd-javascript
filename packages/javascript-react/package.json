@@ -1,6 +1,6 @@
 {
     "name": "@rsm-hcd/javascript-react",
-    "version": "2.0.0",
+    "version": "3.0.0",
     "description": "Common patterns, functions, etc... used when building react applications",
     "homepage": "https://github.com/rsm-hcd/hcd-javascript/tree/main/packages/javascript-react",
     "license": "MIT",
@@ -78,7 +78,7 @@
         "React"
     ],
     "peerDependencies": {
-        "@rsm-hcd/javascript-core": ">=1.2.0",
+        "@rsm-hcd/javascript-core": ">=2.0.0",
         "axios": ">=1.6.0",
         "i18next": ">=23.8.0",
         "immutable": "^4.3.5",
