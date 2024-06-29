@@ -1,7 +1,11 @@
 {
     "$schema": "https://turbo.build/schema.json",
     "globalDependencies": [
+        "**/.env",
         "**/.env.*local"
+    ],
+    "globalPassThroughEnv": [
+        "TURBO_UI"
     ],
     "tasks": {
         "build": {
@@ -24,6 +28,7 @@
             "cache": false
         },
         "dev": {
+            "persistent": true,
             "dependsOn": [
                 "^build"
             ],
@@ -36,6 +41,15 @@
         },
         "lint:fix": {},
         "test": {
+            "dependsOn": [
+                "^build"
+            ],
+            "outputs": [
+                "dist/**"
+            ]
+        },
+        "test:watch": {
+            "persistent": true,
             "dependsOn": [
                 "^build"
             ],

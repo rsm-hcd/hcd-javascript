@@ -9,6 +9,7 @@ on:
 
 env:
     CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
+    TURBO_UI: 0
 
 permissions:
     contents: read
@@ -62,7 +63,7 @@ jobs:
                       ${{ runner.os }}-pnpm-store-
 
             - name: Install dependencies
-              run: pnpm i -frozen-lockfile
+              run: pnpm i --frozen-lockfile
 
             - name: Run test
               run: pnpm run test

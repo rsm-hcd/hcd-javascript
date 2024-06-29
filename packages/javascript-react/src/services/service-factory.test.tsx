@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-interface -- for testing purposes */
 
 import { Factory } from "rosie";
-import { StubResourceRecord, FactoryType } from "@rsm-hcd/javascript-testing";
+import { FactoryType, StubResourceRecord } from "@rsm-hcd/javascript-testing";
 import { CanceledError } from "axios";
 import { setupMockApi } from "../tests/setup-mock-api";
 import { ServiceFactory } from "./service-factory";
@@ -99,7 +99,7 @@ describe("ServiceFactory", () => {
             // Assert
             expect(response.resultObjects).not.toBeNull();
             expect(response.resultObjects).toBeInstanceOf(Array);
-            expect(response.resultObjects[0].name).toEqual(expected.name);
+            expect(response.resultObjects[0]?.name).toEqual(expected.name);
         });
     });
 
@@ -295,7 +295,7 @@ describe("ServiceFactory", () => {
                 const expected = expectedResults[i];
                 const resultObject = resultObjects[i];
                 expect(resultObject).toBeInstanceOf(StubResourceRecord);
-                expect(resultObject.name).toEqual(expected.name);
+                expect(resultObject?.name).toEqual(expected?.name);
             }
         });
     });
@@ -384,7 +384,7 @@ describe("ServiceFactory", () => {
                 const expected = expectedResults[i];
                 const resultObject = resultObjects[i];
                 expect(resultObject).toBeInstanceOf(StubResourceRecord);
-                expect(resultObject.name).toEqual(expected.name);
+                expect(resultObject?.name).toEqual(expected?.name);
             }
         });
     });

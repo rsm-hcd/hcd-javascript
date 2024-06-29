@@ -33,8 +33,8 @@ describe("TestUtils", () => {
             expect(result).not.toBeEmpty();
             const name = result.split(".")[0];
             const extension = result.split(".")[1];
-            expect(name.length).toBeGreaterThanOrEqual(1);
-            expect(extension.length).toBeGreaterThanOrEqual(1);
+            expect(name?.length).toBeGreaterThanOrEqual(1);
+            expect(extension?.length).toBeGreaterThanOrEqual(1);
         });
     });
 

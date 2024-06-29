@@ -11,10 +11,10 @@
         "build": "turbo run build",
         "build:prod": "turbo run build:prod",
         "clean": "turbo run clean",
-        "dev": "turbo run dev",
+        "dev": "dotenvx run -- turbo run dev",
         "docs": "typedoc",
         "test": "turbo run test",
-        "test:watch": "turbo run test -- --watch",
+        "test:watch": "dotenvx run -- turbo run test:watch",
         "lint": "turbo run lint",
         "lint:fix": "turbo run lint:fix",
         "format": "prettier --write \"**/*.{ts,tsx,md}\"",
@@ -22,13 +22,15 @@
         "prepare": "pnpm husky install"
     },
     "devDependencies": {
-        "@changesets/cli": "^2.27.5",
+        "@changesets/cli": "^2.27.6",
+        "@dotenvx/dotenvx": "^1.1.0",
         "@rsm-hcd/tsconfig": "workspace:*",
         "husky": "^9.0.11",
         "lint-staged": "^15.2.7",
         "prettier": "^3.3.2",
-        "turbo": "^2.0.4",
-        "typedoc": "^0.26.1"
+        "turbo": "^2.0.6",
+        "typedoc": "^0.26.3",
+        "typescript": "^5.5.2"
     },
     "engines": {
         "node": ">=20",

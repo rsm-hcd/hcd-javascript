@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Factory } from "rosie";
 import { render, waitFor } from "@testing-library/react";
-import { StubResourceRecord, FactoryType } from "@rsm-hcd/javascript-testing";
+import { FactoryType, StubResourceRecord } from "@rsm-hcd/javascript-testing";
 import { CoreUtils } from "@rsm-hcd/javascript-core";
 import { setupMockApi } from "../tests/setup-mock-api";
 import { ServiceHookFactory } from "./service-hook-factory";
@@ -91,9 +91,8 @@ describe("ServiceHookFactory", () => {
 
             const UpdateStubComponent = () => {
                 const { update } = useBulkUpdate();
-                const [records, setRecords] = useState<StubResourceRecord[]>(
-                    null as any
-                );
+                const [records, setRecords] = useState<StubResourceRecord[]>();
+                const [firstRecord] = records ?? [];
 
                 useEffect(() => {
                     async function updateUser() {
@@ -101,9 +100,9 @@ describe("ServiceHookFactory", () => {
                         setRecords(result.resultObjects);
                     }
                     updateUser();
-                }, []);
+                }, [update]);
 
-                return <div>{records?.[0].name}</div>;
+                return <div>{firstRecord?.name}</div>;
             };
 
             // Act
@@ -141,6 +140,7 @@ describe("ServiceHookFactory", () => {
             const UpdateStubComponent = () => {
                 const { update } = useBulkUpdate();
                 const [records, setRecords] = useState<StubResourceRecord[]>();
+                const [firstRecord] = records ?? [];
 
                 useEffect(() => {
                     (async function updateUser() {
@@ -151,9 +151,9 @@ describe("ServiceHookFactory", () => {
                     return () => {
                         isUnmounted = true;
                     };
-                }, []);
+                }, [update]);
 
-                return <div>{records?.[0].name}</div>;
+                return <div>{firstRecord?.name}</div>;
             };
 
             // Act
@@ -190,16 +190,14 @@ describe("ServiceHookFactory", () => {
 
             const CreateStubComponent = () => {
                 const { create } = useCreate();
-                const [record, setRecord] = useState<StubResourceRecord>(
-                    null as any
-                );
+                const [record, setRecord] = useState<StubResourceRecord>();
 
                 useEffect(() => {
                     (async function createRecord() {
                         const result = await create(new StubResourceRecord());
-                        setRecord(result.resultObject!);
+                        setRecord(result.resultObject);
                     })();
-                }, []);
+                }, [create]);
 
                 return <div>{record?.name}</div>;
             };
@@ -252,7 +250,7 @@ describe("ServiceHookFactory", () => {
                     return () => {
                         isUnmounted = true;
                     };
-                }, []);
+                }, [create]);
 
                 return <div>{record?.name}</div>;
             };
@@ -303,7 +301,7 @@ describe("ServiceHookFactory", () => {
                         }
                     }
                     deleteStubRecord();
-                }, []);
+                }, [deleteRecord]);
 
                 return <div>{isDeleted && "deleted"}</div>;
             };
@@ -352,7 +350,7 @@ describe("ServiceHookFactory", () => {
                     return () => {
                         isUnmounted = true;
                     };
-                }, []);
+                }, [deleteRecord]);
 
                 return <div>{isDeleted && "deleted"}</div>;
             };
@@ -407,7 +405,7 @@ describe("ServiceHookFactory", () => {
                     }
 
                     getRecord();
-                }, []);
+                }, [get]);
 
                 return <div>{record?.name}</div>;
             };
@@ -458,7 +456,7 @@ describe("ServiceHookFactory", () => {
                     return () => {
                         isUnmounted = true;
                     };
-                }, []);
+                }, [get, record.id]);
 
                 return <div>{record?.name}</div>;
             };
@@ -510,7 +508,7 @@ describe("ServiceHookFactory", () => {
                         }
                     }
                     listUsers();
-                }, []);
+                }, [list]);
 
                 return <div>{records?.map((u) => u.name)}</div>;
             };
@@ -565,7 +563,7 @@ describe("ServiceHookFactory", () => {
                     return () => {
                         isUnmounted = true;
                     };
-                }, []);
+                }, [list]);
 
                 return <div>{records?.map((u) => u.name)}</div>;
             };
@@ -617,7 +615,7 @@ describe("ServiceHookFactory", () => {
                         setRecord(result.resultObject!);
                     }
                     createLogin();
-                }, []);
+                }, [create]);
 
                 return <div>{record?.name}</div>;
             };
@@ -672,7 +670,7 @@ describe("ServiceHookFactory", () => {
                     return () => {
                         isUnmounted = true;
                     };
-                }, []);
+                }, [create]);
 
                 return <div>{record?.name}</div>;
             };
@@ -726,7 +724,7 @@ describe("ServiceHookFactory", () => {
                         setRecords(result.resultObjects);
                     }
                     getRecords();
-                }, []);
+                }, [list]);
 
                 return <div>{records?.map((u) => u.name)}</div>;
             };
@@ -785,7 +783,7 @@ describe("ServiceHookFactory", () => {
                     return () => {
                         isUnmounted = true;
                     };
-                }, []);
+                }, [list]);
 
                 return <div>{records?.map((u) => u.name)}</div>;
             };
@@ -836,7 +834,7 @@ describe("ServiceHookFactory", () => {
                         setRecord(result.resultObject!);
                     }
                     updateUser();
-                }, []);
+                }, [update]);
 
                 return <div>{record?.name}</div>;
             };
@@ -887,7 +885,7 @@ describe("ServiceHookFactory", () => {
                     return () => {
                         isUnmounted = true;
                     };
-                }, []);
+                }, [update]);
 
                 return <div>{record?.name}</div>;
             };

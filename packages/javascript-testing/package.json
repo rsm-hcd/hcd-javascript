@@ -33,7 +33,7 @@
     "devDependencies": {
         "@rsm-hcd/eslint-config-custom": "workspace:*",
         "@rsm-hcd/tsconfig": "workspace:*",
-        "@swc/core": "^1.6.5",
+        "@swc/core": "^1.6.6",
         "@types/jest": "^29.5.12",
         "@types/rosie": "^0.0.45",
         "cross-env": "^7.0.3",
@@ -78,7 +78,8 @@
         "lint": "eslint \"src/**/*.ts\" --ext .ts --fix",
         "lint:fix": "pnpm run lint --fix",
         "prepublishOnly": "npm run build:prod",
-        "test": "jest ./src"
+        "test": "jest ./src",
+        "test:watch": "jest ./src --watch"
     },
     "lint-staged": {
         "*.{ts,tsx}": [
