@@ -40,6 +40,30 @@ describe("object-utils", () => {
             expect(result).toEqual(current);
         });
 
+        it("returns current value if nested array objects are the same", () => {
+            // Arrange
+            const current = { a: [{ b: 1 }, { b: 1 }, { b: 3 }] };
+            const value = { a: [{ b: 1 }, { b: 1 }, { b: 3 }] };
+
+            // Act
+            const result = deepReplace(current, value);
+
+            // Assert
+            expect(result).toEqual(current);
+        });
+
+        it("returns new value if nested array objects are different", () => {
+            // Arrange
+            const current = { a: [{ b: 1 }, { b: 1 }, { b: 4 }] };
+            const value = { a: [{ b: 1 }, { b: 1 }, { b: 3 }] };
+
+            // Act
+            const result = deepReplace(current, value);
+
+            // Assert
+            expect(result).not.toEqual(current);
+        });
+
         it("returns new value if nested property values are different", () => {
             // Arrange
             const current = {
