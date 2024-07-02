@@ -1,8 +1,9 @@
-import { renderHook, act } from "@testing-library/react-hooks";
+import { renderHook } from "@testing-library/react-hooks";
+import { act } from "react";
 import { useWindow } from "./use-window";
 
-const DEFAULT_WIDTH: number = 1024;
-const DEFAULT_HEIGHT: number = 768;
+const DEFAULT_WIDTH = 1024;
+const DEFAULT_HEIGHT = 768;
 
 describe("useWindow", () => {
     beforeEach(() => {
