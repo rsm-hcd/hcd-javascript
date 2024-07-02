@@ -23,8 +23,15 @@ class TestRecord extends Record<{ id: number; value: string }>({
     value: "",
 }) {}
 
+interface TestServiceUpdatePathParams {
+    id: number;
+}
+
 const TestService = {
-    update: ServiceFactory.update(TestRecord, resourceEndpoint),
+    update: ServiceFactory.update<TestRecord, TestServiceUpdatePathParams>(
+        TestRecord,
+        resourceEndpoint
+    ),
 };
 
 // #endregion Setup
@@ -113,6 +120,33 @@ describe("useCreateService", () => {
                     expect(result.current.error).toBeUndefined();
                     expect(result.current.updated).toEqual([]);
                 });
+            });
+        });
+
+        describe("rerender with the same path params", () => {
+            it("should be the same update method", () => {
+                // Arrange
+                const { result, rerender } = renderHook(
+                    ({ service, pathParams }) =>
+                        useUpdateService(service, pathParams),
+                    {
+                        initialProps: {
+                            service: TestService.update,
+                            pathParams: { id: 1 },
+                        },
+                    }
+                );
+
+                const preRerenderUpdate = result.current.update;
+
+                // Act
+                rerender({
+                    service: TestService.update,
+                    pathParams: { id: 1 },
+                });
+
+                // Assert
+                expect(preRerenderUpdate).toBe(result.current.update);
             });
         });
     });
