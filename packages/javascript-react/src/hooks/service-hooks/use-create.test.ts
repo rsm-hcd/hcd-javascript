@@ -1,4 +1,5 @@
-import { act, renderHook, waitFor } from "@testing-library/react";
+import { renderHook, waitFor } from "@testing-library/react";
+import { act } from "react";
 import { Record } from "immutable";
 import { ServiceFactory } from "../../services/service-factory";
 import { setupMockApi } from "../../tests/setup-mock-api";

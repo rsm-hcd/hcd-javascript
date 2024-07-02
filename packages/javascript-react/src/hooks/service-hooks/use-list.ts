@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { CanceledError } from "axios";
 import { useAbortSignal } from "../use-abort-signal";
 import type { ListServiceWithSignal } from "../../types/list-service-type";
+import { useDeepMemo } from "../use-deep-memo";
 
 interface UseListServiceHook<TRecord> {
     error?: Error;
@@ -24,8 +25,7 @@ export function useListService<TRecord = any, TQueryParams = {}>(
     listService: ListServiceWithSignal<TRecord, TQueryParams>,
     options: UseListServiceHookOptions<TQueryParams> = {}
 ): UseListServiceHook<TRecord> {
-    const { autoLoad = true, queryParams } = options;
-
+    const { autoLoad = true, queryParams } = useDeepMemo(options);
     const signal = useAbortSignal();
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<Error>();

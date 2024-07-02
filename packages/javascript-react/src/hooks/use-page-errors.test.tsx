@@ -1,5 +1,6 @@
-import { renderHook, act } from "@testing-library/react-hooks";
-import { ResultRecord, ResultErrorRecord } from "@rsm-hcd/javascript-core";
+import { renderHook } from "@testing-library/react-hooks";
+import { act } from "react";
+import { ResultErrorRecord, ResultRecord } from "@rsm-hcd/javascript-core";
 import { waitFor } from "@testing-library/react";
 import { usePageErrors } from "./use-page-errors";
 

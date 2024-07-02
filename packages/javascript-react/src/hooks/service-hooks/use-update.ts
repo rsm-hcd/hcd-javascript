@@ -3,6 +3,7 @@ import { CanceledError } from "axios";
 import type { RecordType } from "../../services/service-factory";
 import { useAbortSignal } from "../use-abort-signal";
 import type { UpdateServiceWithSignal } from "../../types/update-service-type";
+import { useDeepMemo } from "../use-deep-memo";
 
 interface UseUpdateServiceHook<TRecord> {
     error?: Error;
@@ -19,6 +20,7 @@ export function useUpdateService<TRecord extends RecordType, TPathParams>(
     const [isUpdating, setIsUpdating] = useState(false);
     const [error, setError] = useState<Error>();
     const [updated, setUpdated] = useState<TRecord[]>([]);
+    const memoizedPathParams = useDeepMemo(pathParams);
 
     const update = useCallback(
         (record: TRecord) => {
@@ -27,7 +29,7 @@ export function useUpdateService<TRecord extends RecordType, TPathParams>(
                     setIsUpdating(true);
                     const { resultObject } = await updateService(
                         record,
-                        pathParams,
+                        memoizedPathParams,
                         signal
                     );
 
@@ -63,7 +65,7 @@ export function useUpdateService<TRecord extends RecordType, TPathParams>(
                 }
             })();
         },
-        [pathParams, signal, updateService]
+        [memoizedPathParams, signal, updateService]
     );
 
     return {

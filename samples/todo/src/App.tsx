@@ -1,8 +1,8 @@
 import {
-    useListService,
     useCreateService,
-    useUpdateService,
     useDeleteService,
+    useListService,
+    useUpdateService,
 } from "@rsm-hcd/javascript-react";
 import { TodoService } from "./services/todo-service";
 import { TodoRecord } from "./models/todo";
@@ -12,7 +12,11 @@ import { useResultsMerge } from "./hooks/use-results-merge";
 
 function App() {
     const inputRef = useRef<HTMLInputElement>(null);
-    const { refresh, results } = useListService(TodoService.list);
+    const { refresh, results } = useListService(TodoService.list, {
+        queryParams: {
+            completed: true,
+        },
+    });
     const { create, created } = useCreateService(TodoService.create);
     const { update, updated } = useUpdateService(TodoService.update);
     const { delete: remove, deleted } = useDeleteService(TodoService.delete);
@@ -43,7 +47,8 @@ function App() {
                     <button
                         type="button"
                         onClick={refresh}
-                        className="px-4 py-2 border border-black rounded-md bg-slate-100 text-slate-950">
+                        className="px-4 py-2 border border-black rounded-md bg-slate-100 text-slate-950"
+                    >
                         Refresh
                     </button>
                 </div>
@@ -56,7 +61,8 @@ function App() {
             <div className="container flex-grow mx-auto mt-4">
                 <form
                     className="flex flex-row gap-2"
-                    onSubmit={handleFormSubmission}>
+                    onSubmit={handleFormSubmission}
+                >
                     <input
                         ref={inputRef}
                         className="flex-grow px-4 py-2 border border-black rounded-md"
@@ -65,7 +71,8 @@ function App() {
                     />
                     <button
                         type="submit"
-                        className="px-4 py-2 border border-black rounded-md bg-slate-100">
+                        className="px-4 py-2 border border-black rounded-md bg-slate-100"
+                    >
                         +
                     </button>
                 </form>
@@ -89,7 +96,8 @@ function App() {
                                 </p>
                             </th>
                             <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
-                                <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70"></p>
+                                <p className="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
+                                </p>
                             </th>
                         </tr>
                     </thead>
@@ -97,7 +105,8 @@ function App() {
                         {fullResults.map((todo) => (
                             <tr
                                 key={todo.id}
-                                className="even:bg-blue-gray-50/50">
+                                className="even:bg-blue-gray-50/50"
+                            >
                                 <td className="p-4">
                                     <p className="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
                                         {todo.id}
@@ -117,16 +126,18 @@ function App() {
                                     <div className="flex flex-row gap-2">
                                         <button
                                             onClick={handleToggleTodoCompletion(
-                                                todo
+                                                todo,
                                             )}
-                                            className="inline-block px-2 font-sans text-sm antialiased font-medium leading-normal border rounded hover:bg-slate-200 border-slate-600 text-blue-gray-900">
+                                            className="inline-block px-2 font-sans text-sm antialiased font-medium leading-normal border rounded hover:bg-slate-200 border-slate-600 text-blue-gray-900"
+                                        >
                                             {todo.completed
                                                 ? "Reopen"
                                                 : "Complete"}
                                         </button>
                                         <button
                                             onClick={handleRemoveTodo(todo)}
-                                            className="inline-block px-2 font-sans text-sm antialiased font-medium leading-normal border rounded hover:bg-slate-200 border-slate-600 text-blue-gray-900">
+                                            className="inline-block px-2 font-sans text-sm antialiased font-medium leading-normal border rounded hover:bg-slate-200 border-slate-600 text-blue-gray-900"
+                                        >
                                             Remove
                                         </button>
                                     </div>

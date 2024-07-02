@@ -1,5 +1,5 @@
 import { renderHook, waitFor } from "@testing-library/react";
-import { act } from "react-dom/test-utils";
+import { act } from "react";
 import { ServiceFactory } from "../../services/service-factory";
 import { setupMockApi } from "../../tests/setup-mock-api";
 import { useDeleteService } from "./use-delete";

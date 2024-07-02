@@ -1,0 +1,37 @@
+{
+    "folders": [
+        {
+            "path": "packages/javascript-core",
+        },
+        {
+            "path": "packages/javascript-react",
+        },
+        {
+            "path": "packages/javascript-testing",
+        },
+        {
+            "name": "root",
+            "path": ".",
+        },
+    ],
+    "settings": {
+        "files.associations": {
+            "*.tsx": "typescriptreact",
+            "*.css": "tailwindcss",
+            "*.scss": "tailwindcss",
+        },
+        "trailing-spaces.trimOnSave": true,
+        "typescript.tsdk": "./node_modules/typescript/lib",
+        "files.exclude": {
+            "**/.git": true,
+            "**/.svn": true,
+            "**/.hg": true,
+            "**/CVS": true,
+            "**/.DS_Store": true,
+            "**/Thumbs.db": true,
+            "packages/javascript-core": true,
+            "packages/javascript-react": true,
+            "packages/javascript-testing": true,
+        },
+    },
+}
