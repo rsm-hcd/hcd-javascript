@@ -1,5 +1,6 @@
 import { renderHook, waitFor } from "@testing-library/react";
 import { Record } from "immutable";
+import type { ServiceResponse } from "@rsm-hcd/javascript-core";
 import { ServiceFactory } from "../../services/service-factory";
 import { setupMockApi } from "../../tests/setup-mock-api";
 import { useListService } from "./use-list";
@@ -20,8 +21,15 @@ class TestRecord extends Record<{ id: number; value: string }>({
     value: "",
 }) {}
 
+interface TestServiceListQueryParams {
+    flag?: boolean;
+}
+
 const TestService = {
-    list: ServiceFactory.list(TestRecord, baseEndpoint),
+    list: ServiceFactory.list<TestRecord, TestServiceListQueryParams>(
+        TestRecord,
+        baseEndpoint
+    ),
 };
 
 // #endregion Setup
@@ -180,6 +188,75 @@ describe("useListService", () => {
             // Assert
             await waitFor(() => {
                 expect(result.current.isLoading).toBe(false);
+            });
+        });
+
+        describe("with queryparams", () => {
+            let listSpy: jest.SpyInstance;
+
+            beforeEach(() => {
+                records = [new TestRecord({ id: 1, value: "test" })];
+                listSpy = jest
+                    .spyOn(TestService, "list")
+                    .mockReturnValue(
+                        Promise.resolve({
+                            resultObjects: records,
+                        } as ServiceResponse<TestRecord>)
+                    );
+            });
+
+            afterEach(() => {
+                listSpy.mockRestore();
+            });
+
+            it("should call service with queryparams", async () => {
+                // Arrange
+                const queryparams: TestServiceListQueryParams = { flag: true };
+
+                // Act
+                const { result } = renderHook(
+                    ({ queryparams }) =>
+                        useListService(TestService.list, {
+                            queryParams: queryparams,
+                        }),
+                    {
+                        initialProps: { queryparams },
+                    }
+                );
+
+                // Assert
+                await waitFor(() => {
+                    expect(result.current.results).toStrictEqual(records);
+                    expect(listSpy).toHaveBeenCalledTimes(1);
+                });
+            });
+
+            describe("do not change", () => {
+                it("should not call the list service with queryparams", async () => {
+                    // Arrange
+                    const queryparams: TestServiceListQueryParams = {
+                        flag: true,
+                    };
+
+                    // Act
+                    const { result, rerender } = renderHook(
+                        ({ queryparams }) =>
+                            useListService(TestService.list, {
+                                queryParams: queryparams,
+                            }),
+                        {
+                            initialProps: { queryparams },
+                        }
+                    );
+
+                    rerender({ queryparams: { flag: true } });
+
+                    // Assert
+                    await waitFor(() => {
+                        expect(result.current.results).toStrictEqual(records);
+                        expect(listSpy).toHaveBeenCalledTimes(1);
+                    });
+                });
             });
         });
     });

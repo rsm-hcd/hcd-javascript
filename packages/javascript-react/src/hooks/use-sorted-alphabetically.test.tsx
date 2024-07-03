@@ -1,6 +1,5 @@
 import { render } from "@testing-library/react";
-import React from "react";
-import { act } from "react-dom/test-utils";
+import React, { act } from "react";
 import { useSortedAlphabetically } from "./use-sorted-alphabetically";
 
 describe("useSortedAlphabetically", () => {
@@ -12,7 +11,7 @@ describe("useSortedAlphabetically", () => {
         const sortedList = ["A", "B", "C", "D"];
 
         const TestApp = () => {
-            const [values, setValues] = useSortedAlphabetically(
+            const [values] = useSortedAlphabetically(
                 unsortedList,
                 testSelector
             );
