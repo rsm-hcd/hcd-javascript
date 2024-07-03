@@ -1,5 +1,11 @@
 # @rsm-hcd/javascript-react
 
+## 3.1.0
+
+### Minor Changes
+
+-   5bff6f2: Adds useDeepMemo hook and deep compare and replace object-utils
+
 ## 3.0.0
 
 ### Major Changes

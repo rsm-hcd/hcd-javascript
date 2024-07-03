@@ -1,6 +1,6 @@
 {
     "name": "@rsm-hcd/javascript-react",
-    "version": "3.0.0",
+    "version": "3.1.0",
     "description": "Common patterns, functions, etc... used when building react applications",
     "homepage": "https://github.com/rsm-hcd/hcd-javascript/tree/main/packages/javascript-react",
     "license": "MIT",
