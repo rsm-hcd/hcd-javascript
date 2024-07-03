@@ -97,5 +97,137 @@ describe("object-utils", () => {
             expect(result.b.d).toEqual(value.b.d);
             expect(result.e).toEqual(current.e);
         });
+
+        describe("arrays have the same values", () => {
+            it("returns current array", () => {
+                // Arrange
+                const current = [1, 2, 3];
+                const value = [1, 2, 3];
+
+                // Act
+                const result = deepReplace(current, value);
+
+                // Assert
+                expect(result).toEqual(current);
+            });
+        });
+
+        describe("arrays have different values", () => {
+            it("returns new array", () => {
+                // Arrange
+                const current = [1, 2, 3];
+                const value = [1, 2, 4];
+
+                // Act
+                const result = deepReplace(current, value);
+
+                // Assert
+                expect(result).toEqual(value);
+            });
+        });
+
+        describe("arrays have different lengths", () => {
+            it("returns new array", () => {
+                // Arrange
+                const current = [1, 2, 3];
+                const value = [1, 2];
+
+                // Act
+                const result = deepReplace(current, value);
+
+                // Assert
+                expect(result).toEqual(value);
+            });
+        });
+
+        describe("arrays have the same objects", () => {
+            it("returns current array", () => {
+                // Arrange
+                const current = [{ a: 1 }, { a: 2 }, { a: 3 }];
+                const value = [{ a: 1 }, { a: 2 }, { a: 3 }];
+
+                // Act
+                const result = deepReplace(current, value);
+
+                // Assert
+                expect(result).toEqual(current);
+            });
+        });
+
+        describe("arrays have different objects", () => {
+            it("returns new array", () => {
+                // Arrange
+                const current = [{ a: 1 }, { a: 2 }, { a: 3 }];
+                const value = [{ a: 1 }, { a: 2 }, { a: 4 }];
+
+                // Act
+                const result = deepReplace(current, value);
+
+                // Assert
+                expect(result).toEqual(value);
+            });
+        });
+
+        describe("primitive values", () => {
+            describe("current value is a string", () => {
+                describe("new value is a string", () => {
+                    describe("values are the same", () => {
+                        it("returns current string", () => {
+                            // Arrange
+                            const current = "current";
+                            const value = "current";
+
+                            // Act
+                            const result = deepReplace(current, value);
+
+                            // Assert
+                            expect(result).toEqual(current);
+                        });
+                    });
+
+                    describe("values are different", () => {
+                        it("returns new string", () => {
+                            // Arrange
+                            const current = "current";
+                            const value = "new";
+
+                            // Act
+                            const result = deepReplace(current, value);
+
+                            // Assert
+                            expect(result).toEqual(value);
+                        });
+                    });
+                });
+
+                describe("new value is a number", () => {
+                    it("returns new value", () => {
+                        // Arrange
+                        const current = "current";
+                        const value = 1;
+
+                        // Act
+                        const result = deepReplace<unknown>(current, value);
+
+                        // Assert
+                        expect(result).toEqual(value);
+                    });
+                });
+
+                describe("new value is an object", () => {
+                    it("returns new value", () => {
+                        // Arrange
+                        const current = "current";
+                        const value = { a: 1 };
+
+                        // Act
+                        const result = deepReplace<unknown>(current, value);
+
+                        // Assert
+                        expect(result).toEqual(value);
+                    });
+                });
+            });
+        });
     });
 });
