@@ -18,7 +18,7 @@
         "lint": "turbo run lint",
         "lint:fix": "turbo run lint:fix",
         "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-        "publish-packages": "turbo run build:prod lint test && changeset version && pnpm install && pnpm changeset tag && pnpm publish -r --access=public",
+        "publish-packages": "turbo run lint test build:prod && changeset version && pnpm install && pnpm changeset tag && pnpm publish -r --access=public",
         "prepare": "pnpm husky install"
     },
     "devDependencies": {
