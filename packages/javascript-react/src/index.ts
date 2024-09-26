@@ -36,6 +36,7 @@ export { useDeleteService } from "./hooks/service-hooks/use-delete";
 // #region Hooks
 // -----------------------------------------------------------------------------------------
 
+export { useAbortSignal } from "./hooks/use-abort-signal";
 export { makeCancellable } from "./hooks/make-cancellable";
 export { useAsyncEffect } from "./hooks/use-async-effect";
 export { useCancellablePromise } from "./hooks/use-cancellable-promise";
