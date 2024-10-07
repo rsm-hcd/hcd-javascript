@@ -33,4 +33,4 @@ import {
 
 ## Peer dependencies
 
-This package wraps several external packages for our own configuration and ease of use, such as `axios`, `i18next`, `react-router-dom`, etc. These will need to be installed alongside this package, even if you do not plan on leveraging features that rely on them.
+This package wraps several external packages for our own configuration and ease of use, such as `axios`, `i18next`, etc. These will need to be installed alongside this package, even if you do not plan on leveraging features that rely on them.
