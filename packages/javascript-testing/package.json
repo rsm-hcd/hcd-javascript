@@ -1,6 +1,6 @@
 {
     "name": "@rsm-hcd/javascript-testing",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "description": "Commonly used actors for automated testing javascript applications",
     "homepage": "https://github.com/rsm-hcd/hcd-javascript/tree/main/packages/javascript-testing",
     "type": "module",

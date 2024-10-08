@@ -1,5 +1,17 @@
 # todo
 
+## 3.1.1
+
+### Patch Changes
+
+-   a148de5: update dependencies
+-   Updated dependencies [a148de5]
+-   Updated dependencies [a148de5]
+-   Updated dependencies [a148de5]
+-   Updated dependencies [a148de5]
+    -   @rsm-hcd/javascript-core@3.0.1
+    -   @rsm-hcd/javascript-react@3.2.0
+
 ## 3.1.0
 
 ### Minor Changes

@@ -1,5 +1,14 @@
 # @rsm-hcd/javascript-core
 
+## 3.0.1
+
+### Patch Changes
+
+-   a148de5: update dependencies
+-   a148de5: updated npm packages
+-   Updated dependencies [a148de5]
+    -   @rsm-hcd/javascript-testing@3.0.1
+
 ## 3.0.0
 
 ### Major Changes

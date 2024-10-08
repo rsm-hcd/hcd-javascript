@@ -1,5 +1,19 @@
 # @rsm-hcd/javascript-react
 
+## 3.2.0
+
+### Minor Changes
+
+-   a148de5: Remove react-router-dom from dependencies
+-   a148de5: export useAbortSignal hook
+
+### Patch Changes
+
+-   a148de5: updated npm packages
+-   Updated dependencies [a148de5]
+-   Updated dependencies [a148de5]
+    -   @rsm-hcd/javascript-core@3.0.1
+
 ## 3.1.0
 
 ### Minor Changes

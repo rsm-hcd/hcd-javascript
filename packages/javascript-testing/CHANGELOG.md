@@ -1,5 +1,11 @@
 # @rsm-hcd/javascript-testing
 
+## 3.0.1
+
+### Patch Changes
+
+-   a148de5: updated npm packages
+
 ## 3.0.0
 
 ### Major Changes
