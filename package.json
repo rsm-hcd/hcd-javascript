@@ -19,22 +19,22 @@
         "lint:fix": "turbo run lint:fix",
         "format": "prettier --write \"**/*.{ts,tsx,md}\"",
         "publish-packages": "turbo run lint test build:prod && changeset version && pnpm install && pnpm changeset tag && pnpm publish -r --access=public",
-        "prepare": "pnpm husky install"
+        "prepare": "husky"
     },
     "devDependencies": {
-        "@changesets/cli": "^2.27.6",
-        "@dotenvx/dotenvx": "^1.1.0",
+        "@changesets/cli": "^2.27.9",
+        "@dotenvx/dotenvx": "^1.16.0",
         "@rsm-hcd/tsconfig": "workspace:*",
-        "husky": "^9.0.11",
-        "lint-staged": "^15.2.7",
-        "prettier": "^3.3.2",
-        "turbo": "^2.0.6",
-        "typedoc": "^0.26.3",
-        "typescript": "^5.5.2"
+        "husky": "^9.1.6",
+        "lint-staged": "^15.2.10",
+        "prettier": "^3.3.3",
+        "turbo": "^2.1.3",
+        "typedoc": "^0.26.8",
+        "typescript": "^5.6.2"
     },
     "engines": {
         "node": ">=20",
         "pnpm": ">=9"
     },
-    "packageManager": "pnpm@9.4.0"
+    "packageManager": "pnpm@9.12.1"
 }

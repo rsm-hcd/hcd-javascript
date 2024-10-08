@@ -1,26 +1,4 @@
 // -----------------------------------------------------------------------------------------
-// #region Components
-// -----------------------------------------------------------------------------------------
-
-// TODO: The original purpose for this was to provide a helper routes when using react-router-dom.This needs to be re-implemented in the new project structure.
-// export {
-//     AuthenticatedRoute,
-//     AuthenticatedRouteProps,
-// } from "./components/routing/authenticated-route";
-// export {
-//     NestedRoute,
-//     NestedRouteProps,
-// } from "./components/routing/nested-route";
-// export { NestedRoutes } from "./components/routing/nested-routes";
-// export type { NestedRoutesProps } from "./components/routing/nested-routes";
-// export { NestedRoutesByProperty } from "./components/routing/nested-routes-by-property";
-// export type { NestedRoutesByPropertyProps } from "./components/routing/nested-routes-by-property";
-// export { Redirects } from "./components/routing/redirects";
-// export type { RedirectsProps } from "./components/routing/redirects";
-
-// #endregion Components
-
-// -----------------------------------------------------------------------------------------
 // #region Service Hooks
 // -----------------------------------------------------------------------------------------
 
@@ -36,6 +14,7 @@ export { useDeleteService } from "./hooks/service-hooks/use-delete";
 // #region Hooks
 // -----------------------------------------------------------------------------------------
 
+export { useAbortSignal } from "./hooks/use-abort-signal";
 export { makeCancellable } from "./hooks/make-cancellable";
 export { useAsyncEffect } from "./hooks/use-async-effect";
 export { useCancellablePromise } from "./hooks/use-cancellable-promise";

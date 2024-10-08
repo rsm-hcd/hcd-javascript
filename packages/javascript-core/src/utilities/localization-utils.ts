@@ -158,7 +158,8 @@ const initialize = <TResources>(
 const translate = (
     key: string,
     options?: any
-): string | TFunctionDetailedResult => i18n.t(key, options);
+): string | TFunctionDetailedResult =>
+    i18n.t(key, options) as string | TFunctionDetailedResult;
 
 /**
  * Retrieve translation for given key in the currently configured language
@@ -166,12 +167,6 @@ const translate = (
  * @param options object key/values for interpolation of dynamic values
  */
 const t = translate;
-
-// #endregion Functions
-
-// -----------------------------------------------------------------------------------------
-// #region Exports
-// -----------------------------------------------------------------------------------------
 
 export const LocalizationUtils = {
     changeCultureCode,
