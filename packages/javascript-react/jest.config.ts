@@ -15,7 +15,7 @@ export default {
     transform: {
         "^.+\\.tsx?$": "@swc/jest",
     },
-    testEnvironment: "jsdom",
+    testEnvironment: "jest-fixed-jsdom",
     testEnvironmentOptions: {
         /**
          * @note Opt-out from JSDOM using browser-style resolution

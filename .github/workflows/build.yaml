@@ -31,7 +31,7 @@ jobs:
                       node: 18.20.3
                       allowed-to-fail: false
                     - os: windows-latest
-                      node: 20.15.0
+                      node: 20.18.0
                       allowed-to-fail: true
         continue-on-error: ${{matrix.allowed-to-fail}}
 
