@@ -1,6 +1,6 @@
 {
     "name": "@rsm-hcd/javascript-core",
-    "version": "3.0.1",
+    "version": "3.0.2",
     "description": "Common patterns, functions, etc... used when building any JavaScript or TypeScript application",
     "homepage": "https://github.com/rsm-hcd/hcd-javascript/tree/main/packages/javascript-core",
     "license": "MIT",

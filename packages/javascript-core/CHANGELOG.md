@@ -1,5 +1,11 @@
 # @rsm-hcd/javascript-core
 
+## 3.0.2
+
+### Patch Changes
+
+-   23ddfd5: Fixed pathParam replacement logic
+
 ## 3.0.1
 
 ### Patch Changes

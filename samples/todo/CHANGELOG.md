@@ -1,5 +1,13 @@
 # todo
 
+## 3.1.2
+
+### Patch Changes
+
+-   Updated dependencies [23ddfd5]
+    -   @rsm-hcd/javascript-core@3.0.2
+    -   @rsm-hcd/javascript-react@3.2.0
+
 ## 3.1.1
 
 ### Patch Changes

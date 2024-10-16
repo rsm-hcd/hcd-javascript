@@ -78,7 +78,7 @@
         "React"
     ],
     "peerDependencies": {
-        "@rsm-hcd/javascript-core": ">=3.0.1",
+        "@rsm-hcd/javascript-core": ">=3.0.2",
         "axios": ">=1.6.0",
         "i18next": ">=23.8.0",
         "immutable": "^4.3.5",
