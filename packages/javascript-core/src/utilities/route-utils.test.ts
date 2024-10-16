@@ -197,6 +197,26 @@ describe("RouteUtils", () => {
             expect(result).toBe(path);
         });
 
+        test("when given a path with replaceable params of '0', it returns the path with replaced values", () => {
+            // Arrange
+            const path = "users/:userId/roles/:id";
+            const pathParams = {
+                id: 1,
+                userId: 0,
+            };
+            const queryParams = {};
+
+            // Act
+            const result = RouteUtils.getUrlFromPath(
+                path,
+                pathParams,
+                queryParams
+            );
+
+            // Assert
+            expect(result).toBe("users/0/roles/1");
+        });
+
         test("when given a path with replaceable params, it returns the path with replaced values", () => {
             // Arrange
             const path = "users/:userId/roles/:id";

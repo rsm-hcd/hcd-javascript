@@ -136,7 +136,7 @@ const replacePathParams = (path: string, pathParams: any) => {
 
         const value = pathParams[key];
 
-        if (!value) {
+        if (value == null) {
             console.error(
                 `routeUtils::getUrl cannot find value for path parameter: ${key}`
             );
