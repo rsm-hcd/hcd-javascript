@@ -7,7 +7,7 @@ import type { ServiceResponse } from "@rsm-hcd/javascript-core";
  * @param pathParams Object with path parameters to be replaced in the endpoint route
  */
 export type NestedCreateService<TRecord, TPathParams> = (
-    record: TRecord,
+    record: TRecord | null | undefined,
     pathParams: TPathParams
 ) => Promise<ServiceResponse<TRecord>>;
 
@@ -19,7 +19,7 @@ export type NestedCreateService<TRecord, TPathParams> = (
  * @param signal AbortSignal to be used for aborting the request
  */
 export type NestedCreateServiceWithSignal<TRecord, TPathParams> = (
-    record: TRecord,
+    record: TRecord | null | undefined,
     pathParams: TPathParams,
     signal?: AbortSignal
 ) => Promise<ServiceResponse<TRecord>>;

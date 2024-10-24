@@ -126,7 +126,7 @@ const ServiceFactory = {
         baseEndpoint: string
     ): NestedCreateServiceWithSignal<TRecord, TPathParams> {
         return (
-            record: TRecord,
+            record: TRecord | undefined | null,
             pathParams: TPathParams,
             signal?: AbortSignal
         ) => {
@@ -232,17 +232,13 @@ const _bulkUpdate = async function <
 const _create = async function <TRecord extends RecordType>(
     recordType: new () => TRecord,
     url: string,
-    record?: TRecord,
+    record?: TRecord | null,
     signal?: AbortSignal
 ) {
-    if (!record) {
-        throw new TypeError(
-            `Could not create resource. Record value was invalid.`
-        );
-    }
+    const requestData = record != null ? record.toJS() : null;
 
     return axios
-        .post(url, record.toJS(), { signal })
+        .post(url, requestData, { signal })
         .then((r) => ServiceUtils.mapAxiosResponse(recordType, r));
 };
 

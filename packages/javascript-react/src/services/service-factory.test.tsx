@@ -112,17 +112,22 @@ describe("ServiceFactory", () => {
     describe("create", () => {
         itReturnsFunction(ServiceFactory.create, baseEndpoint);
 
-        it("given null, throws error", async () => {
-            expect.assertions(1);
-            try {
-                const sut = ServiceFactory.create(
-                    StubResourceRecord,
-                    baseEndpoint
-                );
-                await sut(null as any); // <----- passing null
-            } catch (e) {
-                expect(e).toBeInstanceOf(TypeError);
-            }
+        it("given no arguments, throws error", async () => {
+            // Arrange
+            const expected = Factory.build<StubResourceRecord>(
+                FactoryType.StubResourceRecord
+            );
+
+            const sut = ServiceFactory.create(StubResourceRecord, baseEndpoint);
+            mockPostSuccess(expected);
+
+            // Act
+            const response = await sut();
+
+            // Assert
+            expect(response.resultObject).not.toBeNull();
+            expect(response.resultObject).toBeInstanceOf(StubResourceRecord);
+            expect(response.resultObject!.name).toEqual(expected.name);
         });
 
         it("when successful, returns response mapped to supplied TRecord", async () => {
@@ -310,17 +315,24 @@ describe("ServiceFactory", () => {
         itReturnsFunction(ServiceFactory.nestedCreate, nestedBaseEndpoint);
 
         it("given null, throws error", async () => {
-            expect.assertions(1);
-            try {
-                const sut = ServiceFactory.nestedCreate(
-                    StubResourceRecord,
-                    baseEndpoint
-                );
+            // Arrange
+            const expected = Factory.build<StubResourceRecord>(
+                FactoryType.StubResourceRecord
+            );
 
-                await sut(null as any, {}); // <----- passing null
-            } catch (e) {
-                expect(e).toBeInstanceOf(TypeError);
-            }
+            const sut = ServiceFactory.nestedCreate(
+                StubResourceRecord,
+                baseEndpoint
+            );
+            mockPostSuccess(expected);
+
+            // Act
+            const response = await sut(null, {});
+
+            // Assert
+            expect(response.resultObject).not.toBeNull();
+            expect(response.resultObject).toBeInstanceOf(StubResourceRecord);
+            expect(response.resultObject!.name).toEqual(expected.name);
         });
 
         it("when successful, returns response mapped to supplied TRecord", async () => {

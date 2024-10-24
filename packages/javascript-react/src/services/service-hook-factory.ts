@@ -83,7 +83,7 @@ const ServiceHookFactory = {
 
             const create = useCallback(
                 async function create(
-                    record: TRecord
+                    record?: TRecord
                 ): Promise<ServiceResponse<TRecord>> {
                     try {
                         return await serviceCreate(record, signal);
@@ -244,7 +244,7 @@ const ServiceHookFactory = {
 
             const create = useCallback(
                 async function create(
-                    record: TRecord,
+                    record: TRecord | null | undefined,
                     pathParams: TPathParams
                 ): Promise<ServiceResponse<TRecord>> {
                     try {
