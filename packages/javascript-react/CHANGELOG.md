@@ -1,5 +1,11 @@
 # @rsm-hcd/javascript-react
 
+## 3.3.0
+
+### Minor Changes
+
+-   251943b: Update create and nestedCreate service hooks to have optional record
+
 ## 3.2.0
 
 ### Minor Changes
